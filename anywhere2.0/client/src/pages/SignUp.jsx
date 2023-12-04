@@ -1,8 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import Logo from "../assets/Anywhere-Transparent.png";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
+  // Initialize state variables for form inputs and alert message
+  const [username, setUsername] = useState("");
+  const [dob, setDob] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [alertMessage, setAlertMessage] = useState(null);
+
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Create user object
+    const user = {
+      username,
+      dob,
+      email,
+      password,
+    };
+
+    console.log(user, "userdata");
+    // Make POST request
+    if (password === confirmPassword) {
+      try {
+        const response = await axios.post("http://localhost:5000/user", user);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+        // Set alert message on error
+        setAlertMessage("An error occurred while signing up. Please try again.");
+      }
+    } else {
+      // Set alert message for password mismatch
+      setAlertMessage("Passwords do not match. Please try again.");
+    }
+  };
+
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
       {/* Left: Image */}
@@ -16,7 +54,7 @@ const SignUp = () => {
       {/* Right: Signup Form */}
       <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
         <h1 className="text-2xl font-semibold mb-4">Sign Up</h1>
-        <div>
+        <form onSubmit={handleSubmit}>
           {/* Username Input */}
           <div className="mb-4">
             <label htmlFor="username" className="block text-gray-600">
@@ -28,6 +66,7 @@ const SignUp = () => {
               name="username"
               className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
               autoComplete="off"
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           {/* DOB Input */}
@@ -40,6 +79,7 @@ const SignUp = () => {
               id="dob"
               name="dob"
               className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+              onChange={(e) => setDob(e.target.value)}
             />
           </div>
           {/* Email Input */}
@@ -53,6 +93,7 @@ const SignUp = () => {
               name="email"
               className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
               autoComplete="off"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           {/* Password Input */}
@@ -66,6 +107,7 @@ const SignUp = () => {
               name="password"
               className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
               autoComplete="off"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           {/* Confirm Password Input */}
@@ -79,6 +121,7 @@ const SignUp = () => {
               name="confirmPassword"
               className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
               autoComplete="off"
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
           {/* Signup Button */}
@@ -88,7 +131,13 @@ const SignUp = () => {
           >
             Sign Up
           </button>
-        </div>
+        </form>
+        {/* Display the alert message */}
+        {alertMessage && (
+          <div className="mt-4 p-2 bg-red-500 text-white text-center">
+            {alertMessage}
+          </div>
+        )}
         {/* Login Link */}
         <div className="flex mt-6 text-gray-500 text-center">
           Already have an account?
