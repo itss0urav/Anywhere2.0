@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
       {/* Left: Image */}
-      <div className="w-1/2 h-screen hidden lg:block">
+      <div className="w-2/4 h-screen hidden lg:block">
         <img
           src={Logo}
           alt="Logo"
@@ -14,7 +14,7 @@ const Login = () => {
         />
       </div>
       {/* Right: Login Form */}
-      <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+      <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-3/4">
         <h1 className="text-2xl font-semibold mb-4">Login</h1>
         <div>
           {/* Username Input */}

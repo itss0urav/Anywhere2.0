@@ -1,54 +1,46 @@
 import React from "react";
-import logo from "../assets/Anywhere-Transparent.png";
-import videoBg from "../assets/bg-video.mp4";
 import { Link } from "react-router-dom";
+// import logo from "../assets/Anywhere-Transparent.png";
+import videoBg from "../assets/wideinroVid4k.mp4";
 
 function Introduction() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-900 to-black relative animate-fade-in-down">
-      <div className="absolute top-0 right-0 p-6 space-x-4">
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-900 to-black animate-fade-in-down">
+      <video
+        autoPlay
+        muted
+        loop
+        src={videoBg}
+        className="absolute top-0 left-0 min-w-full min-h-full object-cover z-0"
+      ></video>
+      <div className="absolute inset-0 bg-gradient-to-center from-transparent via-black to-transparent opacity-50 z-20"></div>
+      <div className="absolute top-0 right-0 p-6 space-x-4 z-30">
         <Link
           to="/Signup"
-          className="text-white hover:text-purple-300 transition duration-300 py-1 px-2 rounded md:text-lg animate-pulse"
+          className="text-black font-bold hover:text-gray-600 transition duration-300 py-2 px-3 rounded-md text-lg shadow-white"
         >
           Signup
         </Link>
         <Link
           to="/Login"
-          className="text-white hover:text-purple-300 transition duration-300 py-1 px-2 rounded md:text-lg animate-pulse"
+          className="text-black font-bold hover:text-gray-600 transition duration-300 py-2 px-3 rounded-md text-lg shadow-white"
         >
           Login
         </Link>
         <Link
           to="/Help"
-          className="text-white hover:text-purple-300 transition duration-300 py-1 px-2 rounded md:text-lg animate-pulse"
+          className="text-black font-bold hover:text-gray-600 transition duration-300 py-2 px-3 rounded-md text-lg shadow-white"
         >
           Help
         </Link>
       </div>
-      <div className="flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8">
-        <div className="text-center w-full md:w-2/4 relative animate-bounce">
-          <img
-            src={logo}
-            alt="Anywhere Logo"
-            className="mx-auto h-24 w-24 md:h-48 md:w-48 mb-4 absolute z-10 inset-1/2 transform -translate-x-1/2 -translate-y-1/2"
-          />
-          <div className="absolute inset-0 bg-gradient-to-center from-transparent via-black to-transparent opacity-50 z-20"></div>
-          <video
-            autoPlay
-            muted
-            loop
-            src={videoBg}
-            className="object-cover absolute z-0 "
-          ></video>
-        </div>
-
+      <div className="z-30 flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8">
         <div className="text-center w-full md:w-1/2 animate-fade-in-left">
           <div className="">
-            <h1 className="text-4xl md:text-6xl lg:text-8xl text-white mb-4 font-bold tracking-wide">
+            <h1 className="font-roboto-slab text-4xl md:text-6xl lg:text-8xl text-black font-bold mb-4 tracking-wide neon-text shadow-white">
               ANYWHERE
             </h1>
-            <p className="hidden md:flex text-white text-sm md:text-lg lg:text-xl font-light">
+            <p className="text-center hidden md:flex text-black  text-sm md:text-lg lg:text-xl  neon-text shadow-white">
               Anywhere is a web application designed to foster a sense of
               community and encourage meaningful discussions among its users.
               With its user-friendly interface, Anywhere provides a platform for
@@ -58,13 +50,13 @@ function Introduction() {
           </div>
         </div>
       </div>
-      <p className="z-50 p-2 md:hidden flex text-white text-sm md:text-lg lg:text-xl font-light animate-fade-in-right">
+      <p className="text-center z-50 p-2 md:hidden flex text-black  text-sm md:text-lg lg:text-xl  neon-text shadow-white">
         Anywhere is a web application designed to foster a sense of community
         and encourage meaningful discussions among its users. With its
         user-friendly interface, Anywhere provides a platform for individuals to
         come together and engage in a range of conversations.
       </p>
-      <div className="absolute bottom-0 right-0 p-6 text-white text-sm md:text-lg animate-bounce">
+      <div className="absolute bottom-0 right-0 p-1 text-black font-bold text-sm md:text-lg neon-text  opacity-100">
         Made with <span className="text-red-500">❤️</span> by @itss0urav
       </div>
     </div>
