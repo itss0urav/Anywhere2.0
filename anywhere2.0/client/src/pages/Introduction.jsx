@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import logo from "../assets/Anywhere-Transparent.png";
-import videoBg from "../assets/wideinroVid4k.mp4";
+import v1 from "../assets/v1.mp4";
+import v3 from "../assets/v3.mp4";
 
 function Introduction() {
+  const bgs = [v1, v3];
+  const videoBg = bgs[Math.floor(Math.random() * bgs.length)];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-900 to-black animate-fade-in-down">
       <video
@@ -37,10 +40,10 @@ function Introduction() {
       <div className="z-30 flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8">
         <div className="text-center w-full md:w-1/2 animate-fade-in-left">
           <div className="">
-            <h1 className="font-roboto-slab text-4xl md:text-6xl lg:text-8xl text-black font-bold mb-4 tracking-wide neon-text shadow-white">
+            <h1 className="font-roboto font-extrabold text-4xl md:text-6xl lg:text-8xl text-black  mb-4 tracking-wide neon-text shadow-white">
               ANYWHERE
             </h1>
-            <p className="text-center hidden md:flex text-black  text-sm md:text-lg lg:text-xl  neon-text shadow-white">
+            <p className=" text-center hidden md:flex text-black  text-sm md:text-lg lg:text-xl  neon-text shadow-white">
               Anywhere is a web application designed to foster a sense of
               community and encourage meaningful discussions among its users.
               With its user-friendly interface, Anywhere provides a platform for
@@ -50,7 +53,7 @@ function Introduction() {
           </div>
         </div>
       </div>
-      <p className="text-center z-50 p-2 md:hidden flex text-black  text-sm md:text-lg lg:text-xl  neon-text shadow-white">
+      <p className=" text-center z-50 p-2 md:hidden flex text-black  text-sm md:text-lg lg:text-xl  neon-text shadow-white">
         Anywhere is a web application designed to foster a sense of community
         and encourage meaningful discussions among its users. With its
         user-friendly interface, Anywhere provides a platform for individuals to
