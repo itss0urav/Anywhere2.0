@@ -60,7 +60,7 @@ function Introduction() {
         come together and engage in a range of conversations.
       </p>
       <div className="absolute bottom-0 right-0 p-1 text-black font-bold text-sm md:text-lg neon-text  opacity-100">
-        Made with <span className="text-red-500">❤️</span> by @itss0urav
+        Coded with <span className="text-red-500">❤️</span> by @itss0urav
       </div>
     </div>
   );
