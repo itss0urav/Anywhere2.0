@@ -1,8 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../assets/Anywhere-Transparent.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate,  } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [alertMessage, setAlertMessage] = useState(null);
+  const nav = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const userCredentials = {
+      username,
+      password,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/user/login",
+        userCredentials
+      );
+      console.log(response.data);
+      // TODO: Handle successful login, e.g., store user information in state or local storage
+      // Redirect the user to another page
+      nav("/home");
+    } catch (error) {
+      console.error(error);
+      setAlertMessage("Invalid credentials. Please try again.");
+    }
+  };
+
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
       {/* Left: Image */}
@@ -13,10 +42,11 @@ const Login = () => {
           className="object-contain bg-black w-full h-full"
         />
       </div>
+
       {/* Right: Login Form */}
       <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-3/4">
         <h1 className="text-2xl font-semibold mb-4">Login</h1>
-        <div>
+        <form onSubmit={handleSubmit}>
           {/* Username Input */}
           <div className="mb-4">
             <label htmlFor="username" className="block text-gray-600">
@@ -28,8 +58,10 @@ const Login = () => {
               name="username"
               className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
               autoComplete="off"
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
+
           {/* Password Input */}
           <div className="mb-4">
             <label htmlFor="password" className="block text-gray-600">
@@ -41,8 +73,10 @@ const Login = () => {
               name="password"
               className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
               autoComplete="off"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+
           {/* Remember Me Checkbox */}
           <div className="mb-4 flex items-center">
             <input
@@ -55,12 +89,14 @@ const Login = () => {
               Remember Me
             </label>
           </div>
+
           {/* Forgot Password Link */}
           <div className="mb-6 text-blue-500">
             <Link to="/" className="hover:underline">
               Forgot Password?
             </Link>
           </div>
+
           {/* Login Button */}
           <button
             type="submit"
@@ -68,13 +104,21 @@ const Login = () => {
           >
             Login
           </button>
-        </div>
+        </form>
+
+        {/* Display the alert message */}
+        {alertMessage && (
+          <div className="mt-4 p-2 bg-red-500 text-white text-center">
+            {alertMessage}
+          </div>
+        )}
+
         {/* Sign up Link */}
         <div className="flex mt-6 text-gray-500 text-center">
           New Here?
           <div className="pl-2 text-blue-500 text-center">
             <Link to="/SignUp" className="hover:underline">
-              Sign up 
+              Sign up
             </Link>
           </div>
         </div>

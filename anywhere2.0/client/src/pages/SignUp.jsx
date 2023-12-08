@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Logo from "../assets/Anywhere-Transparent.png";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   // Initialize state variables for form inputs and alert message
@@ -11,6 +11,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [alertMessage, setAlertMessage] = useState(null);
+  const nav = useNavigate();
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
@@ -30,6 +31,8 @@ const SignUp = () => {
       try {
         const response = await axios.post("http://localhost:5000/user", user);
         console.log(response.data);
+      nav("/login");
+
       } catch (error) {
         console.error(error);
         // Set alert message on error
