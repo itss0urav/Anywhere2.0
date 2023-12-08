@@ -6,7 +6,11 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white font-bold text-xl">Logo</div>
         <div className="space-x-4">
-          <input className="rounded p-2 border  transition-all duration-200" type="text" placeholder="Search..." />
+          <input
+            className="rounded p-2 border  transition-all duration-200"
+            type="text"
+            placeholder="Search..."
+          />
           <button className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white">
             About
           </button>

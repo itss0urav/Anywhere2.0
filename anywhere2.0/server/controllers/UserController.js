@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
 
 const UserController = {
   createUser: async (req, res) => {
@@ -7,12 +8,16 @@ const UserController = {
 
       // Perform any necessary validation here
 
+      // Hash the password before saving it to the database
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
       // Create a new user in the database
       const newUser = new User({
         username,
         dob,
         email,
-        password,
+        password: hashedPassword,
       });
 
       await newUser.save();
