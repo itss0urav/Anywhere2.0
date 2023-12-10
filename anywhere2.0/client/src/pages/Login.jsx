@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Logo from "../assets/Anywhere-Transparent.png";
-import { Link, useNavigate,  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import vid from "../assets/v1.mp4";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -34,8 +34,8 @@ const Login = () => {
 
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
-      {/* Left: Image */}
       <div className="w-2/4 h-screen hidden lg:block">
+        <video muted autoPlay loop src={vid}></video>
         <img
           src={Logo}
           alt="Logo"
@@ -43,11 +43,9 @@ const Login = () => {
         />
       </div>
 
-      {/* Right: Login Form */}
       <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-3/4">
         <h1 className="text-2xl font-semibold mb-4">Login</h1>
         <form onSubmit={handleSubmit}>
-          {/* Username Input */}
           <div className="mb-4">
             <label htmlFor="username" className="block text-gray-600">
               Username
@@ -62,7 +60,6 @@ const Login = () => {
             />
           </div>
 
-          {/* Password Input */}
           <div className="mb-4">
             <label htmlFor="password" className="block text-gray-600">
               Password
@@ -77,7 +74,6 @@ const Login = () => {
             />
           </div>
 
-          {/* Remember Me Checkbox */}
           <div className="mb-4 flex items-center">
             <input
               type="checkbox"
@@ -90,14 +86,12 @@ const Login = () => {
             </label>
           </div>
 
-          {/* Forgot Password Link */}
           <div className="mb-6 text-blue-500">
             <Link to="/" className="hover:underline">
               Forgot Password?
             </Link>
           </div>
 
-          {/* Login Button */}
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
@@ -106,14 +100,12 @@ const Login = () => {
           </button>
         </form>
 
-        {/* Display the alert message */}
         {alertMessage && (
           <div className="mt-4 p-2 bg-red-500 text-white text-center">
             {alertMessage}
           </div>
         )}
 
-        {/* Sign up Link */}
         <div className="flex mt-6 text-gray-500 text-center">
           New Here?
           <div className="pl-2 text-blue-500 text-center">

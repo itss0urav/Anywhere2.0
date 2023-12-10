@@ -7,6 +7,9 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Introduction from "./pages/Introduction";
+import AboutPage from "./pages/AboutPage";
+import ContactUsPage from "./pages/ContactUsPage";
+import ServicesPage from "./pages/ServicesPage";
 
 //components
 import CreatePostForm from "./components/CreatePostForm";
@@ -22,6 +25,9 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/" element={<Introduction />} />
+          <Route path="/About" element={<AboutPage />} />
+          <Route path="/ContactUs" element={<ContactUsPage />} />
+          <Route path="/Services" element={<ServicesPage />} />
 
           {/* Components */}
           <Route path="/createpostform" element={<CreatePostForm />} />
