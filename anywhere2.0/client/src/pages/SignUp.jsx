@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Logo from "../assets/Anywhere-Transparent.png";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import vid from "../assets/v3.mp4";
 
 const SignUp = () => {
@@ -32,12 +32,13 @@ const SignUp = () => {
       try {
         const response = await axios.post("http://localhost:5000/user", user);
         console.log(response.data);
-      nav("/login");
-
+        nav("/login");
       } catch (error) {
         console.error(error);
         // Set alert message on error
-        setAlertMessage("An error occurred while signing up. Please try again.");
+        setAlertMessage(
+          "An error occurred while signing up. Please try again."
+        );
       }
     } else {
       // Set alert message for password mismatch
@@ -57,8 +58,7 @@ const SignUp = () => {
           className="absolute w-full h-full object-cover"
         ></video>
         <div className="flex justify-center">
-
-        <img src={Logo} alt="Logo" className="relative w-3/4" />
+          <img src={Logo} alt="Logo" className="relative w-3/4" />
         </div>
       </div>
       {/* Right: Signup Form */}
