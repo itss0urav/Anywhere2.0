@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Logo from "../assets/Anywhere-Transparent.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import vid from "../assets/v1.mp4";
+import vid from "../assets/v3.mp4";
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,8 +24,6 @@ const Login = () => {
         userCredentials
       );
       console.log(response.data);
-      // TODO: Handle successful login, e.g., store user information in state or local storage
-      // Redirect the user to another page
       nav("/home");
     } catch (error) {
       console.error(error);
@@ -34,13 +33,18 @@ const Login = () => {
 
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
-      <div className="w-2/4 h-screen hidden lg:block">
-        <video muted autoPlay loop src={vid}></video>
-        <img
-          src={Logo}
-          alt="Logo"
-          className="object-contain bg-black w-full h-full"
-        />
+      <div className="w-2/4 h-screen hidden lg:block relative">
+        <video
+          muted
+          autoPlay
+          loop
+          src={vid}
+          className="absolute w-full h-full object-cover"
+        ></video>
+        <div className="flex justify-center">
+
+        <img src={Logo} alt="Logo" className="relative w-3/4" />
+        </div>
       </div>
 
       <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-3/4">

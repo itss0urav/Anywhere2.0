@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Logo from "../assets/Anywhere-Transparent.png";
 import { Link,useNavigate } from "react-router-dom";
+import vid from "../assets/v3.mp4";
 
 const SignUp = () => {
   // Initialize state variables for form inputs and alert message
@@ -47,12 +48,18 @@ const SignUp = () => {
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
       {/* Left: Image */}
-      <div className="w-2/4 h-screen hidden lg:block">
-        <img
-          src={Logo}
-          alt="Logo"
-          className="object-contain bg-black w-full h-full"
-        />
+      <div className="w-2/4 h-screen hidden lg:block relative">
+        <video
+          muted
+          autoPlay
+          loop
+          src={vid}
+          className="absolute w-full h-full object-cover"
+        ></video>
+        <div className="flex justify-center">
+
+        <img src={Logo} alt="Logo" className="relative w-3/4" />
+        </div>
       </div>
       {/* Right: Signup Form */}
       <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-3/4">
