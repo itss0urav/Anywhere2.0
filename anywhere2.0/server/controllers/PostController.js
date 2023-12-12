@@ -1,7 +1,6 @@
-// Import necessary modules
+// controllers/postController.js
 const Post = require("../models/Post");
 
-// Create a new post
 const createPost = async (req, res) => {
   try {
     const newPost = new Post(req.body);
@@ -13,6 +12,17 @@ const createPost = async (req, res) => {
   }
 };
 
+const getPosts = async (req, res) => {
+  try {
+    const posts = await Post.find();
+    res.json(posts);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ error: "Failed to fetch posts" });
+  }
+};
+
 module.exports = {
   createPost,
+  getPosts,
 };
