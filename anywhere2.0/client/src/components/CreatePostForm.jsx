@@ -1,6 +1,6 @@
 // CreatePostForm.js
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../config/axios";
 import Navbar from "./Navbar";
 
 const CreatePostForm = () => {
@@ -28,7 +28,7 @@ const CreatePostForm = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post("http://localhost:5000/post", post);
+      await axios.post("/posts", post);
       setAlert({
         type: "success",
         message: "Post created successfully!",

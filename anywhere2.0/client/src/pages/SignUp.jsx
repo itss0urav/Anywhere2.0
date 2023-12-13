@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../config/axios";
 import Logo from "../assets/Anywhere-Transparent.png";
 import { Link, useNavigate } from "react-router-dom";
 import vid from "../assets/v3.mp4";
@@ -30,7 +30,7 @@ const SignUp = () => {
     // Make POST request
     if (password === confirmPassword) {
       try {
-        const response = await axios.post("http://localhost:5000/user", user);
+        const response = await axios.post("/users/signup", user);
         console.log(response.data);
         nav("/login");
       } catch (error) {

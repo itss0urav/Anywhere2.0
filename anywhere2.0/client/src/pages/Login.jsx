@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../assets/Anywhere-Transparent.png";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../config/axios";
 import vid from "../assets/v3.mp4";
 
 const Login = () => {
@@ -20,7 +20,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/user/login",
+        "/users/login",
         userCredentials
       );
       console.log(response.data);
