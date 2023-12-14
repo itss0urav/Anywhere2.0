@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import v1 from "../assets/v1.mp4";
+// import v1 from "../assets/v1.mp4";
 import v3 from "../assets/v3.mp4";
 
 function Introduction() {
-  const bgs = [v1, v3];
+  const bgs = [
+    // v1,
+    v3
+  ];
   const videoBg = bgs[Math.floor(Math.random() * bgs.length)];
 
   return (

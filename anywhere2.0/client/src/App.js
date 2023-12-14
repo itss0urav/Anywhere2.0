@@ -13,6 +13,7 @@ import ServicesPage from "./pages/ServicesPage";
 
 //components
 import CreatePostForm from "./components/CreatePostForm";
+import IntroComponent from "./components/IntoComponent";
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
 
           {/* Components */}
           <Route path="/createpostform" element={<CreatePostForm />} />
+
+          {/* Test Components */}
+          <Route path="/IntroComponent" element={<IntroComponent />} />
         </Routes>
       </BrowserRouter>
     </div>

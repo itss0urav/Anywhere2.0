@@ -70,6 +70,7 @@ const CreatePostForm = () => {
         )}
         <div className="rounded-md bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 flex flex-col items-center justify-center">
           <input
+            required
             name="name"
             value={post.name}
             onChange={handleChange}
@@ -78,6 +79,7 @@ const CreatePostForm = () => {
             placeholder="Post Name"
           />
           <input
+            required
             name="category"
             value={post.category}
             onChange={handleChange}
@@ -86,6 +88,7 @@ const CreatePostForm = () => {
             placeholder="Category"
           />
           <textarea
+            required
             name="description"
             value={post.description}
             onChange={handleChange}
@@ -93,6 +96,7 @@ const CreatePostForm = () => {
             placeholder="Description"
           />
           <input
+            required
             name="imageUrl"
             value={post.imageUrl}
             onChange={handleChange}
@@ -102,6 +106,7 @@ const CreatePostForm = () => {
           />
           <div className="w-full flex justify-start items-center mt-2">
             <input
+              required
               name="nsfw"
               checked={post.nsfw}
               onChange={handleCheck}
