@@ -37,11 +37,15 @@ const PostView = () => {
         <div
           className="rounded-lg shadow-md p-4 bg-white transform transition-transform duration-500 hover:shadow-blue-400 mb-4" // Add 'mb-4' here
         >
-          <p className="inline rounded-sm  text-red-600 border border-red-800 text-sm mt-4 pr-1 pl-1">
-            {post.nsfw ? "NSFW" : ""}
-          </p>
+          {post.nsfw ? (
+            <p className="inline rounded-sm  text-red-600 border border-red-800 text-sm mt-4 pr-1 pl-1">
+              {post.nsfw ? "NSFW" : ""}
+            </p>
+          ) : (
+            ""
+          )}
           <img
-            onClick={toggleBlur} // Call toggleBlur on click
+            onClick={toggleBlur} 
             className={`w-full h-64 object-contain rounded-t-lg ${
               blurStatus && post.nsfw ? "blur-lg" : ""
             }`}

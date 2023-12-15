@@ -43,9 +43,20 @@ const getPost = async (req, res) => {
   }
 };
 
+const getPostsByCategory = async (req, res) => {
+  try {
+    const posts = await Post.find({ category: req.params.category });
+    res.json(posts);
+  } catch (error) {
+    console.error("Error fetching posts by category:", error);
+    res.status(500).json({ error: "Failed to fetch posts by category" });
+  }
+};
+
 module.exports = {
   createPost,
   getPosts,
   getCategories,
   getPost,
+  getPostsByCategory,
 };

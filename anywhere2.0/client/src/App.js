@@ -11,6 +11,7 @@ import AboutPage from "./pages/AboutPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import ServicesPage from "./pages/ServicesPage";
 import PostView from "./pages/PostView";
+import PostFromCategory from "./pages/PostFromCategory"; // Import the new page
 
 //components
 import CreatePostForm from "./components/CreatePostForm";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/" element={<Introduction />} />
           <Route path="/About" element={<AboutPage />} />
           <Route path="/posts/:postId" element={<PostView />} />
+          <Route path="/posts/category/:category" element={<PostFromCategory />} /> {/* Add this line */}
           <Route path="/ContactUs" element={<ContactUsPage />} />
           <Route path="/Services" element={<ServicesPage />} />
 

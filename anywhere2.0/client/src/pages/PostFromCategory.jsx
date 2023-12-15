@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "../config/axios";
-import { useNavigate } from "react-router-dom";
-const AllPosts = () => {
+import Navbar from "../components/Navbar";
+
+const PostFromCategory = () => {
   const [posts, setPosts] = useState([]);
-  const [blurStatus, setBlurStatus] = useState({});
-  const navigate = useNavigate();
+  const { category } = useParams();
+  const [blurStatus, setBlurStatus] = useState(true); // Initialize blurStatus as true
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("/posts");
+        const response = await axios.get(`/posts/category/${category}`);
         setPosts(response.data);
         const initialBlurStatus = {};
         response.data.forEach((post, index) => {
@@ -16,13 +19,12 @@ const AllPosts = () => {
         });
         setBlurStatus(initialBlurStatus);
       } catch (error) {
-        console.error("Error fetching posts:", error);
+        console.error("Error fetching posts by category:", error);
       }
     };
 
     fetchPosts();
-  }, []);
-
+  }, [category]);
   const toggleBlur = (index, event) => {
     event.stopPropagation(); // Stop event propagation
     setBlurStatus({
@@ -32,7 +34,12 @@ const AllPosts = () => {
   };
   return (
     <div className="">
-      <div className="w-full p-4 flex flex-col justify-center items-center space-y-4 ">
+      <Navbar />
+      <div className="m-8">
+        <h1 className="text-2xl font-bold mb-4">
+          Posts in category: {category}
+        </h1>
+        <div className="w-full p-4 flex flex-col justify-center items-center space-y-4 ">
         {posts.length === 0 ? (
           <h1 className=" text-3xl font-bold mb-4 text-blue-700">No Posts</h1>
         ) : (
@@ -42,7 +49,7 @@ const AllPosts = () => {
           {posts.map((post, index) => (
             <div
               key={index}
-              onClick={() => navigate(`/posts/${post._id}`)}
+            //   onClick={() => navigate(`/posts/${post._id}`)}
               className="rounded-lg shadow-md p-4 bg-white transform transition-transform duration-500 hover:shadow-blue-400 mb-4" // Add 'mb-4' here
             >
               {post.nsfw ? (
@@ -69,8 +76,9 @@ const AllPosts = () => {
           ))}
         </div>
       </div>
+      </div>
     </div>
   );
 };
 
-export default AllPosts;
+export default PostFromCategory;
