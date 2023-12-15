@@ -32,7 +32,7 @@ const AllPosts = () => {
 
   return (
     <div className="w-full p-4 flex flex-col justify-center items-center space-y-4 ">
-      {posts.length == 0 ? (
+      {posts.length === 0 ? (
         <h1 className=" text-3xl font-bold mb-4 text-blue-700">No Posts</h1>
       ) : (
         <h1 className=" text-3xl font-bold mb-4 text-blue-700">All Posts</h1>
