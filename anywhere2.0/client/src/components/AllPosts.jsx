@@ -3,12 +3,18 @@ import axios from "../config/axios";
 
 const AllPosts = () => {
   const [posts, setPosts] = useState([]);
+  const [blurStatus, setBlurStatus] = useState({});
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get("/posts");
         setPosts(response.data);
+        const initialBlurStatus = {};
+        response.data.forEach((post, index) => {
+          initialBlurStatus[index] = true;
+        });
+        setBlurStatus(initialBlurStatus);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
@@ -17,17 +23,27 @@ const AllPosts = () => {
     fetchPosts();
   }, []);
 
+  const toggleBlur = (index) => {
+    setBlurStatus({
+      ...blurStatus,
+      [index]: !blurStatus[index],
+    });
+  };
+
   return (
-    <div className="p-4 flex flex-col justify-center items-center space-y-4 bg-gray-100">
-      <h1 className="text-3xl font-bold mb-4 text-blue-700">All Posts</h1>
-      <div className="">
+    <div className="w-full p-4 flex flex-col justify-center items-center space-y-4 ">
+      <h1 className=" text-3xl font-bold mb-4 text-blue-700">All Posts</h1>
+      <div className="w-3/4 m-4">
         {posts.map((post, index) => (
           <div
             key={index}
-            className="rounded-lg shadow-md p-4 bg-white transform transition-transform duration-500 hover:scale-105"
+            className="rounded-lg shadow-md p-4 bg-white transform transition-transform duration-500 hover:shadow-blue-400 mb-4" // Add 'mb-4' here
           >
             <img
-              className="w-full h-64 object-cover rounded-t-lg"
+              onClick={() => toggleBlur(index)}
+              className={`w-full h-64 object-contain rounded-t-lg ${
+                blurStatus[index] && post.nsfw ? "blur-lg" : ""
+              }`}
               src={post.imageUrl}
               alt={post.name}
             />

@@ -1,13 +1,31 @@
-import React from 'react'
+import axios from "../config/axios";
+import React, { useEffect, useState } from "react";
 
 const SideComponent = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("/posts/categories");
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   return (
     <div>
-        <div className="bg-gray-100 p-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore molestiae debitis, voluptas excepturi laborum saepe nostrum nam vel et expedita dolorum obcaecati nesciunt, omnis earum quia velit doloribus blanditiis neque!
-        </div>
+      <div className="text-white bg-gradient-to-r from-blue-700 to-blue-500 p-2">
+        {categories.map((category, index) => (
+          <p key={index}>{category}</p>
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default SideComponent
+export default SideComponent;

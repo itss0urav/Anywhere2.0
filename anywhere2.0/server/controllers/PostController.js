@@ -21,8 +21,18 @@ const getPosts = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch posts" });
   }
 };
+const getCategories = async (req, res) => {
+  try {
+    const categories = await Post.distinct("category");
+    res.json(categories);
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    res.status(500).json({ error: "Failed to fetch categories" });
+  }
+};
 
 module.exports = {
   createPost,
   getPosts,
+  getCategories,
 };
