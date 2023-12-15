@@ -10,6 +10,7 @@ import Introduction from "./pages/Introduction";
 import AboutPage from "./pages/AboutPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import ServicesPage from "./pages/ServicesPage";
+import PostView from "./pages/PostView";
 
 //components
 import CreatePostForm from "./components/CreatePostForm";
@@ -27,6 +28,7 @@ function App() {
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/" element={<Introduction />} />
           <Route path="/About" element={<AboutPage />} />
+          <Route path="/posts/:postId" element={<PostView />} />
           <Route path="/ContactUs" element={<ContactUsPage />} />
           <Route path="/Services" element={<ServicesPage />} />
 
