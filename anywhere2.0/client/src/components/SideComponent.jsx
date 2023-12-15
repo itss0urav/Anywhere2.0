@@ -28,6 +28,7 @@ const SideComponent = () => {
           >
             {category}
           </p>
+          
         ))}
       </div>
     </div>

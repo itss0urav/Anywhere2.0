@@ -30,6 +30,7 @@ const Navbar = () => {
           <Link to="/Login" className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white">
             <MdContactMail className="inline-block mr-1" /> Login
           </Link>
+          
         </div>
       </div>
     </nav>

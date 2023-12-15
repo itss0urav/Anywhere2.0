@@ -29,6 +29,7 @@ const AllPosts = () => {
       [index]: !blurStatus[index],
     });
   };
+  
 
   return (
     <div className="w-full p-4 flex flex-col justify-center items-center space-y-4 ">

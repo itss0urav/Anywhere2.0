@@ -19,6 +19,7 @@ const LandingPage = () => {
       <footer className="w-full text-center p-4">
         <p>Trusted by companies like 3M, KPMG, and SAP</p>
       </footer>
+      
     </div>
   );
 };

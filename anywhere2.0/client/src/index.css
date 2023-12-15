@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Open+Sans&family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Open+Sans&family=Roboto&display=swap");
 
-*{
-    font-family: Fira Code;
+* {
+  font-family: Fira Code;
 }

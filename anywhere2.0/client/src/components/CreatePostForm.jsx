@@ -68,6 +68,7 @@ const CreatePostForm = () => {
             </span>
           </div>
         )}
+        
         <div className="rounded-md bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 flex flex-col items-center justify-center">
           <input
             required
