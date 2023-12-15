@@ -17,7 +17,7 @@ const Home = () => {
             <AllPosts />
           </div>
         </div>
-        <div className="max-w-[25%]">
+        <div className="max-w-[25%] m-2  ">
           <SideComponent />
         </div>
       </div>

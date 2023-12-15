@@ -19,9 +19,9 @@ const SideComponent = () => {
 
   return (
     <div>
-      <div className="text-white bg-gradient-to-r from-blue-700 to-blue-500 p-2">
+      <div className="rounded-sm text-white bg-gradient-to-r from-blue-700 to-blue-500 p-2">
         {categories.map((category, index) => (
-          <p key={index}>{category}</p>
+          <p className="bg-gray-700 bg-transparent mt-2 p-2 rounded-md" key={index}>{category}</p>
         ))}
       </div>
     </div>
