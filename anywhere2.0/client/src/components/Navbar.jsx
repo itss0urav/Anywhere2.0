@@ -1,9 +1,11 @@
 import React from "react";
 import Logo from "../assets/Anywhere-Transparent.png";
 import { MdContactMail, MdBuild, MdInfo } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const nav = useNavigate();
+  const location = useLocation();
   return (
     <nav className="bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -14,23 +16,39 @@ const Navbar = () => {
         </div>
         <div className="flex items-center space-x-4">
           <input
+            onClick={() => {
+              if (location.pathname !== "/searchpage") {
+                nav("/searchpage");
+              }
+            }}
             className="rounded p-2 border transition-all duration-200"
             type="text"
             placeholder="Search..."
           />
-          <Link to="/About" className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white">
+          <Link
+            to="/About"
+            className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
+          >
             <MdInfo className="inline-block mr-1" /> About
           </Link>
-          <Link to="/Services" className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white">
+          <Link
+            to="/Services"
+            className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
+          >
             <MdBuild className="inline-block mr-1" /> Services
           </Link>
-          <Link to="/ContactUs" className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white">
+          <Link
+            to="/ContactUs"
+            className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
+          >
             <MdContactMail className="inline-block mr-1" /> Contact Us
           </Link>
-          <Link to="/Login" className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white">
+          <Link
+            to="/Login"
+            className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
+          >
             <MdContactMail className="inline-block mr-1" /> Login
           </Link>
-          
         </div>
       </div>
     </nav>

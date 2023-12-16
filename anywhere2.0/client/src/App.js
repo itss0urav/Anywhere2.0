@@ -12,6 +12,7 @@ import ContactUsPage from "./pages/ContactUsPage";
 import ServicesPage from "./pages/ServicesPage";
 import PostView from "./pages/PostView";
 import PostFromCategory from "./pages/PostFromCategory"; // Import the new page
+import SearchPage from "./pages/SearchPage";
 
 //components
 import CreatePostForm from "./components/CreatePostForm";
@@ -33,6 +34,7 @@ function App() {
           <Route path="/posts/category/:category" element={<PostFromCategory />} /> {/* Add this line */}
           <Route path="/ContactUs" element={<ContactUsPage />} />
           <Route path="/Services" element={<ServicesPage />} />
+          <Route path="/searchpage" element={<SearchPage />} />
 
           {/* Components */}
           <Route path="/createpostform" element={<CreatePostForm />} />
