@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import { useParams } from "react-router-dom"; // Import useParams
 import Navbar from "../components/Navbar";
-
+import Comment from "../components/Comment";
 const PostView = () => {
   const { postId } = useParams(); // Get postId from URL parameters
   const [post, setPost] = useState(null);
@@ -58,6 +58,9 @@ const PostView = () => {
             <p className="text-gray-600 text-sm">{post.description}</p>
           </div>
         </div>
+      </div>
+      <div className="">
+        <Comment/>
       </div>
     </div>
   );
