@@ -19,10 +19,13 @@ const Login = () => {
     };
 
     try {
-      const response = await axios.post(
-        "/users/login",
-        userCredentials
-      );
+      const response = await axios.post("/users/login", userCredentials);
+      // .then((req, res) => {
+      //   if (res.data.passed) {
+      //     console.log(response.data);
+      //     nav("/home");
+      //   }
+      // });
       console.log(response.data);
       nav("/home");
     } catch (error) {
@@ -42,8 +45,7 @@ const Login = () => {
           className="absolute w-full h-full object-cover"
         ></video>
         <div className="flex justify-center">
-
-        <img src={Logo} alt="Logo" className="relative w-3/4" />
+          <img src={Logo} alt="Logo" className="relative w-3/4" />
         </div>
       </div>
 

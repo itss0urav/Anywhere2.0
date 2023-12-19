@@ -8,7 +8,7 @@ const createPost = async (req, res) => {
     res.json(savedPost);
   } catch (error) {
     console.error("Error creating post:", error);
-    res.status(500).json({ error: "Failed to create post" });
+    res.status(500).json({ error: "Failed to create post"});
   }
 };
 
