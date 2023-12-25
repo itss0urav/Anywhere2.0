@@ -1,9 +1,9 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const cors = require("cors");
+const cookieParser =require("cookie-parser")
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
-
 // Load environment variables from .env
 require("dotenv").config();
 
@@ -11,6 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 connectDB();
 app.use(cors());
+app.use(cookieParser())
 app.use(express.json());
 
 // Use routes

@@ -31,14 +31,16 @@ function App() {
           <Route path="/" element={<Introduction />} />
           <Route path="/About" element={<AboutPage />} />
           <Route path="/posts/:postId" element={<PostView />} />
-          <Route path="/posts/category/:category" element={<PostFromCategory />} /> {/* Add this line */}
+          <Route
+            path="/posts/category/:category"
+            element={<PostFromCategory />}
+          />{" "}
+          {/* Add this line */}
           <Route path="/ContactUs" element={<ContactUsPage />} />
           <Route path="/Services" element={<ServicesPage />} />
           <Route path="/searchpage" element={<SearchPage />} />
-
           {/* Components */}
           <Route path="/createpostform" element={<CreatePostForm />} />
-
           {/* Test Components */}
           <Route path="/IntroComponent" element={<IntroComponent />} />
         </Routes>
