@@ -1,4 +1,5 @@
 // controllers/postController.js
+
 const Post = require("../models/Post");
 
 const createPost = async (req, res) => {
@@ -8,7 +9,7 @@ const createPost = async (req, res) => {
     res.json(savedPost);
   } catch (error) {
     console.error("Error creating post:", error);
-    res.status(500).json({ error: "Failed to create post"});
+    res.status(500).json({ error: "Failed to create post. Please try again." });
   }
 };
 
@@ -21,6 +22,7 @@ const getPosts = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch posts" });
   }
 };
+
 const getCategories = async (req, res) => {
   try {
     const categories = await Post.distinct("category");
@@ -30,6 +32,7 @@ const getCategories = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch categories" });
   }
 };
+
 const getPost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);

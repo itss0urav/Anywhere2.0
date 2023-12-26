@@ -1,4 +1,5 @@
-// CreatePostForm.js
+// src/components/CreatePostForm.js
+
 import React, { useState } from "react";
 import axios from "../config/axios";
 import Navbar from "./Navbar";
@@ -13,9 +14,11 @@ const CreatePostForm = () => {
   });
 
   const [alert, setAlert] = useState({
-    type: null, // "success" or "error"
+    type: null,
     message: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,22 +26,51 @@ const CreatePostForm = () => {
   };
 
   const handleCheck = () => {
-    setPost({ ...post, nsfw: !post.nsfw });
+    setPost((prevPost) => ({ ...prevPost, nsfw: !prevPost.nsfw }));
   };
 
   const handleSubmit = async () => {
     try {
-      await axios.post("/posts", post);
+      setLoading(true);
+
+      const accessToken = localStorage.getItem("anywhere-access-token");
+
+      if (!accessToken) {
+        setAlert({
+          type: "error",
+          message: "Please log in to create a post.",
+        });
+        return;
+      }
+
+      await axios.post("/posts", post, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
       setAlert({
         type: "success",
         message: "Post created successfully!",
       });
+
+      setPost({
+        name: "",
+        category: "",
+        description: "",
+        imageUrl: "",
+        nsfw: false,
+      });
     } catch (error) {
       console.error("Error creating post:", error);
+
       setAlert({
         type: "error",
-        message: "Error creating post. Please try again.",
+        message:
+          error.response?.data?.message || "Error creating post. Please try again.",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,7 +80,7 @@ const CreatePostForm = () => {
       message: "",
     });
   };
-
+  
   return (
     <div className="">
       <Navbar />
@@ -68,7 +100,7 @@ const CreatePostForm = () => {
             </span>
           </div>
         )}
-        
+
         <div className="rounded-md bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 flex flex-col items-center justify-center">
           <input
             required
@@ -119,8 +151,9 @@ const CreatePostForm = () => {
           <button
             onClick={handleSubmit}
             className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white mt-2 w-full"
+            disabled={loading}
           >
-            Submit
+            {loading ? "Submitting..." : "Submit"}
           </button>
         </div>
       </div>

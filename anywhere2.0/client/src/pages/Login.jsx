@@ -20,16 +20,10 @@ const Login = () => {
 
     try {
       const response = await axios.post("/users/login", userCredentials);
-      // .then((req, res) => {
-      //   if (res.data.passed) {
-      //     console.log(response.data);
-      //     nav("/home");
-      //   }
-      // });
-      console.log(response.data);
+      localStorage.setItem("anywhere-access-token", response.data.accessToken);
       nav("/home");
     } catch (error) {
-      console.error(error);
+      console.error("Error during login:", error);
       setAlertMessage("Invalid credentials. Please try again.");
     }
   };
