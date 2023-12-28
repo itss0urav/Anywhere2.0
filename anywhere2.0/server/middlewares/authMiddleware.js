@@ -1,9 +1,7 @@
-// middleware/authMiddleware.js
-
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-const protect = async (req, res, next) => {
+const protect = async (req, res, next, handleUnauthorizedError) => {
   try {
     let token;
     if (
@@ -18,28 +16,29 @@ const protect = async (req, res, next) => {
       }
       req.user = user;
       next();
-      return;
+    } else {
+      handleUnauthorizedError(res, "NO_TOKEN");
     }
-    handleUnauthorizedError(res, "NO_TOKEN");
-  } catch (error) {
-    console.log(error);
-    handleUnauthorizedError(res, error);
+  } catch (err) {
+    console.error(err);
+    handleUnauthorizedError(res, err);
   }
 };
 
 function handleUnauthorizedError(res, err) {
   let message;
-  if (err === "NO_USER") {
+  if (err.name === "JsonWebTokenError" && err.message === "jwt malformed") {
+    message = "Malformed token";
+  } else if (err === "NO_USER") {
     message = "User not found";
-  }
-  if (err === "NO_TOKEN") {
+  } else if (err === "NO_TOKEN") {
     message = "No token found";
-  }
-  if (err instanceof SyntaxError) {
+  } else if (err instanceof SyntaxError) {
     message = "Something went wrong. Contact customer care";
-  }
-  if (error instanceof jwt.TokenExpiredError) {
+  } else if (err instanceof jwt.TokenExpiredError) {
     message = "Token expired";
+  } else {
+    message = "Unauthorized";
   }
   res.status(401).json({ message });
 }
