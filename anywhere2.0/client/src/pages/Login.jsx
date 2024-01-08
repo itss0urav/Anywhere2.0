@@ -20,7 +20,11 @@ const Login = () => {
 
     try {
       const response = await axios.post("/users/login", userCredentials);
-      localStorage.setItem("anywhere-access-token", response.data.accessToken);
+      sessionStorage.setItem(
+        "user",
+        JSON.stringify({ token: response.data.token, userCredentials })
+      );
+      console.log("clg from login",sessionStorage.getItem("user"));
       nav("/home");
     } catch (error) {
       console.error("Error during login:", error);
