@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Logo from "../assets/Anywhere-Transparent.png";
 import { MdContactMail, MdBuild, MdInfo } from "react-icons/md";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
+import GlobalContext from "../contexts/Context";
 
 const Navbar = () => {
+  const { user, setUser } = useContext(GlobalContext);
+  console.log(user);
+  useEffect(() => {}, [user]);
   const nav = useNavigate();
   const location = useLocation();
+
+  function handleLogout() {
+    sessionStorage.removeItem("user");
+    setUser(null);
+    nav("/Login");
+  }
+  function handleLogin() {
+    nav("/Login");
+  }
   return (
     <nav className="bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -44,11 +58,27 @@ const Navbar = () => {
             <MdContactMail className="inline-block mr-1" /> Contact Us
           </Link>
           <Link
-            to="/Login"
-            className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
+            to="/UserProfile"
+            className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
           >
-            <MdContactMail className="inline-block mr-1" /> Login
+            <MdContactMail className="inline-block mr-1" /> Profile
           </Link>
+          {user !== null ? (
+            <button
+              onClick={handleLogout}
+              className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
+            >
+              <FaUser className="inline-block mr-1" /> Logout
+            </button>
+          ) : (
+            <button
+              onClick={handleLogin}
+              className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
+            >
+              <FaUser className="inline-block mr-1" />
+              Login
+            </button>
+          )}
         </div>
       </div>
     </nav>

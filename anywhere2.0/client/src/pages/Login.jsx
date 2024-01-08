@@ -19,12 +19,18 @@ const Login = () => {
     };
 
     try {
-      const response = await axios.post("/users/login", userCredentials);
+      const req = await axios.post("/users/login", userCredentials);
+      console.log("from login", req.data);
+
+      const token = req.data.token;
       sessionStorage.setItem(
         "user",
-        JSON.stringify({ token: response.data.token, userCredentials })
+        JSON.stringify({
+          token,
+          user: req.data.user,
+        })
       );
-      console.log("clg from login",sessionStorage.getItem("user"));
+
       nav("/home");
     } catch (error) {
       console.error("Error during login:", error);

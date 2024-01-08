@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
@@ -18,32 +19,45 @@ import SearchPage from "./pages/SearchPage";
 import CreatePostForm from "./components/CreatePostForm";
 import IntroComponent from "./components/IntoComponent";
 
+//context
+import GlobalContext from "./contexts/Context";
+import UserProfile from "./pages/UserProfile";
+
 function App() {
+  const SessionStorageData = JSON.parse(sessionStorage.getItem("user"));
+  const [user, setUser] = useState(SessionStorageData);
+  const dataExpanded = {
+    user,
+    setUser,
+  };
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          {/* pages */}
-          <Route path="/Home" element={<Home />} />
-          <Route path="/Help" element={<Help />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/" element={<Introduction />} />
-          <Route path="/About" element={<AboutPage />} />
-          <Route path="/posts/:postId" element={<PostView />} />
-          <Route
-            path="/posts/category/:category"
-            element={<PostFromCategory />}
-          />{" "}
-          {/* Add this line */}
-          <Route path="/ContactUs" element={<ContactUsPage />} />
-          <Route path="/Services" element={<ServicesPage />} />
-          <Route path="/searchpage" element={<SearchPage />} />
-          {/* Components */}
-          <Route path="/createpostform" element={<CreatePostForm />} />
-          {/* Test Components */}
-          <Route path="/IntroComponent" element={<IntroComponent />} />
-        </Routes>
+        <GlobalContext.Provider value={dataExpanded}>
+          <Routes>
+            {/* pages */}
+            <Route path="/Home" element={<Home />} />
+            <Route path="/Help" element={<Help />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/SignUp" element={<SignUp />} />
+            <Route path="/" element={<Introduction />} />
+            <Route path="/UserProfile" element={<UserProfile />} />
+            <Route path="/About" element={<AboutPage />} />
+            <Route path="/posts/:postId" element={<PostView />} />
+            <Route
+              path="/posts/category/:category"
+              element={<PostFromCategory />}
+            />{" "}
+            {/* Add this line */}
+            <Route path="/ContactUs" element={<ContactUsPage />} />
+            <Route path="/Services" element={<ServicesPage />} />
+            <Route path="/searchpage" element={<SearchPage />} />
+            {/* Components */}
+            <Route path="/createpostform" element={<CreatePostForm />} />
+            {/* Test Components */}
+            <Route path="/IntroComponent" element={<IntroComponent />} />
+          </Routes>
+        </GlobalContext.Provider>
       </BrowserRouter>
     </div>
   );

@@ -58,7 +58,7 @@ const UserController = {
           maxAge: 1000 * 60 * 60,
         })
         .status(200)
-        .json({ message: "Login successful", passed: true, token });
+        .json({ message: "Login successful", passed: true, token, user: user });
     } catch (error) {
       console.error("Error during login:", error);
       res
