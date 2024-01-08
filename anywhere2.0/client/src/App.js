@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
@@ -20,20 +20,19 @@ import CreatePostForm from "./components/CreatePostForm";
 import IntroComponent from "./components/IntoComponent";
 
 //context
-import GlobalContext from "./contexts/Context";
+// import GlobalContext from "./contexts/Context";
 import UserProfile from "./pages/UserProfile";
 
 function App() {
-  const SessionStorageData = JSON.parse(sessionStorage.getItem("user"));
-  const [user, setUser] = useState(SessionStorageData);
-  const dataExpanded = {
-    user,
-    setUser,
-  };
+  // const [user, setUser] = useState(SessionStorageData);
+  // const dataExpanded = {
+  //   user,
+  //   setUser,
+  // };
   return (
     <div className="App">
       <BrowserRouter>
-        <GlobalContext.Provider value={dataExpanded}>
+        {/* <GlobalContext.Provider value={dataExpanded}> */}
           <Routes>
             {/* pages */}
             <Route path="/Home" element={<Home />} />
@@ -57,7 +56,7 @@ function App() {
             {/* Test Components */}
             <Route path="/IntroComponent" element={<IntroComponent />} />
           </Routes>
-        </GlobalContext.Provider>
+        {/* </GlobalContext.Provider> */}
       </BrowserRouter>
     </div>
   );

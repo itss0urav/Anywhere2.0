@@ -26,11 +26,12 @@ const SignUp = () => {
       password,
     };
 
-    console.log(user, "userdata");
+    console.log("Data From Signup", user);
     // Make POST request
     if (password === confirmPassword) {
       try {
         const response = await axios.post("/users/signup", user);
+        //console log for success message
         console.log(response.data);
         nav("/login");
       } catch (error) {

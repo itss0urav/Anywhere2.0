@@ -1,20 +1,19 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import Logo from "../assets/Anywhere-Transparent.png";
 import { MdContactMail, MdBuild, MdInfo } from "react-icons/md";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
-import GlobalContext from "../contexts/Context";
 
 const Navbar = () => {
-  const { user, setUser } = useContext(GlobalContext);
-  console.log(user);
-  useEffect(() => {}, [user]);
+  const SessionStorageData = JSON.parse(sessionStorage.getItem("user"));
+
+  console.log("Data From Navbar in SessionStorage", SessionStorageData);
+  useEffect(() => {}, [SessionStorageData]);
   const nav = useNavigate();
   const location = useLocation();
 
   function handleLogout() {
     sessionStorage.removeItem("user");
-    setUser(null);
     nav("/Login");
   }
   function handleLogin() {
@@ -63,7 +62,7 @@ const Navbar = () => {
           >
             <MdContactMail className="inline-block mr-1" /> Profile
           </Link>
-          {user !== null ? (
+          {SessionStorageData.user !== null ? (
             <button
               onClick={handleLogout}
               className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
