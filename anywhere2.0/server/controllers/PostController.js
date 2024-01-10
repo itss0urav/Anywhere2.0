@@ -1,11 +1,23 @@
 // controllers/postController.js
 
-const Post = require("../models/Post");
+const jwt = require("jsonwebtoken");
+const Post = require("../models/Post"); // replace with your actual Post model path
 
 const createPost = async (req, res) => {
   try {
-    const newPost = new Post(req.body);
+    // req.user is available here after token verification
+    const username = req.user;
+
+    // create a new post
+    const newPost = new Post({
+      ...req.body,
+      username: username, // add the username to the post
+    });
+
+    // save the post
     const savedPost = await newPost.save();
+
+    // send the saved post in the response
     res.json(savedPost);
   } catch (error) {
     console.error("Error creating post:", error);

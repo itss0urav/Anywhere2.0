@@ -43,11 +43,7 @@ const CreatePostForm = () => {
         return;
       }
 
-      await axios.post("/posts", post, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      await axios.post("/posts", post, { withCredentials: true });
 
       setAlert({
         type: "success",
@@ -67,7 +63,8 @@ const CreatePostForm = () => {
       setAlert({
         type: "error",
         message:
-          error.response?.data?.message || "Error creating post. Please try again.",
+          error.response?.data?.message ||
+          "Error creating post. Please try again.",
       });
     } finally {
       setLoading(false);
@@ -80,7 +77,7 @@ const CreatePostForm = () => {
       message: "",
     });
   };
-  
+
   return (
     <div className="">
       <Navbar />
