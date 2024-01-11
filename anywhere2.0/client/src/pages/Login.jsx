@@ -22,11 +22,9 @@ const Login = () => {
       const req = await axios.post("/users/login", userCredentials);
       console.log("from login", req.data);
 
-      const token = req.data.token;
       sessionStorage.setItem(
         "user",
         JSON.stringify({
-          token,
           user: req.data.user,
         })
       );

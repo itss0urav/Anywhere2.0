@@ -33,16 +33,6 @@ const CreatePostForm = () => {
     try {
       setLoading(true);
 
-      const accessToken = localStorage.getItem("anywhere-access-token");
-
-      if (!accessToken) {
-        setAlert({
-          type: "error",
-          message: "Please log in to create a post.",
-        });
-        return;
-      }
-
       await axios.post("/posts", post, { withCredentials: true });
 
       setAlert({
