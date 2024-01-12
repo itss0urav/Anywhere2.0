@@ -3,12 +3,13 @@ import Logo from "../assets/Anywhere-Transparent.png";
 import { MdContactMail, MdBuild, MdInfo } from "react-icons/md";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
+import useSessionStorage from "../hooks/useSessionStorage";
 
 const Navbar = () => {
-  const SessionStorageData = JSON.parse(sessionStorage.getItem("user"));
-
-  console.log("Data From Navbar in SessionStorage", SessionStorageData);
-  useEffect(() => {}, [SessionStorageData]);
+  const [user] = useSessionStorage("user");
+  useEffect(() => {
+    console.log("Changes/Access Noticed in Session Data");
+  }, [user]);
   const nav = useNavigate();
   const location = useLocation();
 
@@ -60,9 +61,9 @@ const Navbar = () => {
             to="/UserProfile"
             className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
           >
-            <MdContactMail className="inline-block mr-1" /> Profile
+            <MdContactMail className="inline-block mr-1" /> {user.username}
           </Link>
-          {SessionStorageData.user !== null ? (
+          {user.username !== null ? (
             <button
               onClick={handleLogout}
               className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"

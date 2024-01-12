@@ -8,7 +8,9 @@ const verifyToken = require("../middlewares/authMiddleware");
 router
   .route("/")
   .get(postController.getPosts)
-  .post(verifyToken, postController.createPost);
+  .post(
+    // verifyToken,
+     postController.createPost);
 router.get("/categories", postController.getCategories);
 router.get("/:id", postController.getPost);
 router.get("/category/:category", postController.getPostsByCategory);

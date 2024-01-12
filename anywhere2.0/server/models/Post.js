@@ -21,6 +21,10 @@ const postSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  author: {
+    type: String,
+    required: true,
+  },
 });
 
 const Post = mongoose.model("posts", postSchema);

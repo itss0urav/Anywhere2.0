@@ -10,21 +10,26 @@ const UserController = {
   createUser: async (req, res) => {
     try {
       const { username, dob, email, password } = req.body;
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
-      const newUser = new User({
-        username,
-        dob,
-        email,
-        password: hashedPassword,
-      });
-      await newUser.save();
-      res.status(201).json({ message: "User created successfully" });
+      const userFromDatabase = await User.findOne({ username });
+      if (!userFromDatabase) {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const newUser = new User({
+          username,
+          dob,
+          email,
+          password: hashedPassword,
+        });
+        await newUser.save();
+        res.status(201).json({ message: "User created successfully" });
+      } else {
+        res.status(400).json({ message: "User already exists with same username!" });
+      }
     } catch (error) {
       console.error("Error creating user:", error);
       res
         .status(500)
-        .json({ message: "Error creating user. Please try again." });
+        .json({ message: error.message || "Error creating user. Please try again." });
     }
   },
 

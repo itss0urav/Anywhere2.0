@@ -5,13 +5,14 @@ const Post = require("../models/Post"); // replace with your actual Post model p
 
 const createPost = async (req, res) => {
   try {
+    const token = req.cookies.token; // access the token from cookies
+    console.log("token from createPost", token);
     // req.user is available here after token verification
     const username = req.user;
 
     // create a new post
     const newPost = new Post({
-      ...req.body,
-      username: username, // add the username to the post
+      ...req.body
     });
 
     // save the post

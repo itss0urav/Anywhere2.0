@@ -1,11 +1,16 @@
 // src/components/CreatePostForm.js
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import Navbar from "./Navbar";
+import useSessionStorage from "../hooks/useSessionStorage";
 
 const CreatePostForm = () => {
-  const [post, setPost] = useState({
+  const [user] = useSessionStorage("user");
+  useEffect(() => {
+    console.log("Changes/Access Noticed in Session Data");
+  }, [user]);
+  const [postData, setPostData] = useState({
     name: "",
     category: "",
     description: "",
@@ -22,25 +27,28 @@ const CreatePostForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setPost({ ...post, [name]: value });
+    setPostData({ ...postData, [name]: value });
   };
 
   const handleCheck = () => {
-    setPost((prevPost) => ({ ...prevPost, nsfw: !prevPost.nsfw }));
+    setPostData((prevPost) => ({ ...prevPost, nsfw: !prevPost.nsfw }));
   };
 
   const handleSubmit = async () => {
     try {
       setLoading(true);
+      const post = { ...postData, author: user.username };
 
-      await axios.post("/posts", post, { withCredentials: true });
+      await axios.post("/posts", post,  {
+        withCredentials: true,
+      });
 
       setAlert({
         type: "success",
         message: "Post created successfully!",
       });
 
-      setPost({
+      setPostData({
         name: "",
         category: "",
         description: "",
@@ -92,7 +100,7 @@ const CreatePostForm = () => {
           <input
             required
             name="name"
-            value={post.name}
+            value={postData.name}
             onChange={handleChange}
             className="w-full rounded p-2"
             type="text"
@@ -101,7 +109,7 @@ const CreatePostForm = () => {
           <input
             required
             name="category"
-            value={post.category}
+            value={postData.category}
             onChange={handleChange}
             className="w-full rounded p-2 mt-2"
             type="text"
@@ -110,7 +118,7 @@ const CreatePostForm = () => {
           <textarea
             required
             name="description"
-            value={post.description}
+            value={postData.description}
             onChange={handleChange}
             className="w-full rounded p-2 mt-2"
             placeholder="Description"
@@ -118,7 +126,7 @@ const CreatePostForm = () => {
           <input
             required
             name="imageUrl"
-            value={post.imageUrl}
+            value={postData.imageUrl}
             onChange={handleChange}
             className="w-full rounded p-2 mt-2"
             type="text"
@@ -128,7 +136,7 @@ const CreatePostForm = () => {
             <input
               required
               name="nsfw"
-              checked={post.nsfw}
+              checked={postData.nsfw}
               onChange={handleCheck}
               className="mr-2"
               type="checkbox"

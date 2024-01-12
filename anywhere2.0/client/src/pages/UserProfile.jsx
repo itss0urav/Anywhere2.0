@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
+import useSessionStorage from "../hooks/useSessionStorage";
 
 export default function UserProfile() {
-  const SessionStorageData = JSON.parse(sessionStorage.getItem("user"));
-  useEffect(() => {}, [SessionStorageData]);
+  const [user] = useSessionStorage("user");
+  useEffect(() => {
+    console.log("Changes/Access Noticed in Session Data");
+  }, [user]);
 
-  
   return (
     <div className="">
       <Navbar />
@@ -21,7 +23,7 @@ export default function UserProfile() {
               <div className="grid grid-cols-3 gap-4 py-4">
                 <dt className="text-sm font-medium text-gray-500">Username</dt>
                 <dd className="mt-1 text-sm text-gray-900 col-span-2">
-                  {SessionStorageData.user.username}
+                  {user.username}
                 </dd>
               </div>
               <div className="grid grid-cols-3 gap-4 py-4">
@@ -29,13 +31,13 @@ export default function UserProfile() {
                   Date Of Birth
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 col-span-2">
-                  {SessionStorageData.user.dob}
+                  {user.dob}
                 </dd>
               </div>
               <div className="grid grid-cols-3 gap-4 py-4">
                 <dt className="text-sm font-medium text-gray-500">Email</dt>
                 <dd className="mt-1 text-sm text-gray-900 col-span-2">
-                  {SessionStorageData.user.email}
+                  {user.email}
                 </dd>
               </div>
             </dl>

@@ -3,8 +3,9 @@ import Logo from "../assets/Anywhere-Transparent.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../config/axios";
 import vid from "../assets/v3.mp4";
-
+import useSessionStorage from "../hooks/useSessionStorage";
 const Login = () => {
+  const [user, setUser] = useSessionStorage('user');
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [alertMessage, setAlertMessage] = useState(null);
@@ -22,12 +23,8 @@ const Login = () => {
       const req = await axios.post("/users/login", userCredentials);
       console.log("from login", req.data);
 
-      sessionStorage.setItem(
-        "user",
-        JSON.stringify({
-          user: req.data.user,
-        })
-      );
+      setUser( req.data.user)
+        
 
       nav("/home");
     } catch (error) {
