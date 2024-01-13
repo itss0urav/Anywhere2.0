@@ -1,6 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LuArrowBigUp, LuArrowBigDown } from "react-icons/lu";
+import axios from "../config/axios";
+import useSessionStorage from "../hooks/useSessionStorage";
+import { useParams } from "react-router-dom";
+
 const Comment = ({ username, commentText }) => {
+  const { postId } = useParams();
+
+  console.log(postId);
+  const [user] = useSessionStorage("user");
+  useEffect(() => {
+    console.log("Changes/Access Noticed in Session Data");
+  }, [user]);
   const [votes, setVotes] = useState(0);
   const [input, setInput] = useState("");
 
@@ -12,11 +23,18 @@ const Comment = ({ username, commentText }) => {
     setVotes(votes - 1);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle the form submission here
-    console.log(input);
-    setInput("");
+    try {
+      const response = await axios.post(`/posts/${postId}/comments`, {
+        text: input,
+        user: user.username,
+      });
+      console.log(response.data);
+      setInput("");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

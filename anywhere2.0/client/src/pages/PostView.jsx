@@ -34,7 +34,7 @@ const PostView = () => {
       <Navbar />
       <PostContainer value={post} index={0} />
       <div className="">
-        <Comment />
+        <Comment value={postId} />
       </div>
     </div>
   );

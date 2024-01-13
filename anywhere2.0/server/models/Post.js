@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const likeSchema = require("./Like");
+const commentSchema = require("./Comment");
 
 const postSchema = new mongoose.Schema({
   name: {
@@ -24,6 +26,14 @@ const postSchema = new mongoose.Schema({
   author: {
     type: String,
     required: true,
+  },
+  likes: {
+    type: [likeSchema],
+    default: [], // defaults to an empty array
+  },
+  comments: {
+    type: [commentSchema],
+    default: [], // defaults to an empty array
   },
 });
 

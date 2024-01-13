@@ -4,6 +4,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
+const commentRoutes = require("./routes/commentRoutes");
 
 require("dotenv").config();
 
@@ -15,14 +16,6 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-// optional
-// const corsOptions = {
-//   origin: "http://localhost:3000",
-//   credentials: true,
-// };
-
-// app.use("/api/users", cors(corsOptions), userRoutes);
-// app.use("/api/posts", cors(corsOptions), postRoutes);
 
 app.use(
   cors({
@@ -33,7 +26,17 @@ app.use(
 
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/posts/:id/comments", commentRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// optional
+// const corsOptions = {
+//   origin: "http://localhost:3000",
+//   credentials: true,
+// };
+
+// app.use("/api/users", cors(corsOptions), userRoutes);
+// app.use("/api/posts", cors(corsOptions), postRoutes);
