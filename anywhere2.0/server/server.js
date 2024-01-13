@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
 const commentRoutes = require("./routes/commentRoutes");
+const replyRoutes=require("./routes/replyRoute")
 
 require("dotenv").config();
 
@@ -27,7 +28,7 @@ app.use(
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/posts/:id/comments", commentRoutes);
-
+app.use("/api/posts/:postId/comments/:commentId/replies", replyRoutes);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

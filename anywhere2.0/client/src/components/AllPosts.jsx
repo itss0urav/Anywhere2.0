@@ -39,7 +39,7 @@ const AllPosts = () => {
           ) : (
             <h1 className=" text-3xl font-bold mb-4 text-blue-700">All Posts</h1>
             )}
-        <div className="w-3/4 m-4">
+        <div className="min-w-[40rem] m-4">
           {posts.map((post, index) => (
             <div
             key={index}
@@ -56,7 +56,7 @@ const AllPosts = () => {
               )}
               <img
                 onClick={(event) => toggleBlur(index, event)}
-                className={`w-full h-64 object-contain rounded-t-lg ${
+                className={` object-contain rounded-t-lg ${
                   blurStatus[index] && post.nsfw ? "blur-lg" : ""
                 }`}
                 src={post.imageUrl}
