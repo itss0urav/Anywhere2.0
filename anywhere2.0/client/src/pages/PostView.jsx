@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import Comment from "../components/Comment";
+import CommentForm from "../components/CommentForm";
 import PostContainer from "../components/PostContainer";
+import CommentContainer from "../components/CommentContainer";
 
 const PostView = () => {
   const { postId } = useParams();
@@ -34,7 +35,8 @@ const PostView = () => {
       <Navbar />
       <PostContainer value={post} index={0} />
       <div className="">
-        <Comment value={postId} />
+        <CommentForm value={postId} />
+        <CommentContainer/>
       </div>
     </div>
   );
