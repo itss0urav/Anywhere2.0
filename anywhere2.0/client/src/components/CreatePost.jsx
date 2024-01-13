@@ -12,7 +12,13 @@ const CreatePost = () => {
           className="w-12 h-12 rounded-full mr-4"
           // src={}
         /> */}
-        <FaCircleUser className="w-8 h-12 rounded-full mr-4 text-white " />
+
+        <FaCircleUser
+          onClick={() => {
+            nav("/UserProfile");
+          }}
+          className="w-8 h-12 rounded-full mr-4 text-white "
+        />
 
         <input
           onClick={() => {
@@ -22,7 +28,7 @@ const CreatePost = () => {
           type="text"
           placeholder="Create Post"
         />
-        
+
         <div className="flex justify-center">
           <div className="flex justify-end md:justify-end space-x-2 mt-2">
             <button className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white">

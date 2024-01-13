@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import Navbar from "./Navbar";
 import useSessionStorage from "../hooks/useSessionStorage";
-
+import { IoMdCloseCircle  } from "react-icons/io";
 const CreatePostForm = () => {
   const [user] = useSessionStorage("user");
   useEffect(() => {
@@ -35,37 +35,46 @@ const CreatePostForm = () => {
   };
 
   const handleSubmit = async () => {
-    try {
-      setLoading(true);
-      const post = { ...postData, author: user.username };
+    if (
+      postData.name &&
+      postData.category &&
+      postData.description &&
+      postData.imageUrl !== ""
+    ) {
+      try {
+        setLoading(true);
+        const post = { ...postData, author: user.username };
 
-      await axios.post("/posts", post,  {
-        withCredentials: true,
-      });
+        await axios.post("/posts", post, {
+          withCredentials: true,
+        });
 
-      setAlert({
-        type: "success",
-        message: "Post created successfully!",
-      });
+        setAlert({
+          type: "success",
+          message: "Post created successfully!",
+        });
 
-      setPostData({
-        name: "",
-        category: "",
-        description: "",
-        imageUrl: "",
-        nsfw: false,
-      });
-    } catch (error) {
-      console.error("Error creating post:", error);
+        setPostData({
+          name: "",
+          category: "",
+          description: "",
+          imageUrl: "",
+          nsfw: false,
+        });
+      } catch (error) {
+        console.error("Error creating post:", error);
 
-      setAlert({
-        type: "error",
-        message:
-          error.response?.data?.message ||
-          "Error creating post. Please try again.",
-      });
-    } finally {
-      setLoading(false);
+        setAlert({
+          type: "error",
+          message:
+            error.response?.data?.message ||
+            "Error creating post. Please try again.",
+        });
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      setAlert({ type: "error", message: "All fields must be filled" });
     }
   };
 
@@ -89,10 +98,16 @@ const CreatePostForm = () => {
                 : "bg-red-200 text-red-800"
             }`}
           >
-            {alert.message}
-            <span className="ml-2 cursor-pointer" onClick={closeAlert}>
-              X
-            </span>
+            <div className="flex">
+              {alert.message}
+              <IoMdCloseCircle 
+                className="ml-2  text-2xl cursor-pointer"
+                onClick={closeAlert}
+              />
+            </div>
+            {/* <span className="ml-2 cursor-pointer" onClick={closeAlert}> */}
+            {/* X
+            </span> */}
           </div>
         )}
 
