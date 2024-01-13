@@ -40,6 +40,14 @@ export default function UserProfile() {
                   {user.email}
                 </dd>
               </div>
+              <div className="grid grid-cols-3 gap-4 py-4">
+                <dt className="text-sm font-medium text-gray-500">
+                  Account Created At
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 col-span-2">
+                  {user.createdAt}
+                </dd>
+              </div>
             </dl>
           </div>
         </div>

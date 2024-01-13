@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import Navbar from "./Navbar";
 import useSessionStorage from "../hooks/useSessionStorage";
-import { IoMdCloseCircle  } from "react-icons/io";
+import { IoMdCloseCircle } from "react-icons/io";
 const CreatePostForm = () => {
   const [user] = useSessionStorage("user");
   useEffect(() => {
@@ -100,7 +100,7 @@ const CreatePostForm = () => {
           >
             <div className="flex">
               {alert.message}
-              <IoMdCloseCircle 
+              <IoMdCloseCircle
                 className="ml-2  text-2xl cursor-pointer"
                 onClick={closeAlert}
               />
