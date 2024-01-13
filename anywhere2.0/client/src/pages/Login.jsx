@@ -5,7 +5,8 @@ import axios from "../config/axios";
 import vid from "../assets/v3.mp4";
 import useSessionStorage from "../hooks/useSessionStorage";
 const Login = () => {
-  const [user, setUser] = useSessionStorage('user');
+  const [user, setUser] = useSessionStorage("user");
+  const [token, setToken] = useSessionStorage("token");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [alertMessage, setAlertMessage] = useState(null);
@@ -21,10 +22,10 @@ const Login = () => {
 
     try {
       const req = await axios.post("/users/login", userCredentials);
-      console.log("from login", req.data);
+      console.log("from login", req.data.token);
 
-      setUser( req.data.user)
-        
+      setUser(req.data.user);
+      setToken(req.data.token);
 
       nav("/home");
     } catch (error) {

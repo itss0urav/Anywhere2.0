@@ -15,6 +15,7 @@ const Navbar = () => {
 
   function handleLogout() {
     sessionStorage.removeItem("user");
+    sessionStorage.removeItem("token");
     nav("/Login");
   }
   function handleLogin() {
