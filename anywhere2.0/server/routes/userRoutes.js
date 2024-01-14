@@ -9,5 +9,5 @@ router.post(
   // (req, res, next) => protect(req, res, next, handleUnauthorizedError),
   UserController.loginUser
 );
-
+router.put("/update", UserController.updateUser);
 module.exports = router;

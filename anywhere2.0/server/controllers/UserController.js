@@ -23,13 +23,15 @@ const UserController = {
         await newUser.save();
         res.status(201).json({ message: "User created successfully" });
       } else {
-        res.status(400).json({ message: "User already exists with same username!" });
+        res
+          .status(400)
+          .json({ message: "User already exists with same username!" });
       }
     } catch (error) {
       console.error("Error creating user:", error);
-      res
-        .status(500)
-        .json({ message: error.message || "Error creating user. Please try again." });
+      res.status(500).json({
+        message: error.message || "Error creating user. Please try again.",
+      });
     }
   },
 
@@ -69,6 +71,55 @@ const UserController = {
       res
         .status(500)
         .json({ message: "Error during login. Please try again." });
+    }
+  },
+  updateUser: async (req, res) => {
+    try {
+      const { userId, username, dob, email, oldPassword, newPassword } =
+        req.body;
+      const user = await User.findById(userId); // Use the user ID from the request
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      const passwordMatch = await bcrypt.compare(oldPassword, user.password);
+      if (!passwordMatch) {
+        return res
+          .status(401)
+          .json({
+            message: "Invalid old password ,Must fill Old Password Field",
+          });
+      }
+
+      const updates = {
+        ...(username && { username }),
+        ...(dob && { dob }),
+        ...(email && { email }),
+      };
+
+      if (newPassword && newPassword.trim() !== "") {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+        updates.password = hashedPassword;
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(
+        userId, // Use the user ID from the request
+        { $set: updates },
+        { new: true }
+      );
+
+      res.status(200).json({
+        message: "User updated successfully",
+        user: updatedUser,
+        passed: true,
+      }); // Include 'passed' in the response
+    } catch (error) {
+      console.error("Error updating user:", error);
+      res.status(500).json({
+        message: error.message || "Error updating user. Please try again.",
+      });
     }
   },
 };
