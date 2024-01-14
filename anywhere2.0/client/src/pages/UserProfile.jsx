@@ -17,7 +17,8 @@ export default function UserProfile() {
   };
 
   const [formData, setFormData] = useState({
-    imageUrl: user.imageUrl || "",
+    // imageUrl: user.imageUrl === "" ? "https://i.pinimg.com/originals/36/ca/c0/36cac052d0c16bbf663b013495e53b97.jpg" : user.imageUrl,
+    imageUrl: user.imageUrl,
     userId: user._id,
     username: user.username,
     dob: formatDate(user.dob),

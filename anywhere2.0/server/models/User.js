@@ -28,10 +28,9 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-
     imageUrl: {
       type: String,
-      required: false,
+      default: "https://i.pinimg.com/originals/36/ca/c0/36cac052d0c16bbf663b013495e53b97.jpg",
     },
   },
   { timestamps: true }
