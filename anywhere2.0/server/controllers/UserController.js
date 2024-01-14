@@ -75,9 +75,16 @@ const UserController = {
   },
   updateUser: async (req, res) => {
     try {
-      const { userId, username, dob, email, oldPassword, newPassword } =
-        req.body;
-      const user = await User.findById(userId); // Use the user ID from the request
+      const {
+        userId,
+        username,
+        dob,
+        email,
+        oldPassword,
+        newPassword,
+        imageUrl,
+      } = req.body;
+      const user = await User.findById(userId);
 
       if (!user) {
         return res.status(404).json({ message: "User not found" });
@@ -85,17 +92,14 @@ const UserController = {
 
       const passwordMatch = await bcrypt.compare(oldPassword, user.password);
       if (!passwordMatch) {
-        return res
-          .status(401)
-          .json({
-            message: "Invalid old password ,Must fill Old Password Field",
-          });
+        return res.status(401).json({ message: "Invalid old password" });
       }
 
       const updates = {
         ...(username && { username }),
         ...(dob && { dob }),
         ...(email && { email }),
+        ...(imageUrl && { imageUrl }), // Add imageUrl to updates
       };
 
       if (newPassword && newPassword.trim() !== "") {
@@ -105,16 +109,18 @@ const UserController = {
       }
 
       const updatedUser = await User.findByIdAndUpdate(
-        userId, // Use the user ID from the request
+        userId,
         { $set: updates },
         { new: true }
       );
 
-      res.status(200).json({
-        message: "User updated successfully",
-        user: updatedUser,
-        passed: true,
-      }); // Include 'passed' in the response
+      res
+        .status(200)
+        .json({
+          message: "User updated successfully",
+          user: updatedUser,
+          passed: true,
+        });
     } catch (error) {
       console.error("Error updating user:", error);
       res.status(500).json({
