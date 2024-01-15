@@ -6,10 +6,7 @@ import { useParams } from "react-router-dom";
 import axios from "../config/axios";
 import useSessionStorage from "../hooks/useSessionStorage";
 
-// import { useLocation } from "react-router-dom";
 export default function CommentContainer() {
-  // const location = useLocation();
-
   const [user] = useSessionStorage("user");
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
@@ -20,6 +17,9 @@ export default function CommentContainer() {
   const [reply, setReply] = useState("");
   const [replyingTo, setReplyingTo] = useState(null);
 
+  // Add a state variable for the most liked comment
+  const [mostLikedComment, setMostLikedComment] = useState(null);
+
   useEffect(() => {
     const fetchComments = async () => {
       try {
@@ -29,6 +29,12 @@ export default function CommentContainer() {
           voteStatus: 0, // Initialize voteStatus to 0 for each comment
         }));
         setComments(commentsWithVotes);
+
+        // Find the comment with the most likes
+        const mostLiked = commentsWithVotes.reduce((prev, current) => {
+          return (prev.votes > current.votes) ? prev : current;
+        });
+        setMostLikedComment(mostLiked);
       } catch (error) {
         console.error(error);
       }
@@ -111,6 +117,13 @@ export default function CommentContainer() {
   return (
     <div className="mt-4 p-4 max-w-xl mx-auto bg-white rounded-xl shadow-md space-y-4 sm:py-4">
       <h2 className="text-3xl font-bold text-center">Comments</h2>
+      {mostLikedComment && (
+        <div className="bg-green-100 p-4 rounded-md">
+          <h3 className="text-xl font-bold text-gray-800">{mostLikedComment.user.username}</h3>
+          <p className="text-gray-600">{mostLikedComment.text}</p>
+          <div className="text-lg font-bold">{mostLikedComment.votes.length}</div>
+        </div>
+      )}
       {comments.map((comment) => {
         const totalVotes = comment.votes.reduce(
           (total, vote) => total + vote.voteStatus,
@@ -139,7 +152,7 @@ export default function CommentContainer() {
               </div>
               <div className="space-y-2">
                 <h3 className="text-xl font-bold text-gray-800">
-                  {comment.user}
+                  {comment.user.username}
                 </h3>
                 <p className="text-gray-600">{comment.text}</p>
                 <div className="flex items-center space-x-2">
@@ -157,7 +170,7 @@ export default function CommentContainer() {
                 key={reply._id}
                 className="ml-4 mt-2 bg-gray-100 p-2 rounded"
               >
-                <h4 className="font-semibold text-gray-700">{reply.user}</h4>
+                <h4 className="font-semibold text-gray-700">{reply.user.username}</h4>
                 <p className="text-gray-600">{reply.text}</p>
               </div>
             ))}
