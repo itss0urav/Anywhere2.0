@@ -49,3 +49,60 @@ exports.addReply = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+exports.addVoteToComment = async (req, res) => {
+  try {
+    const { commentId } = req.params;
+
+    const { userId, voteStatus, postId } = req.body;
+
+    // Log received parameters for debugging
+    console.log("Received postId:", postId);
+    console.log("Received commentId:", commentId);
+    console.log("Received userId:", userId);
+    console.log("Received voteStatus:", voteStatus);
+
+    // Find the post
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      console.log("Post not found");
+      return res.status(404).json({ message: "Post not found." });
+    }
+
+    // Find the comment
+    const comment = post.comments.id(commentId);
+
+    if (!comment) {
+      console.log("Comment not found");
+      return res.status(404).json({ message: "Comment not found." });
+    }
+
+    // Find the vote of this user
+    const vote = comment.votes.find((v) => v.user === userId);
+
+    if (vote) {
+      // If the user has already voted, update the voteStatus
+      vote.voteStatus = voteStatus;
+    } else {
+      // If the user hasn't voted yet, add their vote
+      comment.votes.push({ user: userId, voteStatus });
+    }
+
+    // Save the post
+    await post.save();
+
+    console.log("Vote updated successfully");
+    res
+      .status(200)
+      .json({
+        message: "Vote updated successfully.",
+        voteCount: comment.votes.length,
+      });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating the vote." });
+  }
+};

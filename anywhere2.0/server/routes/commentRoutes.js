@@ -6,5 +6,6 @@ router
   .route("/")
   .post(CommentController.createComment)
   .get(CommentController.getComments);
+router.route("/:commentId/votes").post(CommentController.addVoteToComment);
 
 module.exports = router;

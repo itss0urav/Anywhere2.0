@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const likeSchema = require("./Like");
+const voteSchema = require("./vote");
 const commentSchema = require("./Comment");
 
 const postSchema = new mongoose.Schema({
@@ -27,8 +27,8 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  likes: {
-    type: [likeSchema],
+  votes: {
+    type: [voteSchema],
     default: [], // defaults to an empty array
   },
   comments: {

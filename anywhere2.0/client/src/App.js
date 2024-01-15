@@ -53,6 +53,7 @@ function App() {
             <Route path="/searchpage" element={<SearchPage />} />
             {/* Components */}
             <Route path="/createpostform" element={<CreatePostForm />} />
+            
             {/* Test Components */}
             <Route path="/IntroComponent" element={<IntroComponent />} />
           </Routes>

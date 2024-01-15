@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const likeSchema = require("./Like");
+const voteSchema = require("./vote");
 
 const commentSchema = new mongoose.Schema({
   text: {
@@ -10,7 +10,7 @@ const commentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  likes: [likeSchema],
+  votes: [voteSchema],
   replies: [this], // This allows for comments on comments
 });
 
