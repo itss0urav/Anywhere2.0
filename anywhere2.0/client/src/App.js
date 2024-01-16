@@ -14,10 +14,12 @@ import ServicesPage from "./pages/ServicesPage";
 import PostView from "./pages/PostView";
 import PostFromCategory from "./pages/PostFromCategory"; // Import the new page
 import SearchPage from "./pages/SearchPage";
+import AdminLogin from "./pages/AdminLogin";
 
 //components
 import CreatePostForm from "./components/CreatePostForm";
 import IntroComponent from "./components/IntoComponent";
+import Admin from "./components/Admin";
 
 //context
 // import GlobalContext from "./contexts/Context";
@@ -33,30 +35,31 @@ function App() {
     <div className="App">
       <BrowserRouter>
         {/* <GlobalContext.Provider value={dataExpanded}> */}
-          <Routes>
-            {/* pages */}
-            <Route path="/Home" element={<Home />} />
-            <Route path="/Help" element={<Help />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path="/SignUp" element={<SignUp />} />
-            <Route path="/" element={<Introduction />} />
-            <Route path="/UserProfile" element={<UserProfile />} />
-            <Route path="/About" element={<AboutPage />} />
-            <Route path="/posts/:postId" element={<PostView />} />
-            <Route
-              path="/posts/category/:category"
-              element={<PostFromCategory />}
-            />{" "}
-            {/* Add this line */}
-            <Route path="/ContactUs" element={<ContactUsPage />} />
-            <Route path="/Services" element={<ServicesPage />} />
-            <Route path="/searchpage" element={<SearchPage />} />
-            {/* Components */}
-            <Route path="/createpostform" element={<CreatePostForm />} />
-            
-            {/* Test Components */}
-            <Route path="/IntroComponent" element={<IntroComponent />} />
-          </Routes>
+        <Routes>
+          {/* pages */}
+          <Route path="/Home" element={<Home />} />
+          <Route path="/adminhome" element={<Admin />} />
+          <Route path="/AdminLogin" element={<AdminLogin />} />
+          <Route path="/Help" element={<Help />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/" element={<Introduction />} />
+          <Route path="/UserProfile" element={<UserProfile />} />
+          <Route path="/About" element={<AboutPage />} />
+          <Route path="/posts/:postId" element={<PostView />} />
+          <Route
+            path="/posts/category/:category"
+            element={<PostFromCategory />}
+          />{" "}
+          {/* Add this line */}
+          <Route path="/ContactUs" element={<ContactUsPage />} />
+          <Route path="/Services" element={<ServicesPage />} />
+          <Route path="/searchpage" element={<SearchPage />} />
+          {/* Components */}
+          <Route path="/createpostform" element={<CreatePostForm />} />
+          {/* Test Components */}
+          <Route path="/IntroComponent" element={<IntroComponent />} />
+        </Routes>
         {/* </GlobalContext.Provider> */}
       </BrowserRouter>
     </div>

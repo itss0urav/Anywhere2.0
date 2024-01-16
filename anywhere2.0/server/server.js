@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
 const commentRoutes = require("./routes/commentRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 const replyRoutes = require("./routes/replyRoute");
 
 require("dotenv").config();
@@ -24,6 +25,7 @@ app.use(
 );
 
 app.use("/api/users", userRoutes);
+app.use("/api/admin", adminRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/posts/:id/comments", commentRoutes); // <- This route should come before the /votes route
 app.use("/api/posts/:id/comments/:commentId/votes", commentRoutes); // <- This route handles comment votes
