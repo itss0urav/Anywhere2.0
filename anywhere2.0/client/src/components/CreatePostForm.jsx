@@ -1,10 +1,11 @@
 // src/components/CreatePostForm.js
-
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import Navbar from "./Navbar";
 import useSessionStorage from "../hooks/useSessionStorage";
-import { IoMdCloseCircle } from "react-icons/io";
+import { toast,Toaster } from "react-hot-toast"; // import react-hot-toast
+
 const CreatePostForm = () => {
   const [user] = useSessionStorage("user");
   useEffect(() => {
@@ -18,11 +19,6 @@ const CreatePostForm = () => {
     nsfw: false,
   });
 
-  const [alert, setAlert] = useState({
-    type: null,
-    message: "",
-  });
-
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -33,6 +29,8 @@ const CreatePostForm = () => {
   const handleCheck = () => {
     setPostData((prevPost) => ({ ...prevPost, nsfw: !prevPost.nsfw }));
   };
+
+  const navigate = useNavigate(); // initialize useNavigate
 
   const handleSubmit = async () => {
     if (
@@ -49,9 +47,12 @@ const CreatePostForm = () => {
           withCredentials: true,
         });
 
-        setAlert({
-          type: "success",
-          message: "Post created successfully!",
+        toast.success("Post created successfully!", {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
         });
 
         setPostData({
@@ -61,55 +62,44 @@ const CreatePostForm = () => {
           imageUrl: "",
           nsfw: false,
         });
+
+        setTimeout(() => {
+          navigate("/home"); // navigate to "/home" after 2 seconds
+        }, 2000);
       } catch (error) {
         console.error("Error creating post:", error);
 
-        setAlert({
-          type: "error",
-          message:
-            error.response?.data?.message ||
+        toast.error(
+          error.response?.data?.message ||
             "Error creating post. Please try again.",
-        });
+          {
+            style: {
+              borderRadius: "10px",
+              background: "#333",
+              color: "#fff",
+            },
+          }
+        );
       } finally {
         setLoading(false);
       }
     } else {
-      setAlert({ type: "error", message: "All fields must be filled" });
+      toast.error("All fields must be filled", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
     }
-  };
-
-  const closeAlert = () => {
-    setAlert({
-      type: null,
-      message: "",
-    });
   };
 
   return (
     <div className="">
       <Navbar />
+      <div><Toaster/></div>
       <div className="flex flex-col items-center justify-center mt-4">
         <div className="font-bold mb-4 text-2xl">Create Post</div>
-        {alert.type && (
-          <div
-            className={`rounded-md p-4 mb-4 ${
-              alert.type === "success"
-                ? "bg-green-200 text-green-800"
-                : "bg-red-200 text-red-800"
-            }`}
-          >
-            <div className="flex">
-              {alert.message}
-              <IoMdCloseCircle
-                className="ml-2  text-2xl cursor-pointer"
-                onClick={closeAlert}
-              />
-            </div>
-            {/* <span className="ml-2 cursor-pointer" onClick={closeAlert}> */}
-            {/* X
-            </span> */}
-          </div>
-        )}
 
         <div className="rounded-md bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 flex flex-col items-center justify-center">
           <input

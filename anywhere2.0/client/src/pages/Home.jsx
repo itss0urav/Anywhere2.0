@@ -20,7 +20,6 @@ const Home = () => {
         <div className="max-w-[25%] m-2  ">
           <SideComponent />
         </div>
-        
       </div>
     </div>
   );

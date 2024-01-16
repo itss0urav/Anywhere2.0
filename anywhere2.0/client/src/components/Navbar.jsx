@@ -6,6 +6,7 @@ import { FaUser } from "react-icons/fa";
 import useSessionStorage from "../hooks/useSessionStorage";
 import Logo from "../assets/Anywhere-Transparent.png";
 
+
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
   const [user] = useSessionStorage("user");
@@ -53,7 +54,7 @@ const Navbar = () => {
                 <MdContactMail className="inline-block mr-1" /> Contact Us
               </Link>
               <Link to="/UserProfile" className=" lg:flex bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white">
-                <img src={user.imageUrl} onClick={() => nav("/UserProfile")} className="w-6 rounded-full mr-4 text-white " />
+                <img alt="profile pic" src={user.imageUrl} onClick={() => nav("/UserProfile")} className="w-6 rounded-full mr-4 text-white " />
                 Profile
               </Link>
               {user.username ? (

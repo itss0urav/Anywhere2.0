@@ -15,39 +15,38 @@ const SignUp = () => {
   const nav = useNavigate();
 
   // Function to handle form submission
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  // Create user object
-  const user = {
-    username,
-    dob,
-    email,
-    password,
-  };
+    // Create user object
+    const user = {
+      username,
+      dob,
+      email,
+      password,
+    };
 
-  console.log("Data From Signup", user);
-  // Make POST request
-  if (password === confirmPassword) {
-    try {
-      const response = await axios.post("/users/signup", user);
-      //console log for success message
-      // console.log(response.data.message);
-      // setAlertMessage(response.data.message)
-      nav("/login");
-    } catch (error) {
-      console.error(error);
-      // Set alert message on error
-      setAlertMessage(
-        error.response?.data?.message || "An error occurred while signing up. Please try again."
-      );
+    console.log("Data From Signup", user);
+    // Make POST request
+    if (password === confirmPassword) {
+      try {
+        const response = await axios.post("/users/signup", user);
+
+        setAlertMessage(response.data.message);
+        nav("/login");
+      } catch (error) {
+        console.error(error);
+        // Set alert message on error
+        setAlertMessage(
+          error.response?.data?.message ||
+            "An error occurred while signing up. Please try again."
+        );
+      }
+    } else {
+      // Set alert message for password mismatch
+      setAlertMessage("Passwords do not match. Please try again.");
     }
-  } else {
-    // Set alert message for password mismatch
-    setAlertMessage("Passwords do not match. Please try again.");
-  }
-};
-
+  };
 
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">

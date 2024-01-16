@@ -183,6 +183,7 @@ export default function UserProfile() {
             </div>
             <div className="  lg:flex border-t border-gray-200 p-4 justify-center items-center">
               <img
+              alt="profile pic"
                 src={user.imageUrl}
                 className=" mb-3 rounded-lg w-[10rem] object-contain mr-8"
               />

@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
+import { MdDeleteOutline } from "react-icons/md";
+import useSessionStorage from "../hooks/useSessionStorage";
+import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 
 const AllPosts = () => {
+  const [user] = useSessionStorage("user");
   const [posts, setPosts] = useState([]);
   const [blurStatus, setBlurStatus] = useState({});
   const navigate = useNavigate();
+  const fetchPosts = async () => {
+    try {
+      const response = await axios.get("/posts");
+      setPosts(response.data);
+      const initialBlurStatus = {};
+      response.data.forEach((post, index) => {
+        initialBlurStatus[index] = true;
+      });
+      setBlurStatus(initialBlurStatus);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get("/posts");
-        setPosts(response.data);
-        const initialBlurStatus = {};
-        response.data.forEach((post, index) => {
-          initialBlurStatus[index] = true;
-        });
-        setBlurStatus(initialBlurStatus);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
-
     fetchPosts();
   }, []);
 
@@ -32,9 +35,28 @@ const AllPosts = () => {
       [index]: !blurStatus[index],
     });
   };
+  const handleDeletePost = (event, postId) => {
+    event.stopPropagation();
+    axios
+      .delete(`/posts/${postId}`)
+      .then((req, res) => {
+        fetchPosts();
+        toast.success("Post Deleted", {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="w-full p-4 flex flex-col justify-center items-center space-y-4">
+      <div>
+        <Toaster />
+      </div>
       <h1 className="text-3xl font-bold mb-4 text-blue-700">
         {posts.length === 0 ? "No Posts" : "All Posts"}
       </h1>
@@ -45,7 +67,21 @@ const AllPosts = () => {
             onClick={() => navigate(`/posts/${post._id}`)}
             className="rounded-lg shadow-md p-4 bg-white transform transition-transform duration-500 hover:shadow-blue-400 mb-4"
           >
-            <div className="text-lg font-semibold">Post By {post.author}</div>
+            <div className="flex justify-between ">
+              <div className="text-lg font-semibold">Post By {post.author}</div>
+              {user.username === post.author ? (
+                <>
+                  <MdDeleteOutline
+                    onClick={(event) => {
+                      handleDeletePost(event, post._id);
+                    }}
+                    className="text-red-700 text-2xl"
+                  />
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
             {post.nsfw && (
               <p className="inline rounded-sm text-red-600 border border-red-800 text-sm mt-4 pr-1 pl-1">
                 NSFW

@@ -68,6 +68,15 @@ const getPostsByCategory = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch posts by category" });
   }
 };
+const deletePost = async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Posted Deleted" });
+    console.log(`Post with id:${req.params.id} has been deleted`);
+  } catch {
+    (err) => console.log(err);
+  }
+};
 
 module.exports = {
   createPost,
@@ -75,4 +84,5 @@ module.exports = {
   getCategories,
   getPost,
   getPostsByCategory,
+  deletePost,
 };
