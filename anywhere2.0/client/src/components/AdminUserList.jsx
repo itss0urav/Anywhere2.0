@@ -14,7 +14,6 @@ export default function AdminUserList() {
         console.log(error);
       }
     };
-
     fetchData();
   }, []);
 
@@ -40,13 +39,13 @@ export default function AdminUserList() {
         <tr>
           {[
             "Username",
-            "Date of Birth",
             "Email",
-            "Mod Access",
-            "Status",
-            "Image",
+            "Date of Birth",
             "Created At",
             "Updated At",
+            "Mod Access",
+            "Status",
+            "Profile Pic",
             "Actions",
           ].map((header) => (
             <th
@@ -63,22 +62,9 @@ export default function AdminUserList() {
         {users.map((user) => (
           <tr key={user._id}>
             <td className="px-6 py-4 whitespace-nowrap">{user.username}</td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              {new Date(user.dob).toLocaleDateString()}
-            </td>
             <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
             <td className="px-6 py-4 whitespace-nowrap">
-              {user.isMod ? "Yes" : "No"}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              {user.isBanned ? "Banned" : "Active"}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <img
-                className="h-10 w-10 rounded-full"
-                src={user.imageUrl}
-                alt="User"
-              />
+              {new Date(user.dob).toLocaleDateString()}
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
               {new Date(user.createdAt).toLocaleDateString()}
@@ -86,16 +72,45 @@ export default function AdminUserList() {
             <td className="px-6 py-4  whitespace-nowrap">
               {new Date(user.updatedAt).toLocaleDateString()}
             </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+              {user.isMod ? (
+                <div className="bg-green-500  text-white font-bold py-2 px-4 rounded">
+                  Yes
+                </div>
+              ) : (
+                <div className="bg-red-500  text-white font-bold py-2 px-4 rounded">
+                  No
+                </div>
+              )}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+              {user.isBanned ? (
+                <div className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                  Banned
+                </div>
+              ) : (
+                <div className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                  Active
+                </div>
+              )}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+              <img
+                className="h-10 w-10 object-cover rounded-md"
+                src={user.imageUrl}
+                alt="User"
+              />
+            </td>
             <td className="flex gap-2  px-6 py-4  whitespace-nowrap">
               <button
                 onClick={() => handleBanUnban(user._id)}
-                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
               >
                 {user.isBanned ? "Unban" : "Ban"}
               </button>
               <button
                 onClick={() => handleModAccess(user._id)}
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >
                 {user.isMod ? "Remove Mod" : "Make Mod"}
               </button>
