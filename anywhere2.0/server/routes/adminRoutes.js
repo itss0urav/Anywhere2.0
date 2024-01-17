@@ -9,9 +9,13 @@ router.post(
   // (req, res, next) => protect(req, res, next, handleUnauthorizedError),
   AdminController.adminLogin
 );
-
+router.get("/get", AdminController.getReports);
+router.delete("/delete", AdminController.ignoreReports);
+router.delete("/delete", AdminController.deleteReports);
 
 router.put("/banunbanuser", AdminController.banUnbanUser);
 router.put("/modunmoduser", AdminController.modUnmodUser);
 
 module.exports = router;
+
+// http://localhost:5000/api/posts/reports/get

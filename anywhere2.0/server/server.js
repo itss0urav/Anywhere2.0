@@ -25,8 +25,10 @@ app.use(
 );
 
 app.use("/api/users", userRoutes);
-app.use("/api/admin", adminRoutes);
+app.use("/api/posts/reports", adminRoutes);
+
 app.use("/api/posts", postRoutes);
+app.use("/api/posts", adminRoutes);
 app.use("/api/posts/:id/comments", commentRoutes); // <- This route should come before the /votes route
 app.use("/api/posts/:id/comments/:commentId/votes", commentRoutes); // <- This route handles comment votes
 app.use("/api/posts/:postId/comments/:commentId/replies", replyRoutes);

@@ -2,6 +2,9 @@
 
 const Admin = require("../models/Admin");
 const User = require("../models/User");
+const Report = require("../models/Report");
+const Post = require("../models/Post");
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -138,6 +141,39 @@ const AdminController = {
       res.status(500).json({
         message: error.message || "Error updating user. Please try again.",
       });
+    }
+  },
+
+  getReports: async (req, res) => {
+    try {
+      console.log("Fetching reports...");
+      const Reports = await Report.find();
+      console.log("Reports fetched successfully:", Reports);
+      res.status(200).send(Reports);
+    } catch (error) {
+      console.log("Error occurred while fetching reports:", error);
+    }
+  },
+  deleteReports: async (req, res) => {
+    try {
+      console.log("Fetching report...");
+      const { reportId } = req.body;
+      const Reports = await Post.findByIdAndDelete(reportId);
+      console.log("Report deleted successfully:", Reports);
+      res.status(200).send(Reports);
+    } catch (error) {
+      console.log("Error occurred while deleting reports:", error);
+    }
+  },
+  ignoreReports: async (req, res) => {
+    try {
+      console.log("Fetching report...");
+      const { reportId } = req.body;
+      const Reports = await Report.findByIdAndDelete(reportId);
+      console.log("Report deleted successfully:", Reports);
+      res.status(200).send(Reports);
+    } catch (error) {
+      console.log("Error occurred while deleting reports:", error);
     }
   },
 };
