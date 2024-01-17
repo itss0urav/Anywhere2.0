@@ -7,6 +7,17 @@ const jwt = require("jsonwebtoken");
 // const generateAccessToken = require("../utils/generateToken");
 
 const UserController = {
+  getUsers: async (req, res) => {
+    try {
+      const users = await User.find();
+      res.status(200).send(users);
+      if (!users) {
+        return res.status(404).json({ message: "No users" });
+      }
+    } catch {
+      (err) => console.log(err);
+    }
+  },
   createUser: async (req, res) => {
     try {
       const { username, dob, email, password } = req.body;
@@ -114,13 +125,11 @@ const UserController = {
         { new: true }
       );
 
-      res
-        .status(200)
-        .json({
-          message: "User updated successfully",
-          user: updatedUser,
-          passed: true,
-        });
+      res.status(200).json({
+        message: "User updated successfully",
+        user: updatedUser,
+        passed: true,
+      });
     } catch (error) {
       console.error("Error updating user:", error);
       res.status(500).json({

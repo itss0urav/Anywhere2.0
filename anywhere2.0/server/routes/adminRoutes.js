@@ -9,4 +9,5 @@ router.post(
   // (req, res, next) => protect(req, res, next, handleUnauthorizedError),
   AdminController.adminLogin
 );
+
 module.exports = router;
