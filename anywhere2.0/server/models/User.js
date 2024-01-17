@@ -30,12 +30,13 @@ const userSchema = new mongoose.Schema(
     },
     imageUrl: {
       type: String,
-      default: "https://i.pinimg.com/originals/36/ca/c0/36cac052d0c16bbf663b013495e53b97.jpg",
+      default:
+        "https://i.pinimg.com/originals/36/ca/c0/36cac052d0c16bbf663b013495e53b97.jpg",
     },
   },
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 module.exports = User;

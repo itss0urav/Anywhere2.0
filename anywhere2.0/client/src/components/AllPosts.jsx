@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdDeleteOutline, MdReport } from "react-icons/md";
 import useSessionStorage from "../hooks/useSessionStorage";
 import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 
@@ -51,7 +51,14 @@ const AllPosts = () => {
       })
       .catch((err) => console.log(err));
   };
+  const handleReportPost = (event, postId) => {
+    event.stopPropagation();
+    navigate(`/report/${postId}`);
+    fetchPosts();
+  };
 
+  // ill be giving codes as parts , i want to implement report functionality.
+  // i want the request to create a report collection and in the report it should have the name of reporter and  reported post id and report description
   return (
     <div className="w-full p-4 flex flex-col justify-center items-center space-y-4">
       <div>
@@ -70,14 +77,20 @@ const AllPosts = () => {
             <div className="flex justify-between ">
               <div className="text-lg font-semibold">Post By {post.author}</div>
               {user.username === post.author ? (
-                <>
+                <div className="flex">
                   <MdDeleteOutline
                     onClick={(event) => {
                       handleDeletePost(event, post._id);
                     }}
                     className="text-red-700 text-2xl"
                   />
-                </>
+                  <MdReport
+                    onClick={(event) => {
+                      handleReportPost(event, post._id);
+                    }}
+                    className="text-red-700 text-2xl"
+                  />
+                </div>
               ) : (
                 <></>
               )}

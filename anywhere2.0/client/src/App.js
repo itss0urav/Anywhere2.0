@@ -15,6 +15,7 @@ import PostView from "./pages/PostView";
 import PostFromCategory from "./pages/PostFromCategory"; // Import the new page
 import SearchPage from "./pages/SearchPage";
 import AdminLogin from "./pages/AdminLogin";
+import ReportPage from "./pages/ReportPage";
 
 //components
 import CreatePostForm from "./components/CreatePostForm";
@@ -38,6 +39,7 @@ function App() {
         <Routes>
           {/* pages */}
           <Route path="/Home" element={<Home />} />
+          <Route path="/report/:id" element={<ReportPage />} />
           <Route path="/adminhome" element={<Admin />} />
           <Route path="/AdminLogin" element={<AdminLogin />} />
           <Route path="/Help" element={<Help />} />

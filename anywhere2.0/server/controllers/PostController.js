@@ -2,7 +2,7 @@
 
 const jwt = require("jsonwebtoken");
 const Post = require("../models/Post"); // replace with your actual Post model path
-
+const Report = require("../models/Report");
 const createPost = async (req, res) => {
   try {
     // const token = req.cookies.token; // access the token from cookies
@@ -77,6 +77,27 @@ const deletePost = async (req, res) => {
     (err) => console.log(err);
   }
 };
+const reportPost = async (req, res) => {
+  try {
+    const { postId, reason, username } = req.body;
+
+    console.log({
+      reason,
+      username,
+      postId,
+    });
+
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+    const Reports = await Report.create({ postId, reason, username });
+    res.json({ message: "Report created ", Reports: Reports });
+  } catch (error) {
+    console.error("Error reporting post:", error);
+    res.status(500).json({ error: "Failed to create report " });
+  }
+};
 
 module.exports = {
   createPost,
@@ -85,4 +106,5 @@ module.exports = {
   getPost,
   getPostsByCategory,
   deletePost,
+  reportPost,
 };
