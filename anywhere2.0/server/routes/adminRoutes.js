@@ -10,4 +10,8 @@ router.post(
   AdminController.adminLogin
 );
 
+
+router.put("/banunbanuser", AdminController.banUnbanUser);
+router.put("/modunmoduser", AdminController.modUnmodUser);
+
 module.exports = router;

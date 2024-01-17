@@ -1,6 +1,7 @@
 // controllers/AdminController.js
 
 const Admin = require("../models/Admin");
+const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -47,7 +48,7 @@ const AdminController = {
       }
 
       const passwordMatch = await bcrypt.compare(password, admin.password);
-      console.log(passwordMatch)
+      console.log(passwordMatch);
       if (!passwordMatch) {
         return res
           .status(401)
@@ -81,6 +82,62 @@ const AdminController = {
       res
         .status(500)
         .json({ message: "Error during login. Please try again." });
+    }
+  },
+
+  banUnbanUser: async (req, res) => {
+    try {
+      const { userId } = req.body;
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { $set: { isBanned: !user.isBanned } },
+        { new: true }
+      );
+
+      res.status(200).json({
+        message: "User updated successfully",
+        user: updatedUser,
+        passed: true,
+      });
+    } catch (error) {
+      console.error("Error updating user:", error);
+      res.status(500).json({
+        message: error.message || "Error updating user. Please try again.",
+      });
+    }
+  },
+
+  modUnmodUser: async (req, res) => {
+    try {
+      const { userId } = req.body;
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { $set: { isMod: !user.isMod } },
+        { new: true }
+      );
+
+      res.status(200).json({
+        message: "User updated successfully",
+        user: updatedUser,
+        passed: true,
+      });
+    } catch (error) {
+      console.error("Error updating user:", error);
+      res.status(500).json({
+        message: error.message || "Error updating user. Please try again.",
+      });
     }
   },
 };
