@@ -3,12 +3,14 @@ import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteOutline, MdReport } from "react-icons/md";
 import useSessionStorage from "../hooks/useSessionStorage";
-import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
+import { toast, Toaster } from "react-hot-toast";
+import { SlOptionsVertical } from "react-icons/sl";
 
 const AllPosts = () => {
   const [user] = useSessionStorage("user");
   const [posts, setPosts] = useState([]);
   const [blurStatus, setBlurStatus] = useState({});
+  const [showOptions, setShowOptions] = useState(false);
   const navigate = useNavigate();
   const fetchPosts = async () => {
     try {
@@ -35,6 +37,7 @@ const AllPosts = () => {
       [index]: !blurStatus[index],
     });
   };
+
   const handleDeletePost = (event, postId) => {
     event.stopPropagation();
     axios
@@ -51,14 +54,18 @@ const AllPosts = () => {
       })
       .catch((err) => console.log(err));
   };
+
   const handleReportPost = (event, postId) => {
     event.stopPropagation();
     navigate(`/report/${postId}`);
     fetchPosts();
   };
 
-  // ill be giving codes as parts , i want to implement report functionality.
-  // i want the request to create a report collection and in the report it should have the name of reporter and  reported post id and report description
+  const handleShowOptions = (event) => {
+    event.stopPropagation();
+    setShowOptions(!showOptions);
+  };
+
   return (
     <div className="w-full p-4 flex flex-col justify-center items-center space-y-4">
       <div>
@@ -74,27 +81,53 @@ const AllPosts = () => {
             onClick={() => navigate(`/posts/${post._id}`)}
             className="rounded-lg shadow-md p-4 bg-white transform transition-transform duration-500 hover:shadow-blue-400 mb-4"
           >
-            <div className="flex justify-between ">
-              <div className="text-lg font-semibold">Post By {post.author}</div>
-              {user.username === post.author ? (
-                <div className="flex">
-                  <MdDeleteOutline
-                    onClick={(event) => {
-                      handleDeletePost(event, post._id);
-                    }}
-                    className="text-red-700 text-2xl"
-                  />
-                  <MdReport
-                    onClick={(event) => {
-                      handleReportPost(event, post._id);
-                    }}
-                    className="text-red-700 text-2xl"
-                  />
-                </div>
-              ) : (
-                <></>
-              )}
-            </div>
+            <div className="flex justify-between items-center">
+  <div className="text-lg font-semibold">Post By {post.author}</div>
+  {user.username === post.author && (
+    <div className="relative inline-block text-left">
+      <div>
+        <button
+          type="button"
+          className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+          id="options-menu"
+          aria-haspopup="true"
+          aria-expanded="true"
+          onClick={handleShowOptions}
+        >
+          <SlOptionsVertical className="h-5 w-5" aria-hidden="true" />
+        </button>
+      </div>
+
+      {showOptions && (
+        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+          <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+            <button
+              onClick={(event) => {
+                handleDeletePost(event, post._id);
+              }}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+            >
+              <MdDeleteOutline className="inline-block mr-2 text-red-700 text-xl" />
+              Delete
+            </button>
+            <button
+              onClick={(event) => {
+                handleReportPost(event, post._id);
+              }}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+            >
+              <MdReport className="inline-block mr-2 text-red-700 text-xl" />
+              Report
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  )}
+</div>
+
             {post.nsfw && (
               <p className="inline rounded-sm text-red-600 border border-red-800 text-sm mt-4 pr-1 pl-1">
                 NSFW
