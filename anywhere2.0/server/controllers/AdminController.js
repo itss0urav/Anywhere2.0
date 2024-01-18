@@ -4,6 +4,7 @@ const Admin = require("../models/Admin");
 const User = require("../models/User");
 const Report = require("../models/Report");
 const Post = require("../models/Post");
+const Verification = require("../models/Verification");
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -158,7 +159,7 @@ const AdminController = {
     try {
       console.log("Fetching report...");
       const { postId } = req.body;
-      console.log(postId)
+      console.log(postId);
       const Reports = await Post.findByIdAndDelete(postId);
       console.log("Report deleted successfully:", Reports);
       res.status(200).send(Reports);
@@ -175,6 +176,92 @@ const AdminController = {
       res.status(200).send(Reports);
     } catch (error) {
       console.log("Error occurred while deleting reports:", error);
+    }
+  },
+  getVerification: async (req, res) => {
+    try {
+      const requests = await Verification.find({});
+      res.status(200).send(requests);
+    } catch (error) {
+      console.error("Error finding verification request:", error);
+      res.status(500).json({
+        message:
+          error.message ||
+          "Error finding verification request. Please try again.",
+      });
+    }
+  },
+  ignoreVerification: async (req, res) => {
+    try {
+      const { reqId } = req.body;
+
+      // Check if reqId is defined before attempting to delete
+      if (!reqId) {
+        return res
+          .status(400)
+          .json({ message: "Invalid request. reqId is undefined." });
+      }
+
+      const requests = await Verification.findByIdAndDelete(reqId);
+      res.status(200).send(requests);
+    } catch (error) {
+      console.error("Error finding verification request:", error);
+      res.status(500).json({
+        message:
+          error.message ||
+          "Error finding verification request. Please try again.",
+      });
+    }
+  },
+
+  toggleVerification: async (req, res) => {
+    try {
+      const { userId, reqId } = req.body;
+
+      console.log("userId:", userId);
+      console.log("reqId:", reqId);
+
+      const user = await User.findOne({ _id: userId });
+      console.log("user:", user);
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { $set: { isVerified: !user.isVerified } },
+        { new: true }
+      );
+      console.log("updatedUser:", updatedUser);
+
+      const requestFromDB = await Verification.findOne({ _id: reqId });
+      console.log("requestFromDB:", requestFromDB);
+
+      if (!requestFromDB) {
+        return res.status(404).json({ message: "Request not found" });
+      }
+
+      const toggledRequest = await Verification.findByIdAndUpdate(
+        reqId,
+        { $set: { isVerified: !requestFromDB.isVerified } },
+        { new: true }
+      );
+      console.log("toggledRequest:", toggledRequest);
+
+      res.status(200).json({
+        message: "User and verification request updated successfully",
+        user: updatedUser,
+        verificationRequests: toggledRequest,
+        passed: true,
+      });
+    } catch (error) {
+      console.error("Error finding verifying user :", error);
+      res.status(500).json({
+        message:
+          error.message ||
+          "Error finding verification request. Please try again.",
+      });
     }
   },
 };

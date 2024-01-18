@@ -16,6 +16,11 @@ router.delete("/delete", AdminController.deleteReports);
 router.put("/banunbanuser", AdminController.banUnbanUser);
 router.put("/modunmoduser", AdminController.modUnmodUser);
 
+router.get("/verification", AdminController.getVerification);
+router.put("/verification", AdminController.toggleVerification);
+router.delete("/verification", AdminController.ignoreVerification);
+
 module.exports = router;
 
 // http://localhost:5000/api/posts/reports/get
+// http://localhost:5000/api/admin/verification

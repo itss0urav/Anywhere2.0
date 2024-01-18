@@ -11,8 +11,10 @@ export default function CommentContainer() {
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
   }, [user]);
+
   const { postId } = useParams();
   console.log("Post id from comment ", postId);
+
   const [comments, setComments] = useState([]);
   const [reply, setReply] = useState("");
   const [replyingTo, setReplyingTo] = useState(null);
@@ -24,6 +26,7 @@ export default function CommentContainer() {
     const fetchComments = async () => {
       try {
         const response = await axios.get(`/posts/${postId}/comments`);
+        console.log("fetched comments", response.data);
         const commentsWithVotes = response.data.comments.map((comment) => ({
           ...comment,
           voteStatus: 0, // Initialize voteStatus to 0 for each comment
@@ -32,9 +35,12 @@ export default function CommentContainer() {
 
         // Find the comment with the most likes
         const mostLiked = commentsWithVotes.reduce((prev, current) => {
-          return (prev.votes > current.votes) ? prev : current;
+          return prev.votes > current.votes ? prev : current;
         });
         setMostLikedComment(mostLiked);
+
+        console.log("Fetched comments with votes:", commentsWithVotes);
+        console.log("Most liked comment:", mostLiked);
       } catch (error) {
         console.error(error);
       }
@@ -63,7 +69,7 @@ export default function CommentContainer() {
         }
       );
 
-      console.log(response.data.voteCount);
+      console.log("Upvote response:", response.data);
     } catch (error) {
       console.error(error);
     }
@@ -90,7 +96,7 @@ export default function CommentContainer() {
         }
       );
 
-      console.log(response.data);
+      console.log("Downvote response:", response.data);
     } catch (error) {
       console.error(error);
     }
@@ -106,7 +112,7 @@ export default function CommentContainer() {
           user: user.username, // replace this with the actual username
         }
       );
-      console.log(response.data);
+      console.log("Reply response:", response.data);
       setReply("");
       setReplyingTo(null);
     } catch (error) {
@@ -119,9 +125,13 @@ export default function CommentContainer() {
       <h2 className="text-3xl font-bold text-center">Comments</h2>
       {mostLikedComment && (
         <div className="bg-green-100 p-4 rounded-md">
-          <h3 className="text-xl font-bold text-gray-800">{mostLikedComment.user.username}</h3>
+          <h3 className="text-xl font-bold text-gray-800">
+            {mostLikedComment.user}
+          </h3>
           <p className="text-gray-600">{mostLikedComment.text}</p>
-          <div className="text-lg font-bold">{mostLikedComment.votes.length}</div>
+          <div className="text-lg font-bold">
+            {mostLikedComment.votes.length}
+          </div>
         </div>
       )}
       {comments.map((comment) => {
@@ -152,7 +162,7 @@ export default function CommentContainer() {
               </div>
               <div className="space-y-2">
                 <h3 className="text-xl font-bold text-gray-800">
-                  {comment.user.username}
+                  {comment.user}
                 </h3>
                 <p className="text-gray-600">{comment.text}</p>
                 <div className="flex items-center space-x-2">
@@ -170,7 +180,7 @@ export default function CommentContainer() {
                 key={reply._id}
                 className="ml-4 mt-2 bg-gray-100 p-2 rounded"
               >
-                <h4 className="font-semibold text-gray-700">{reply.user.username}</h4>
+                <h4 className="font-semibold text-gray-700">{reply.user}</h4>
                 <p className="text-gray-600">{reply.text}</p>
               </div>
             ))}

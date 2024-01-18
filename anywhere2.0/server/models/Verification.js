@@ -1,6 +1,18 @@
 const mongoose = require("mongoose");
 
 const VerificationSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+  },
+  userId: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
   voterId: {
     type: String,
     required: true,
@@ -19,6 +31,10 @@ const VerificationSchema = new mongoose.Schema({
   },
   companyRegNumber: {
     type: String,
+  },
+  isVerified: {
+    type: Boolean,
+    required: true,
   },
 });
 

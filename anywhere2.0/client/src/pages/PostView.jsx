@@ -28,7 +28,7 @@ const PostView = () => {
   };
   useEffect(() => {
     fetchPost();
-  }, [post]);
+  }, []);
 
   const handleDeletePost = (event, postId) => {
     event.stopPropagation();

@@ -25,6 +25,7 @@ app.use(
 );
 
 app.use("/api/users", userRoutes);
+app.use("/api/users", adminRoutes);
 app.use("/api/admin/", adminRoutes);
 app.use("/api/posts/reports", adminRoutes);
 

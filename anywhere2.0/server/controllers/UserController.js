@@ -140,24 +140,41 @@ const UserController = {
   },
   createVerification: async (req, res) => {
     try {
-      const { voterId, formType, mobileNumber, companyName, companyRegNumber } = req.body;
-      const newVerification = new Verification({
+      const {
+        username,
+        userId,
+        email,
         voterId,
         formType,
         mobileNumber,
         companyName,
         companyRegNumber,
+        isVerified,
+      } = req.body;
+      const newVerification = new Verification({
+        username,
+        userId,
+        email,
+        voterId,
+        formType,
+        mobileNumber,
+        companyName,
+        companyRegNumber,
+        isVerified,
       });
       await newVerification.save();
-      res.status(201).json({ message: "Verification request created successfully" });
+      res
+        .status(201)
+        .json({ message: "Verification request created successfully" });
     } catch (error) {
       console.error("Error creating verification request:", error);
       res.status(500).json({
-        message: error.message || "Error creating verification request. Please try again.",
+        message:
+          error.message ||
+          "Error creating verification request. Please try again.",
       });
     }
   },
 };
-
 
 module.exports = UserController;

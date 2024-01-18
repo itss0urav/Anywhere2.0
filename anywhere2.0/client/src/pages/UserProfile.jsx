@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import useSessionStorage from "../hooks/useSessionStorage";
 import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
-
+import { MdVerified } from "react-icons/md";
 export default function UserProfile() {
   const nav = useNavigate();
   const [user, setUser] = useSessionStorage("user");
@@ -194,8 +194,9 @@ export default function UserProfile() {
                   <dt className="text-sm font-medium text-gray-500">
                     Username
                   </dt>
-                  <dd className="mt-1 text-sm text-gray-900 col-span-2">
+                  <dd className=" flex gap-2 mt-1 text-sm text-gray-900 col-span-2">
                     {user.username}
+                    {user.isVerified === true ? <MdVerified  className="text-lg"/> : <></>}
                   </dd>
                 </div>
                 <div className="grid grid-cols-3 gap-4 py-4">
