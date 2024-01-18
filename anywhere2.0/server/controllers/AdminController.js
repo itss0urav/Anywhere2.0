@@ -157,8 +157,9 @@ const AdminController = {
   deleteReports: async (req, res) => {
     try {
       console.log("Fetching report...");
-      const { reportId } = req.body;
-      const Reports = await Post.findByIdAndDelete(reportId);
+      const { postId } = req.body;
+      console.log(postId)
+      const Reports = await Post.findByIdAndDelete(postId);
       console.log("Report deleted successfully:", Reports);
       res.status(200).send(Reports);
     } catch (error) {

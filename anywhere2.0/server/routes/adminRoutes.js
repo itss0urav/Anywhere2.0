@@ -10,7 +10,7 @@ router.post(
   AdminController.adminLogin
 );
 router.get("/get", AdminController.getReports);
-router.delete("/delete", AdminController.ignoreReports);
+router.delete("/ignore", AdminController.ignoreReports);
 router.delete("/delete", AdminController.deleteReports);
 
 router.put("/banunbanuser", AdminController.banUnbanUser);

@@ -15,10 +15,10 @@ export default function AdminReportList() {
     };
     fetchData();
   }, []);
-  async function handleRemoveReport(reportId) {
+  async function handleRemoveReport(postId) {
     try {
       const result = await axios.delete("/posts/reports/delete", {
-        data: { reportId },
+        data: { postId },
       });
       if (Array.isArray(result.data)) {
         setReports(result.data);
@@ -32,7 +32,7 @@ export default function AdminReportList() {
 
   async function handleIgnoreReport(reportId) {
     try {
-      const result = await axios.delete("/posts/reports/delete", {
+      const result = await axios.delete("/posts/reports/ignore", {
         data: { reportId },
       });
       if (Array.isArray(result.data)) {
@@ -102,7 +102,7 @@ export default function AdminReportList() {
                     <td className="flex gap-2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <button
                         onClick={() => {
-                          handleRemoveReport(report._id);
+                          handleRemoveReport(report.postId);
                         }}
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                       >
