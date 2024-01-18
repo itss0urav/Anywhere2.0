@@ -21,6 +21,7 @@ import ReportPage from "./pages/ReportPage";
 import CreatePostForm from "./components/CreatePostForm";
 import IntroComponent from "./components/IntoComponent";
 import Admin from "./components/Admin";
+import VerificationForm from "./components/VerificationForm";
 
 //context
 // import GlobalContext from "./contexts/Context";
@@ -39,6 +40,7 @@ function App() {
         <Routes>
           {/* pages */}
           <Route path="/Home" element={<Home />} />
+          <Route path="/verification" element={<VerificationForm />} />
           <Route path="/report/:id" element={<ReportPage />} />
           <Route path="/adminhome" element={<Admin />} />
           <Route path="/AdminLogin" element={<AdminLogin />} />

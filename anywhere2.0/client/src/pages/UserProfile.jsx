@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import useSessionStorage from "../hooks/useSessionStorage";
 import axios from "../config/axios";
+import { useNavigate } from "react-router-dom";
 
 export default function UserProfile() {
+  const nav = useNavigate();
   const [user, setUser] = useSessionStorage("user");
   const [editMode, setEditMode] = useState(false);
   const formatDate = (dateString) => {
@@ -183,7 +185,7 @@ export default function UserProfile() {
             </div>
             <div className="  lg:flex border-t border-gray-200 p-4 justify-center items-center">
               <img
-              alt="profile pic"
+                alt="profile pic"
                 src={user.imageUrl}
                 className=" mb-3 rounded-lg w-[10rem] object-contain mr-8"
               />
@@ -221,12 +223,21 @@ export default function UserProfile() {
               </dl>
             </div>
           </div>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-            onClick={() => setEditMode(true)}
-          >
-            Edit Profile
-          </button>
+          <div className="flex gap-2">
+            {" "}
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+              onClick={() => setEditMode(true)}
+            >
+              Edit Profile
+            </button>
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+              onClick={() => nav("/Verification")}
+            >
+              Apply for Verification
+            </button>
+          </div>
         </div>
       </div>
     );
