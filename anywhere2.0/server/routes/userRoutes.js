@@ -10,4 +10,6 @@ router.post(
   UserController.loginUser
 );
 router.put("/update", UserController.updateUser);
+router.post('/verification', UserController.createVerification);
+
 module.exports = router;

@@ -136,7 +136,7 @@ const AllPosts = () => {
             <div className="flex justify-center">
               <img
                 onClick={(event) => toggleBlur(index, event)}
-                className={`object-contain rounded-t-lg h-64 ${
+                className={`object-contain rounded-t-lg h-1/3 ${
                   blurStatus[index] && post.nsfw ? "blur-lg" : ""
                 }`}
                 src={post.imageUrl}

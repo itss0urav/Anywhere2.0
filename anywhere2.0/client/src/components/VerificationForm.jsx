@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import axios from "../config/axios";
+import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
+import { useNavigate } from "react-router-dom";
 
 export default function VerificationForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     voterId: "",
     formType: "individual",
@@ -19,7 +22,18 @@ export default function VerificationForm() {
     axios
       .post("users/verification", formData)
       .then((res) => {
+        toast.success("Verification Request Submitted!", {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
         console.log(res);
+
+        setTimeout(() => {
+          navigate("/home"); // navigate to "/home" after 2 seconds
+        }, 2000);
       })
       .catch((err) => console.log(err));
   }
@@ -27,6 +41,10 @@ export default function VerificationForm() {
   return (
     <div className="">
       <Navbar />
+      <div>
+        <Toaster />
+      </div>
+
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
         <form className="w-full max-w-sm bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
