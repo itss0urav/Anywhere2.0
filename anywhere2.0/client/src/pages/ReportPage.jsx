@@ -4,7 +4,7 @@ import { toast, Toaster } from "react-hot-toast";
 import axios from "../config/axios";
 import useSessionStorage from "../hooks/useSessionStorage";
 import Navbar from "../components/Navbar";
-import v1 from "../assets/v1.mp4";
+import v1 from "../assets/v2.mp4";
 
 export default function ReportPage() {
   const [user] = useSessionStorage("user");
@@ -48,7 +48,7 @@ export default function ReportPage() {
         <div>
           <Toaster />
         </div>
-        <div className="w-full max-w-md shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-white bg-opacity-20">
+        <div className="w-full max-w-md shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-white bg-opacity-80">
           <h2 className="pb-5 text-2xl font-bold text-center text-gray-800">
             Report Post
           </h2>
@@ -60,7 +60,7 @@ export default function ReportPage() {
               Reason for Report
             </label>
             <textarea
-              className="shadow bg-transparent appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow bg-transparent appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               id="reason"
               type="text"
               value={reason}

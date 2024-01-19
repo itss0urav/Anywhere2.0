@@ -7,11 +7,11 @@ import SideComponent from "../components/SideComponent";
 const Home = () => {
   return (
     <div className="">
-      <Navbar />
+      <Navbar className="z-50" />
       <div className="flex justify-center">
         <div className="flex-grow">
           <div className="flex justify-center mt-2">
-            <CreatePost />
+            <CreatePost className="z-10" />
           </div>
           <div className="flex justify-center">
             <AllPosts />
