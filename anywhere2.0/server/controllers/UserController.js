@@ -8,17 +8,34 @@ const jwt = require("jsonwebtoken");
 // const generateAccessToken = require("../utils/generateToken");
 
 const UserController = {
+  getCurrentUser: async (req, res) => {
+    try {
+      const userId = req.params.id; // Extract userId from request parameters
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.status(200).send(user);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
   getUsers: async (req, res) => {
     try {
       const users = await User.find();
-      res.status(200).send(users);
-      if (!users) {
+      if (users.length === 0) {
         return res.status(404).json({ message: "No users" });
       }
-    } catch {
-      (err) => console.log(err);
+      res.status(200).send(users);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: "Internal Server Error" });
     }
   },
+
   createUser: async (req, res) => {
     try {
       const { username, dob, email, password } = req.body;
@@ -58,6 +75,13 @@ const UserController = {
           .json({ message: "Invalid credentials", passed: false });
       }
 
+      // Check if user is banned
+      if (user.isBanned) {
+        return res
+          .status(403)
+          .json({ message: "You have been banned, contact admins." });
+      }
+
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch) {
         return res
@@ -85,6 +109,7 @@ const UserController = {
         .json({ message: "Error during login. Please try again." });
     }
   },
+
   updateUser: async (req, res) => {
     try {
       const {

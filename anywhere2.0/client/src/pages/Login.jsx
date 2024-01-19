@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "../config/axios";
 import vid from "../assets/v3.mp4";
 import useSessionStorage from "../hooks/useSessionStorage";
+import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
+
 const Login = () => {
   const [user, setUser] = useSessionStorage("user");
   const [token, setToken] = useSessionStorage("token");
@@ -30,12 +32,24 @@ const Login = () => {
       nav("/home");
     } catch (error) {
       console.error("Error during login:", error);
-      setAlertMessage("Invalid credentials. Please try again.");
+      // setAlertMessage("Invalid credentials. Please try again.");
+      setAlertMessage(error.response.data.message);
+      toast.error(error.response.data.message, {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
     }
   };
 
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
+      <div>
+        <Toaster />
+      </div>
+
       <div className="w-2/4 h-screen hidden lg:block relative">
         <video
           muted

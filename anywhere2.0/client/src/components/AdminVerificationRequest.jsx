@@ -5,23 +5,24 @@ export default function AdminVerificationRequest() {
   const [requests, setRequests] = useState([]);
   console.log(requests);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await axios.get("users/verification");
-        setRequests(result.data);
-        console.log(result.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     fetchData();
   }, []);
+  const fetchData = async () => {
+    try {
+      const result = await axios.get("users/verification");
+      setRequests(result.data);
+      console.log(result.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   async function handleAcceptRequest(userId, reqId) {
     console.log("changes", userId);
     // for user collection updation
     try {
       await axios.put("users/verification", { userId, reqId });
       console.log("verified sucessfully");
+      fetchData();
     } catch (error) {
       console.error(error);
     }
@@ -40,6 +41,7 @@ export default function AdminVerificationRequest() {
     try {
       await axios.delete("users/verification", { data: { reqId } });
       console.log("verification ignored");
+      fetchData();
     } catch (error) {
       console.error(error);
     }
@@ -138,12 +140,15 @@ export default function AdminVerificationRequest() {
                     </td>
                     <td className="flex gap-2 px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <button
-                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                         onClick={() => {
                           handleAcceptRequest(request.userId, request._id);
                         }}
                       >
-                        Toggle
+                        {request.isVerified !== false ? (
+                          <div className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Revoke</div>
+                        ) : (
+                          <div className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Allow</div>
+                        )}
                       </button>
                       <button
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"

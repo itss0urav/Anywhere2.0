@@ -3,16 +3,15 @@ import axios from "../config/axios";
 
 export default function AdminReportList() {
   const [reports, setReports] = useState([]);
-
+  const fetchData = async () => {
+    try {
+      const result = await axios.get("/posts/reports/get");
+      setReports(result.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await axios.get("/posts/reports/get");
-        setReports(result.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     fetchData();
   }, []);
   async function handleRemoveReport(postId) {
@@ -20,6 +19,7 @@ export default function AdminReportList() {
       const result = await axios.delete("/posts/reports/delete", {
         data: { postId },
       });
+      fetchData();
       if (Array.isArray(result.data)) {
         setReports(result.data);
       } else {
@@ -35,6 +35,7 @@ export default function AdminReportList() {
       const result = await axios.delete("/posts/reports/ignore", {
         data: { reportId },
       });
+      fetchData();
       if (Array.isArray(result.data)) {
         setReports(result.data);
       } else {

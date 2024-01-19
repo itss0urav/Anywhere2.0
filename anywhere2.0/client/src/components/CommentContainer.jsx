@@ -22,31 +22,31 @@ export default function CommentContainer() {
   // Add a state variable for the most liked comment
   const [mostLikedComment, setMostLikedComment] = useState(null);
 
+  const fetchComments = async () => {
+    try {
+      const response = await axios.get(`/posts/${postId}/comments`);
+      console.log("fetched comments", response.data);
+      const commentsWithVotes = response.data.comments.map((comment) => ({
+        ...comment,
+        voteStatus: 0, // Initialize voteStatus to 0 for each comment
+      }));
+      setComments(commentsWithVotes);
+
+      // Find the comment with the most likes
+      const mostLiked = commentsWithVotes.reduce((prev, current) => {
+        return prev.votes > current.votes ? prev : current;
+      });
+      setMostLikedComment(mostLiked);
+
+      console.log("Fetched comments with votes:", commentsWithVotes);
+      console.log("Most liked comment:", mostLiked);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const response = await axios.get(`/posts/${postId}/comments`);
-        console.log("fetched comments", response.data);
-        const commentsWithVotes = response.data.comments.map((comment) => ({
-          ...comment,
-          voteStatus: 0, // Initialize voteStatus to 0 for each comment
-        }));
-        setComments(commentsWithVotes);
-
-        // Find the comment with the most likes
-        const mostLiked = commentsWithVotes.reduce((prev, current) => {
-          return prev.votes > current.votes ? prev : current;
-        });
-        setMostLikedComment(mostLiked);
-
-        console.log("Fetched comments with votes:", commentsWithVotes);
-        console.log("Most liked comment:", mostLiked);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     fetchComments();
+    // eslint-disable-next-line
   }, [postId]);
 
   const upvote = async (comment) => {
@@ -70,6 +70,7 @@ export default function CommentContainer() {
       );
 
       console.log("Upvote response:", response.data);
+      fetchComments();
     } catch (error) {
       console.error(error);
     }
@@ -97,6 +98,7 @@ export default function CommentContainer() {
       );
 
       console.log("Downvote response:", response.data);
+      fetchComments();
     } catch (error) {
       console.error(error);
     }

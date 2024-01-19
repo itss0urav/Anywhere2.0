@@ -4,6 +4,7 @@ import useSessionStorage from "../hooks/useSessionStorage";
 import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { MdVerified } from "react-icons/md";
+import { SiAdguard } from "react-icons/si";
 export default function UserProfile() {
   const nav = useNavigate();
   const [user, setUser] = useSessionStorage("user");
@@ -33,8 +34,29 @@ export default function UserProfile() {
 
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
-  }, [user]);
+    fetchUser();
 
+    // Set up interval for automatic refresh (every 5 minutes in this example)
+    const refreshInterval = setInterval(
+      fetchUser,
+      // 5 *
+      // 60 *
+      2000
+    );
+
+    // Clean up interval on component unmount
+    return () => clearInterval(refreshInterval);
+  }, []);
+  const fetchUser = async () => {
+    try {
+      const userId = user._id;
+      const response = await axios.get(`/users/current/${userId}`);
+      console.log(response.data);
+      setUser(response.data);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+  };
   const handleInputChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -196,7 +218,16 @@ export default function UserProfile() {
                   </dt>
                   <dd className=" flex gap-2 mt-1 text-sm text-gray-900 col-span-2">
                     {user.username}
-                    {user.isVerified === true ? <MdVerified  className="text-lg"/> : <></>}
+                    {user.isVerified === true ? (
+                      <MdVerified className="text-xl" />
+                    ) : (
+                      <></>
+                    )}
+                    {user.isMod === true ? (
+                      <SiAdguard className="text-lg" />
+                    ) : (
+                      <></>
+                    )}
                   </dd>
                 </div>
                 <div className="grid grid-cols-3 gap-4 py-4">

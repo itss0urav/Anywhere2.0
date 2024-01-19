@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import v3 from "../assets/v3.mp4";
 
 function Introduction() {
-  const bgs = [
+  // const bgs = [
     // v1,
-    v3
-  ];
-  const videoBg = bgs[Math.floor(Math.random() * bgs.length)];
+  //   v3
+  // ];
+  // const videoBg = bgs[Math.floor(Math.random() * bgs.length)];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-900 to-black animate-fade-in-down">
@@ -16,7 +16,7 @@ function Introduction() {
         autoPlay
         muted
         loop
-        src={videoBg}
+        src={v3}
         className="absolute top-0 left-0 min-w-full min-h-full object-cover z-0"
       ></video>
       <div className="absolute inset-0 bg-gradient-to-center from-transparent via-black to-transparent opacity-50 z-20"></div>
