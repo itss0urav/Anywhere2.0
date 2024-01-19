@@ -111,7 +111,7 @@ const AllPosts = () => {
                       aria-orientation="vertical"
                       aria-labelledby="options-menu"
                     >
-                      {user.username === post.author && (
+                      {(user.username === post.author || user.isMod) && (
                         <button
                           onClick={(event) => {
                             handleDeletePost(event, post._id);
@@ -123,6 +123,7 @@ const AllPosts = () => {
                           Delete
                         </button>
                       )}
+
                       <button
                         onClick={(event) => {
                           handleReportPost(event, post._id);

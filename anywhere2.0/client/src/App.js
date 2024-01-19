@@ -16,17 +16,18 @@ import PostFromCategory from "./pages/PostFromCategory"; // Import the new page
 import SearchPage from "./pages/SearchPage";
 import AdminLogin from "./pages/AdminLogin";
 import ReportPage from "./pages/ReportPage";
+import UserProfile from "./pages/UserProfile";
+
 
 //components
 import CreatePostForm from "./components/CreatePostForm";
 import IntroComponent from "./components/IntoComponent";
 import Admin from "./components/Admin";
 import VerificationForm from "./components/VerificationForm";
+import Mod from "./components/Mod";
 
 //context
 // import GlobalContext from "./contexts/Context";
-import UserProfile from "./pages/UserProfile";
-
 function App() {
   // const [user, setUser] = useState(SessionStorageData);
   // const dataExpanded = {
@@ -40,6 +41,7 @@ function App() {
         <Routes>
           {/* pages */}
           <Route path="/Home" element={<Home />} />
+          <Route path="/modhome" element={<Mod />} />
           <Route path="/verification" element={<VerificationForm />} />
           <Route path="/report/:id" element={<ReportPage />} />
           <Route path="/adminhome" element={<Admin />} />

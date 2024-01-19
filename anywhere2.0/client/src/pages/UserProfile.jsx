@@ -46,6 +46,7 @@ export default function UserProfile() {
 
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);
+    // eslint-disable-next-line
   }, []);
   const fetchUser = async () => {
     try {
@@ -269,6 +270,18 @@ export default function UserProfile() {
             >
               Apply for Verification
             </button>
+            {user.isMod === true ? (
+              <>
+                <button
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
+                  onClick={() => nav("/modhome")}
+                >
+                  Mod Menu
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

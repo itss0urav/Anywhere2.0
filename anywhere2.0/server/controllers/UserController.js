@@ -1,6 +1,7 @@
 // controllers/UserController.js
 
 const User = require("../models/User");
+const Support = require("../models/Support");
 const Verification = require("../models/Verification");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -198,6 +199,26 @@ const UserController = {
           error.message ||
           "Error creating verification request. Please try again.",
       });
+    }
+  },
+  createSupport: async (req, res) => {
+    try {
+      const { username, email, message } = req.body;
+
+      console.log({
+        username,
+        email,
+        message,
+      });
+
+      const support = await Support.create({ username, email, message });
+
+      res
+        .status(201)
+        .json({ message: "Support request created ", support: support });
+    } catch (error) {
+      console.error("Error creating support:", error);
+      res.status(500).json({ error: "Failed to create report " });
     }
   },
 };

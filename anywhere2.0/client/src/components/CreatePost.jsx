@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { MdAddAPhoto, MdMic, MdAttachFile } from "react-icons/md";
+// import { MdAddAPhoto, MdMic, MdAttachFile } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import useSessionStorage from "../hooks/useSessionStorage";
 
@@ -18,6 +18,7 @@ const CreatePost = () => {
         /> */}
 
         <img
+          alt="user-profile"
           src={user.imageUrl}
           onClick={() => {
             nav("/UserProfile");

@@ -16,6 +16,16 @@ export default function AdminUserList() {
       }
     };
     fetchData();
+     // Set up interval for automatic refresh (every 5 minutes in this example)
+     const refreshInterval = setInterval(
+      fetchData,
+      // 5 *
+      // 60 *
+      2000
+    );
+
+    // Clean up interval on component unmount
+    return () => clearInterval(refreshInterval);
   }, []);
 
   function handleBanUnban(userId) {
