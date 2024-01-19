@@ -19,6 +19,7 @@ const PostView = () => {
   const [post, setPost] = useState(null);
 
   const fetchPost = async () => {
+    console.log("Fetching/Updating")
     try {
       const response = await axios.get(`/posts/${postId}`);
       setPost(response.data);
@@ -28,6 +29,7 @@ const PostView = () => {
   };
   useEffect(() => {
     fetchPost();
+  
   }, []);
 
   const handleDeletePost = (event, postId) => {

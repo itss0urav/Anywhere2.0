@@ -6,6 +6,7 @@ export default function AdminUserList() {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("Fetching/Updating...")
       try {
         const result = await axios.get("/users");
         console.log(result.data);

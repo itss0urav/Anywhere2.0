@@ -3,7 +3,8 @@ import axios from "../config/axios";
 
 export default function AdminReportList() {
   const [reports, setReports] = useState([]);
-  const fetchData = async () => {
+  const fetchReports = async () => {
+    console.log("Fetching/Updating...")
     try {
       const result = await axios.get("/posts/reports/get");
       setReports(result.data);
@@ -12,14 +13,24 @@ export default function AdminReportList() {
     }
   };
   useEffect(() => {
-    fetchData();
+    fetchReports();
+      // Set up interval for automatic refresh (every 5 minutes in this example)
+      const refreshInterval = setInterval(
+        fetchReports,
+        // 5 *
+        // 60 *
+        2000
+      );
+  
+      // Clean up interval on component unmount
+      return () => clearInterval(refreshInterval);
   }, []);
   async function handleRemoveReport(postId) {
     try {
       const result = await axios.delete("/posts/reports/delete", {
         data: { postId },
       });
-      fetchData();
+      fetchReports();
       if (Array.isArray(result.data)) {
         setReports(result.data);
       } else {
@@ -35,7 +46,7 @@ export default function AdminReportList() {
       const result = await axios.delete("/posts/reports/ignore", {
         data: { reportId },
       });
-      fetchData();
+      fetchReports();
       if (Array.isArray(result.data)) {
         setReports(result.data);
       } else {

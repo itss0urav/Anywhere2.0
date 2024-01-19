@@ -1,3 +1,4 @@
+// CommentContainer.js
 import React, { useEffect, useState } from "react";
 import { LuArrowBigUp, LuArrowBigDown } from "react-icons/lu";
 import { BiMessageRounded } from "react-icons/bi";
@@ -31,21 +32,34 @@ export default function CommentContainer() {
         voteStatus: 0, // Initialize voteStatus to 0 for each comment
       }));
       setComments(commentsWithVotes);
-
-      // Find the comment with the most likes
-      const mostLiked = commentsWithVotes.reduce((prev, current) => {
-        return prev.votes > current.votes ? prev : current;
-      });
-      setMostLikedComment(mostLiked);
-
-      console.log("Fetched comments with votes:", commentsWithVotes);
-      console.log("Most liked comment:", mostLiked);
+  
+      // Find the comment with the most replies
+      if (commentsWithVotes.length > 0) {
+        const mostReplied = commentsWithVotes.reduce((prev, current) => {
+          return prev.replies.length > current.replies.length ? prev : current;
+        });
+        setMostLikedComment(mostReplied);
+        console.log("Most replied comment:", mostReplied);
+      } else {
+        console.log("No comments to find the most replied");
+      }
     } catch (error) {
       console.error(error);
     }
   };
+  
   useEffect(() => {
     fetchComments();
+    // Set up interval for automatic refresh (every 5 minutes in this example)
+    const refreshInterval = setInterval(
+      fetchComments,
+      // 5 *
+      // 60 *
+      2000
+    );
+
+    // Clean up interval on component unmount
+    return () => clearInterval(refreshInterval);
     // eslint-disable-next-line
   }, [postId]);
 
@@ -127,12 +141,15 @@ export default function CommentContainer() {
       <h2 className="text-3xl font-bold text-center">Comments</h2>
       {mostLikedComment && (
         <div className="bg-green-100 p-4 rounded-md">
-          <h3 className="text-xl font-bold text-gray-800">
-            {mostLikedComment.user}
+          <h3 className="flex gap-4 text-xl font-bold text-gray-800">
+            Top Comment by
+            <div className="bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent">
+              {mostLikedComment.user}
+            </div>
           </h3>
           <p className="text-gray-600">{mostLikedComment.text}</p>
-          <div className="text-lg font-bold">
-            {mostLikedComment.votes.length}
+          <div className="text-lg ">
+            {mostLikedComment.replies.length} Replies
           </div>
         </div>
       )}
@@ -163,8 +180,11 @@ export default function CommentContainer() {
                 </button>
               </div>
               <div className="space-y-2">
-                <h3 className="text-xl font-bold text-gray-800">
-                  {comment.user}
+                <h3 className="flex gap-4 text-xl font-bold text-gray-800">
+                  Comment by
+                  <div className="bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent">
+                    {comment.user}
+                  </div>
                 </h3>
                 <p className="text-gray-600">{comment.text}</p>
                 <div className="flex items-center space-x-2">
@@ -182,7 +202,12 @@ export default function CommentContainer() {
                 key={reply._id}
                 className="ml-4 mt-2 bg-gray-100 p-2 rounded"
               >
-                <h4 className="font-semibold text-gray-700">{reply.user}</h4>
+                <h4 className="flex gap-2 font-semibold text-gray-700">
+                  Replied By
+                  <div className="bg-gradient-to-r from-sky-600 to-cyan-900 bg-clip-text text-transparent">
+                    {reply.user}
+                  </div>
+                </h4>
                 <p className="text-gray-600">{reply.text}</p>
               </div>
             ))}

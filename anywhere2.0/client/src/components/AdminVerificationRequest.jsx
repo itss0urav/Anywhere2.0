@@ -6,8 +6,19 @@ export default function AdminVerificationRequest() {
   console.log(requests);
   useEffect(() => {
     fetchData();
+     // Set up interval for automatic refresh (every 5 minutes in this example)
+     const refreshInterval = setInterval(
+      fetchData,
+      // 5 *
+      // 60 *
+      2000
+    );
+
+    // Clean up interval on component unmount
+    return () => clearInterval(refreshInterval);
   }, []);
   const fetchData = async () => {
+    console.log("Fetching/Updating...")
     try {
       const result = await axios.get("users/verification");
       setRequests(result.data);

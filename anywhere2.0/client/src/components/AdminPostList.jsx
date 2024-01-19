@@ -6,6 +6,7 @@ export default function AdminPostList() {
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = async () => {
+    console.log("Fetching/Updating...")
     try {
       const response = await axios.get("/posts");
       setPosts(response.data);
@@ -32,6 +33,16 @@ export default function AdminPostList() {
 
   useEffect(() => {
     fetchPosts();
+     // Set up interval for automatic refresh (every 5 minutes in this example)
+     const refreshInterval = setInterval(
+      fetchPosts,
+      // 5 *
+      // 60 *
+      2000
+    );
+
+    // Clean up interval on component unmount
+    return () => clearInterval(refreshInterval);
   }, []);
 
   return (
