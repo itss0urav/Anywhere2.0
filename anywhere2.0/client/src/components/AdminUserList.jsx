@@ -6,7 +6,7 @@ export default function AdminUserList() {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Fetching/Updating...")
+      console.log("Fetching/Updating...");
       try {
         const result = await axios.get("/users");
         console.log(result.data);
@@ -16,8 +16,8 @@ export default function AdminUserList() {
       }
     };
     fetchData();
-     // Set up interval for automatic refresh (every 5 minutes in this example)
-     const refreshInterval = setInterval(
+    // Set up interval for automatic refresh (every 5 minutes in this example)
+    const refreshInterval = setInterval(
       fetchData,
       // 5 *
       // 60 *
@@ -119,12 +119,29 @@ export default function AdminUserList() {
               >
                 {user.isBanned ? "Unban" : "Ban"}
               </button>
-              <button
+
+              {user.isMod ? (
+                <button
+                  onClick={() => handleModAccess(user._id)}
+                  className="bg-gradient-to-r from-red-500 to-rose-900  text-white font-bold py-2 px-4 rounded"
+                >
+                  Remove Mod
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleModAccess(user._id)}
+                  className="bg-gradient-to-r from-green-500 to-green-900  text-white font-bold py-2 px-4 rounded"
+                >
+                  Make Mod
+                </button>
+              )}
+
+              {/* <button
                 onClick={() => handleModAccess(user._id)}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >
                 {user.isMod ? "Remove Mod" : "Make Mod"}
-              </button>
+              </button> */}
             </td>
           </tr>
         ))}

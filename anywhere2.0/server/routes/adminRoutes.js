@@ -13,6 +13,11 @@ router.get("/get", AdminController.getReports);
 router.delete("/ignore", AdminController.ignoreReports);
 router.delete("/delete", AdminController.deleteReports);
 
+
+router.get("/support/get", AdminController.getSupports);
+router.delete("/support/delete", AdminController.deleteSupports);
+
+
 router.put("/banunbanuser", AdminController.banUnbanUser);
 router.put("/modunmoduser", AdminController.modUnmodUser);
 

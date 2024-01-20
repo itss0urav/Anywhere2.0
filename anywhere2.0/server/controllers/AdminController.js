@@ -5,7 +5,7 @@ const User = require("../models/User");
 const Report = require("../models/Report");
 const Post = require("../models/Post");
 const Verification = require("../models/Verification");
-
+const Support = require("../models/Support");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -262,6 +262,28 @@ const AdminController = {
           error.message ||
           "Error finding verification request. Please try again.",
       });
+    }
+  },
+  getSupports: async (req, res) => {
+    try {
+      console.log("Fetching Support every 2 sec on focus...");
+      const Supports = await Support.find();
+
+      res.status(200).send(Supports);
+    } catch (error) {
+      console.log("Error occurred while fetching Support:", error);
+    }
+  },
+  deleteSupports: async (req, res) => {
+    try {
+      console.log("Fetching report...");
+      const { supportId } = req.body;
+      console.log(supportId);
+      const Supports = await Support.findByIdAndDelete(supportId);
+      console.log("Support deleted successfully:", Supports);
+      res.status(200).send(Supports);
+    } catch (error) {
+      console.log("Error occurred while deleting support:", error);
     }
   },
 };

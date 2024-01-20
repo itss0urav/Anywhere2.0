@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { MdContactMail, MdBuild, MdInfo } from "react-icons/md";
+import {
+  Link,
+  useNavigate,
+  //  useLocation
+} from "react-router-dom";
+// import { MdContactMail, MdBuild, MdInfo } from "react-icons/md";
 import { BsMenuButtonWideFill } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import useSessionStorage from "../hooks/useSessionStorage";
@@ -10,7 +14,7 @@ const AdminNavbar = () => {
   const [menu, setMenu] = useState(false);
   const [admin] = useSessionStorage("admin");
   const nav = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
@@ -25,7 +29,7 @@ const AdminNavbar = () => {
   const handleLogin = () => nav("/adminLogin");
 
   return (
-    <nav className="bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20">
+    <nav className="bg-gradient-to-r from-red-500 to-rose-900 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <Link
           to="/adminhome"
@@ -33,11 +37,11 @@ const AdminNavbar = () => {
         >
           <img className="w-12 mr-2" src={Logo} alt="" />
         </Link>
-        <div className="text-white text-xl">Admin Mode</div>
+        <div className="text-white text-xl">/AdminConsole...</div>
         <div className="flex items-center space-x-4">
           {menu && (
             <div className="sm:flex sm:flex-col gap-3">
-              <input
+              {/* <input
                 onClick={() => {
                   if (location.pathname !== "/searchpage") {
                     nav("/searchpage");
@@ -46,8 +50,8 @@ const AdminNavbar = () => {
                 className="rounded p-2 border transition-all duration-200"
                 type="text"
                 placeholder="Search..."
-              />
-              <Link
+              /> */}
+              {/* <Link
                 to="/About"
                 className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
               >
@@ -64,7 +68,7 @@ const AdminNavbar = () => {
                 className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
               >
                 <MdContactMail className="inline-block mr-1" /> Contact Us
-              </Link>
+              </Link> */}
 
               {admin.username ? (
                 <button

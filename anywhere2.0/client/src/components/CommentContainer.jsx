@@ -142,7 +142,7 @@ export default function CommentContainer() {
       {mostLikedComment && (
         <div className="bg-green-100 p-4 rounded-md">
           <h3 className="flex gap-4 text-xl font-bold text-gray-800">
-            Top Comment by
+            Most Interacted Comment by
             <div className="bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent">
               {mostLikedComment.user}
             </div>

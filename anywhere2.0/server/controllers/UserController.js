@@ -221,6 +221,7 @@ const UserController = {
       res.status(500).json({ error: "Failed to create report " });
     }
   },
+  
 };
 
 module.exports = UserController;
