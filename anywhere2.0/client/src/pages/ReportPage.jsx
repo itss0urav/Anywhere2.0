@@ -17,21 +17,32 @@ export default function ReportPage() {
   const handleReportPost = () => {
     console.log("Report submitted:", reason);
 
-    axios
-      .post(`/posts/${postId}`, { postId, reason, username })
-      .then((req, res) => {
-        toast.success("Post Reported", {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
-        setTimeout(() => {
-          navigate("/home"); // navigate to "/home" after 2 seconds
-        }, 2000);
-      })
-      .catch((err) => console.log(err));
+    if (reason !== "") {
+      axios
+        .post(`/posts/${postId}`, { postId, reason, username })
+        .then((req, res) => {
+          toast.success("Post Reported", {
+            style: {
+              borderRadius: "10px",
+              background: "#333",
+              color: "#fff",
+            },
+          });
+          setTimeout(() => {
+            navigate("/home"); // navigate to "/home" after 2 seconds
+          }, 2000);
+        })
+        .catch((err) => console.log(err));
+    }
+    else{
+      toast.error("Input Field looks empty", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    }
   };
 
   return (
@@ -60,6 +71,7 @@ export default function ReportPage() {
               Reason for Report
             </label>
             <textarea
+              required
               className="shadow bg-transparent appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               id="reason"
               type="text"

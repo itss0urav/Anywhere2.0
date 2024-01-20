@@ -3,6 +3,7 @@ import axios from "../config/axios";
 import Logo from "../assets/Anywhere-Transparent.png";
 import { Link, useNavigate } from "react-router-dom";
 import vid from "../assets/v3.mp4";
+import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 
 const SignUp = () => {
   // Initialize state variables for form inputs and alert message
@@ -28,7 +29,16 @@ const SignUp = () => {
 
     console.log("Data From Signup", user);
     // Make POST request
-    if (password === confirmPassword) {
+    if (password.length < 8) {
+      setAlertMessage("Password looks too short.");
+      toast.error("Password looks too short", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    } else if (password === confirmPassword) {
       try {
         const response = await axios.post("/users/signup", user);
 
@@ -50,6 +60,9 @@ const SignUp = () => {
 
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
+      <div>
+        <Toaster />
+      </div>
       {/* Left: Image */}
       <div className="w-2/4 h-screen hidden lg:block relative">
         <video
@@ -73,6 +86,7 @@ const SignUp = () => {
               Username
             </label>
             <input
+              required
               type="text"
               id="username"
               name="username"
@@ -87,6 +101,7 @@ const SignUp = () => {
               Date of Birth
             </label>
             <input
+              required
               type="date"
               id="dob"
               name="dob"
@@ -100,6 +115,7 @@ const SignUp = () => {
               Email
             </label>
             <input
+              required
               type="email"
               id="email"
               name="email"
@@ -114,6 +130,7 @@ const SignUp = () => {
               Password
             </label>
             <input
+              required
               type="password"
               id="password"
               name="password"
@@ -128,6 +145,7 @@ const SignUp = () => {
               Confirm Password
             </label>
             <input
+              required
               type="password"
               id="confirmPassword"
               name="confirmPassword"
