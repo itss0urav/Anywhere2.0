@@ -16,7 +16,7 @@ export default function Admin() {
           onClick={() => {
             setCurrentOption("manage-users");
           }}
-          className="px-4 py-2 bg-gradient-to-r from-red-500 to-rose-900 text-white hover:bg-red-500"
+          className="px-4 py-2 bg-gradient-to-r from-red-500 to-rose-900 hover:text-red-100 text-white hover:bg-red-500"
         >
           Manage Users
         </button>
@@ -24,7 +24,7 @@ export default function Admin() {
           onClick={() => {
             setCurrentOption("manage-posts");
           }}
-          className="px-4 py-2 bg-gradient-to-r from-red-500 to-rose-900 text-white hover:bg-rose-500"
+          className="px-4 py-2 bg-gradient-to-r from-red-500 to-rose-900 hover:text-red-100 text-white hover:bg-rose-500"
         >
           Manage Posts
         </button>
@@ -32,7 +32,7 @@ export default function Admin() {
           onClick={() => {
             setCurrentOption("manage-reports");
           }}
-          className="px-4 py-2 bg-gradient-to-r from-red-500 to-rose-900 text-white hover:bg-rose-500"
+          className="px-4 py-2 bg-gradient-to-r from-red-500 to-rose-900 hover:text-red-100 text-white hover:bg-rose-500"
         >
           Reports
         </button>
@@ -40,7 +40,7 @@ export default function Admin() {
           onClick={() => {
             setCurrentOption("manage-verification");
           }}
-          className="px-4 py-2 bg-gradient-to-r from-red-500 to-rose-900 text-white hover:bg-rose-500"
+          className="px-4 py-2 bg-gradient-to-r from-red-500 to-rose-900 hover:text-red-100 text-white hover:bg-rose-500"
         >
           Verification Request
         </button>
@@ -48,7 +48,7 @@ export default function Admin() {
           onClick={() => {
             setCurrentOption("manage-support");
           }}
-          className="px-4 py-2 bg-gradient-to-r from-red-500 to-rose-900 text-white hover:bg-rose-500"
+          className="px-4 py-2 bg-gradient-to-r from-red-500 to-rose-900 hover:text-red-100 text-white hover:bg-rose-500"
         >
           Support
         </button>

@@ -73,7 +73,7 @@ const AdminNavbar = () => {
               {admin.username ? (
                 <button
                   onClick={handleLogout}
-                  className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
+                  className="bg-gradient-to-r from-red-900 to-rose-500 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
                 >
                   <FaUser className="inline-block mr-1" /> Logout
                 </button>

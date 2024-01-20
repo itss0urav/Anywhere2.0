@@ -9,6 +9,7 @@ router.route("/").get(postController.getPosts).post(
   // verifyToken,
   postController.createPost
 );
+router.post("/search", postController.getFilteredPosts);
 router.post("/:id", postController.reportPost);
 
 router.get("/categories", postController.getCategories);

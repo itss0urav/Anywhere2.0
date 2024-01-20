@@ -3,6 +3,7 @@
 const User = require("../models/User");
 const Support = require("../models/Support");
 const Verification = require("../models/Verification");
+const Post = require("../models/Post");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -221,7 +222,6 @@ const UserController = {
       res.status(500).json({ error: "Failed to create report " });
     }
   },
-  
 };
 
 module.exports = UserController;

@@ -35,6 +35,20 @@ const getPosts = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch posts" });
   }
 };
+const getFilteredPosts = async (req, res) => {
+  try {
+    const { postName } = req.body;
+    // Use a case-insensitive regular expression to find posts containing the specified letters
+    const posts = await Post.find({
+      name: { $regex: new RegExp(postName, "i") },
+    });
+    // const posts = await Post.find({ name: postName });
+    res.json(posts);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ error: "Failed to fetch posts" });
+  }
+};
 
 const getCategories = async (req, res) => {
   try {
@@ -107,4 +121,5 @@ module.exports = {
   getPostsByCategory,
   deletePost,
   reportPost,
+  getFilteredPosts,
 };

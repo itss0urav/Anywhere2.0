@@ -14,7 +14,7 @@ export default function Mod() {
           onClick={() => {
             setCurrentOption("manage-users");
           }}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 hover:text-white  rounded"
         >
           Manage Users
         </button>
@@ -22,7 +22,7 @@ export default function Mod() {
           onClick={() => {
             setCurrentOption("manage-posts");
           }}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 hover:text-white  rounded"
         >
           Manage Posts
         </button>
@@ -30,7 +30,7 @@ export default function Mod() {
           onClick={() => {
             setCurrentOption("manage-reports");
           }}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 hover:text-white  rounded"
         >
           Reports
         </button>

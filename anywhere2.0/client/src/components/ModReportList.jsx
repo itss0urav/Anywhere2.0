@@ -4,7 +4,7 @@ import axios from "../config/axios";
 export default function ModReportList() {
   const [reports, setReports] = useState([]);
   const fetchReports = async () => {
-    console.log("Fetching/Updating...")
+    console.log("Fetching/Updating...");
     try {
       const result = await axios.get("/posts/reports/get");
       setReports(result.data);
@@ -14,16 +14,16 @@ export default function ModReportList() {
   };
   useEffect(() => {
     fetchReports();
-      // Set up interval for automatic refresh (every 5 minutes in this example)
-      const refreshInterval = setInterval(
-        fetchReports,
-        // 5 *
-        // 60 *
-        2000
-      );
-  
-      // Clean up interval on component unmount
-      return () => clearInterval(refreshInterval);
+    // Set up interval for automatic refresh (every 5 minutes in this example)
+    const refreshInterval = setInterval(
+      fetchReports,
+      // 5 *
+      // 60 *
+      2000
+    );
+
+    // Clean up interval on component unmount
+    return () => clearInterval(refreshInterval);
   }, []);
   async function handleRemoveReport(postId) {
     try {
@@ -116,7 +116,7 @@ export default function ModReportList() {
                         onClick={() => {
                           handleRemoveReport(report.postId);
                         }}
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        className="bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded"
                       >
                         Remove
                       </button>
@@ -124,7 +124,7 @@ export default function ModReportList() {
                         onClick={() => {
                           handleIgnoreReport(report._id);
                         }}
-                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                        className="bg-gradient-to-r from-green-500 to-green-900 text-white font-bold py-2 px-4 rounded"
                       >
                         Ignore
                       </button>

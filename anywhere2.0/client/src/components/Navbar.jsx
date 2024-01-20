@@ -55,25 +55,25 @@ const Navbar = () => {
               />
               <Link
                 to="/About"
-                className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
+                className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
               >
                 <MdInfo className="inline-block mr-1" /> About
               </Link>
               <Link
                 to="/Services"
-                className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
+                className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
               >
                 <MdBuild className="inline-block mr-1" /> Services
               </Link>
               <Link
                 to="/ContactUs"
-                className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
+                className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
               >
                 <MdContactMail className="inline-block mr-1" /> Contact Us
               </Link>
               <Link
                 to="/UserProfile"
-                className=" lg:flex bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
+                className=" lg:flex bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
               >
                 <img
                   alt="profile pic"
@@ -86,14 +86,14 @@ const Navbar = () => {
               {user.username ? (
                 <button
                   onClick={handleLogout}
-                  className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
+                  className="bg-gradient-to-r from-red-500 to-rose-900 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
                 >
                   <FaUser className="inline-block mr-1" /> Logout
                 </button>
               ) : (
                 <button
                   onClick={handleLogin}
-                  className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
+                  className="bg-gradient-to-r from-green-500 to-green-900 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
                 >
                   <FaUser className="inline-block mr-1" /> Login
                 </button>

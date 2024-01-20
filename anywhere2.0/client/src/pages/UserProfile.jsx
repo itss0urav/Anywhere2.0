@@ -259,13 +259,13 @@ export default function UserProfile() {
           <div className="flex gap-2">
             {" "}
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+              className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100  transition-all duration-200 hover:bg-blue-500 hover:text-white font-bold py-2 px-4 rounded mt-4"
               onClick={() => setEditMode(true)}
             >
               Edit Profile
             </button>
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+              className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 hover:text-white transition-all duration-200 hover:bg-blue-500  font-bold py-2 px-4 rounded mt-4"
               onClick={() => nav("/Verification")}
             >
               Apply for Verification
@@ -273,7 +273,7 @@ export default function UserProfile() {
             {user.isMod === true ? (
               <>
                 <button
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
+                  className="bg-gradient-to-r from-red-500 to-rose-900  text-red-100 hover:text-white font-bold py-2 px-4 rounded mt-4"
                   onClick={() => nav("/modhome")}
                 >
                   Mod Menu

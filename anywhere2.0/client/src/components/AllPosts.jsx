@@ -7,7 +7,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { SlOptionsVertical } from "react-icons/sl";
 
 const AllPosts = () => {
-  const [user] = useSessionStorage("user");
+  const [user,setUser] = useSessionStorage("user");
   const [posts, setPosts] = useState([]);
   const [blurStatus, setBlurStatus] = useState({});
   const [showOptions, setShowOptions] = useState(false);
@@ -28,7 +28,28 @@ const AllPosts = () => {
 
   useEffect(() => {
     fetchPosts();
+     // Set up interval for automatic refresh (every 5 minutes in this example)
+     const refreshInterval = setInterval(
+      fetchUser,
+      // 5 *
+      // 60 *
+      2000
+    );
+
+    // Clean up interval on component unmount
+    return () => clearInterval(refreshInterval);
+    // eslint-disable-next-line
   }, []);
+  const fetchUser = async () => {
+    try {
+      const userId = user._id;
+      const response = await axios.get(`/users/current/${userId}`);
+      console.log(response.data);
+      setUser(response.data);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+  };
 
   const toggleBlur = (index, event) => {
     event.stopPropagation();

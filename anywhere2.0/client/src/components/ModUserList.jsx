@@ -6,7 +6,7 @@ export default function ModUserList() {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Fetching/Updating...")
+      console.log("Fetching/Updating...");
       try {
         const result = await axios.get("/users");
         console.log(result.data);
@@ -16,8 +16,8 @@ export default function ModUserList() {
       }
     };
     fetchData();
-     // Set up interval for automatic refresh (every 5 minutes in this example)
-     const refreshInterval = setInterval(
+    // Set up interval for automatic refresh (every 5 minutes in this example)
+    const refreshInterval = setInterval(
       fetchData,
       // 5 *
       // 60 *
@@ -35,8 +35,6 @@ export default function ModUserList() {
       );
     });
   }
-
-  
 
   return (
     <table className="min-w-full divide-y divide-gray-200">
@@ -79,22 +77,22 @@ export default function ModUserList() {
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
               {user.isMod ? (
-                <div className="bg-green-500  text-white font-bold py-2 px-4 rounded">
+                <div className="bg-gradient-to-r from-green-500 to-green-900  text-white font-bold py-2 px-4 rounded">
                   Yes
                 </div>
               ) : (
-                <div className="bg-red-500  text-white font-bold py-2 px-4 rounded">
+                <div className="bg-gradient-to-r from-red-500 to-rose-900  text-white font-bold py-2 px-4 rounded">
                   No
                 </div>
               )}
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
               {user.isBanned ? (
-                <div className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                <div className="bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded">
                   Banned
                 </div>
               ) : (
-                <div className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                <div className="bg-gradient-to-r from-green-500 to-green-900 text-white font-bold py-2 px-4 rounded">
                   Active
                 </div>
               )}
@@ -107,13 +105,21 @@ export default function ModUserList() {
               />
             </td>
             <td className="flex gap-2  px-6 py-4  whitespace-nowrap">
-              <button
-                onClick={() => handleBanUnban(user._id)}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-              >
-                {user.isBanned ? "Unban" : "Ban"}
-              </button>
-              
+              {user.isBanned ? (
+                <button
+                  onClick={() => handleBanUnban(user._id)}
+                  className="bg-gradient-to-r from-green-500 to-green-900 text-white font-bold py-2 px-4 rounded"
+                >
+                  Unban
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleBanUnban(user._id)}
+                  className="bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded"
+                >
+                  Ban
+                </button>
+              )}
             </td>
           </tr>
         ))}

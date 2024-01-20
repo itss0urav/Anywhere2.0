@@ -104,7 +104,7 @@ export default function AdminPostList() {
                   onClick={() => {
                     handleDeletePost(post._id);
                   }}
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded"
                 >
                   Delete
                 </button>

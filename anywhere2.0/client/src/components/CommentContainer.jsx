@@ -2,16 +2,40 @@
 import React, { useEffect, useState } from "react";
 import { LuArrowBigUp, LuArrowBigDown } from "react-icons/lu";
 import { BiMessageRounded } from "react-icons/bi";
+import { MdDeleteOutline } from "react-icons/md";
 
 import { useParams } from "react-router-dom";
 import axios from "../config/axios";
 import useSessionStorage from "../hooks/useSessionStorage";
 
 export default function CommentContainer() {
-  const [user] = useSessionStorage("user");
+  const [user,setUser] = useSessionStorage("user");
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
-  }, [user]);
+    fetchUser();
+
+    // Set up interval for automatic refresh (every 5 minutes in this example)
+    const refreshInterval = setInterval(
+      fetchUser,
+      // 5 *
+      // 60 *
+      2000
+    );
+
+    // Clean up interval on component unmount
+    return () => clearInterval(refreshInterval);
+    // eslint-disable-next-line
+  }, []);
+  const fetchUser = async () => {
+    try {
+      const userId = user._id;
+      const response = await axios.get(`/users/current/${userId}`);
+      console.log(response.data);
+      setUser(response.data);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+  };
 
   const { postId } = useParams();
   console.log("Post id from comment ", postId);
@@ -32,7 +56,7 @@ export default function CommentContainer() {
         voteStatus: 0, // Initialize voteStatus to 0 for each comment
       }));
       setComments(commentsWithVotes);
-  
+
       // Find the comment with the most replies
       if (commentsWithVotes.length > 0) {
         const mostReplied = commentsWithVotes.reduce((prev, current) => {
@@ -47,7 +71,7 @@ export default function CommentContainer() {
       console.error(error);
     }
   };
-  
+
   useEffect(() => {
     fetchComments();
     // Set up interval for automatic refresh (every 5 minutes in this example)
@@ -136,6 +160,18 @@ export default function CommentContainer() {
     }
   };
 
+  const handleDeleteComment = async (postId, commentId) => {
+    try {
+      const response = await axios.delete(
+        `/posts/${postId}/comments/${commentId}/delete`,
+        { data: { postId } }
+      );
+      console.log("Reply response:", response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="mt-4 p-4 max-w-xl mx-auto bg-white rounded-xl shadow-md space-y-4 sm:py-4">
       <h2 className="text-3xl font-bold text-center">Comments</h2>
@@ -188,12 +224,18 @@ export default function CommentContainer() {
                 </h3>
                 <p className="text-gray-600">{comment.text}</p>
                 <div className="flex items-center space-x-2">
-                  <button
+                  <BiMessageRounded
                     onClick={() => setReplyingTo(comment._id)}
-                    className="text-blue-800"
-                  >
-                    <BiMessageRounded />
-                  </button>
+                    className="cursor-pointer text-blue-800"
+                  />
+                  {user.username === comment.user || user.isMod === true ? (
+                    <MdDeleteOutline
+                      onClick={() => handleDeleteComment(postId, comment._id)}
+                      className="cursor-pointer text-blue-800"
+                    />
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
             </div>

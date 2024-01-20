@@ -116,7 +116,7 @@ export default function AdminReportList() {
                         onClick={() => {
                           handleRemoveReport(report.postId);
                         }}
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        className="bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded"
                       >
                         Remove
                       </button>
@@ -124,7 +124,7 @@ export default function AdminReportList() {
                         onClick={() => {
                           handleIgnoreReport(report._id);
                         }}
-                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                        className="bg-gradient-to-r from-green-500 to-green-900 text-white font-bold py-2 px-4 rounded"
                       >
                         Ignore
                       </button>
