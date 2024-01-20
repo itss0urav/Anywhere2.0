@@ -17,12 +17,11 @@ const SearchPage = () => {
   const [postName, setPostName] = useState("");
   const navigate = useNavigate();
 
-  
   const fetchPosts = async () => {
     try {
       const response = await axios.post("/posts/search", { postName });
       setPosts(response.data);
-      console.log("filtered post",response.data)
+      console.log("filtered post", response.data);
       const initialBlurStatus = {};
       response.data.forEach((post, index) => {
         initialBlurStatus[index] = true;
@@ -32,7 +31,6 @@ const SearchPage = () => {
       console.error("Error fetching posts:", error);
     }
   };
-
 
   useEffect(() => {
     fetchPosts();
@@ -106,7 +104,10 @@ const SearchPage = () => {
             className="w-full border rounded p-2 text-center"
             type="text"
           />
-          <FaSearch onClick={fetchPosts} className="cursor-pointer text-4xl mx-2" />
+          <FaSearch
+            onClick={fetchPosts}
+            className="cursor-pointer text-4xl mx-2"
+          />
         </div>
       </div>
       <div className="flex justify-center">
