@@ -36,7 +36,8 @@ app.use("/api/posts/:id/comments/:commentId/votes", commentRoutes); // <- This r
 app.use("/api/posts/:id/comments/:commentId/delete", commentRoutes); // <- This route handles comment votes
 app.use("/api/posts/:postId/comments/:commentId/replies", replyRoutes);
 
-app.listen(PORT, () => {
+app.listen(PORT
+  , () => {
   console.log(`Server is running on port ${PORT}`);
 });
 

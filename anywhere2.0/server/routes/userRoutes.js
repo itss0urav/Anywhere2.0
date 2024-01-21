@@ -7,6 +7,7 @@ router.post("/support", UserController.createSupport);
 
 
 router.get("/current/:id",UserController.getCurrentUser)
+router.get("/other/:username",UserController.getOtherUser)
 router.post("/signup", UserController.createUser);
 router.post(
   "/login",

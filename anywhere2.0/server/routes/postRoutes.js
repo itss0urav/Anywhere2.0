@@ -3,10 +3,10 @@
 const express = require("express");
 const router = express.Router();
 const postController = require("../controllers/PostController");
-// const verifyToken = require("../middlewares/authMiddleware");
+const verifyToken = require("../middlewares/authMiddleware");
 
 router.route("/").get(postController.getPosts).post(
-  // verifyToken,
+  verifyToken,
   postController.createPost
 );
 router.post("/search", postController.getFilteredPosts);

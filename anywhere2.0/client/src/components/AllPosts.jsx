@@ -7,7 +7,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { SlOptionsVertical } from "react-icons/sl";
 
 const AllPosts = () => {
-  const [user,setUser] = useSessionStorage("user");
+  const [user, setUser] = useSessionStorage("user");
   const [posts, setPosts] = useState([]);
   const [blurStatus, setBlurStatus] = useState({});
   const [showOptions, setShowOptions] = useState(false);
@@ -28,8 +28,8 @@ const AllPosts = () => {
 
   useEffect(() => {
     fetchPosts();
-     // Set up interval for automatic refresh (every 5 minutes in this example)
-     const refreshInterval = setInterval(
+    // Set up interval for automatic refresh (every 5 minutes in this example)
+    const refreshInterval = setInterval(
       fetchUser,
       // 5 *
       // 60 *
@@ -87,6 +87,12 @@ const AllPosts = () => {
     setShowOptions(!showOptions);
   };
 
+  function viewProfileofOthers(event, username) {
+    event.stopPropagation();
+
+    navigate(`/profile/${username}`);
+  }
+
   return (
     <div className="w-2/4 p-4 flex flex-col justify-center items-center space-y-4">
       <div>
@@ -105,7 +111,10 @@ const AllPosts = () => {
             <div className="flex justify-between items-center">
               <div className="flex gap-3 text-lg font-semibold">
                 Post By
-                <div className="bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent">
+                <div
+                  onClick={(event) => viewProfileofOthers(event, post.author)}
+                  className=" cursor-pointer bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent"
+                >
                   {post.author}
                 </div>
               </div>
@@ -168,15 +177,18 @@ const AllPosts = () => {
               </p>
             )}
             <div className="flex justify-center">
-              <img
-                onClick={(event) => toggleBlur(index, event)}
-                className={`object-contain rounded-t-lg h-1/3 ${
-                  blurStatus[index] && post.nsfw ? "blur-lg" : ""
-                }`}
-                src={post.imageUrl}
-                alt={post.name}
-              />
+              {post.imageUrl.includes(".") && (
+                <img
+                  onClick={(event) => toggleBlur(index, event)}
+                  className={`object-contain rounded-t-lg h-1/3 ${
+                    blurStatus[index] && post.nsfw ? "blur-lg" : ""
+                  }`}
+                  src={post.imageUrl}
+                  alt={post.name}
+                />
+              )}
             </div>
+
             <div className="p-4">
               <h2 className="text-xl font-bold mb-2">{post.name}</h2>
               <p className="bg-gradient-to-r from-sky-700 to-indigo-900 bg-clip-text text-transparent mb-2">

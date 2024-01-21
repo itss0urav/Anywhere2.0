@@ -25,6 +25,22 @@ const UserController = {
       res.status(500).json({ message: "Internal Server Error" });
     }
   },
+  getOtherUser: async (req, res) => {
+    try {
+      const username = req.params.username; // Extract userId from request parameters
+      const user = await User.findOne({ username });
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.status(200).send(user);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+
   getUsers: async (req, res) => {
     try {
       const users = await User.find();
@@ -100,7 +116,7 @@ const UserController = {
         .cookie("token", token, {
           httpOnly: true,
           secure: true,
-          maxAge: 1000 * 60 * 60,
+          maxAge: 1000 * 60 * 60 * 2,
         })
         .status(200)
         .json({ message: "Login successful", passed: true, token, user: user });

@@ -1,22 +1,25 @@
-const jwt = require('jsonwebtoken');
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
-  const token = req.cookies.token; // access the token from cookies
-  console.log("token from middleware", token);
-  if (!token) {
-    return res.status(403).json({ error: "No token provided." });
-  }
-
-  // verify the token
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ error: "Failed to authenticate token." });
-    } else {
-      // if token is verified, add the decoded user to the request
-      req.user = decoded.user;
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+    console.log("Token to verify:", token);
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+      if (err) {
+        console.log("Error verifying token:", err);
+        return res
+          .status(403)
+          .json({ message: "Token is not valid. Please log in again." });
+      }
+      req.user = user;
       next();
-    }
-  });
+    });
+  } else {
+    console.log("No authorization header found in request.");
+    res.status(401).json({ message: "Authentication token must be provided." });
+  }
 };
 
 module.exports = verifyToken;

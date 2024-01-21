@@ -8,7 +8,7 @@ import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 
 const Login = () => {
   const [user, setUser] = useSessionStorage("user");
-  const [token, setToken] = useSessionStorage("token");
+  // const [token, setToken] = useSessionStorage("token");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [alertMessage, setAlertMessage] = useState(null);
@@ -27,7 +27,7 @@ const Login = () => {
       console.log("from login", req.data.token);
 
       setUser(req.data.user);
-      setToken(req.data.token);
+      sessionStorage.setItem("token",req.data.token);
 
       nav("/home");
     } catch (error) {

@@ -17,6 +17,7 @@ import SearchPage from "./pages/SearchPage";
 import AdminLogin from "./pages/AdminLogin";
 import ReportPage from "./pages/ReportPage";
 import UserProfile from "./pages/UserProfile";
+import OtherUserProfile from "./pages/OtherUserProfile"
 
 
 //components
@@ -53,6 +54,7 @@ function App() {
           <Route path="/UserProfile" element={<UserProfile />} />
           <Route path="/About" element={<AboutPage />} />
           <Route path="/posts/:postId" element={<PostView />} />
+          <Route path="/profile/:username" element={<OtherUserProfile />} />
           <Route
             path="/posts/category/:category"
             element={<PostFromCategory />}
