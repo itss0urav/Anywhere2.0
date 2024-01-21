@@ -5,6 +5,7 @@ import { MdDeleteOutline, MdReport } from "react-icons/md";
 import useSessionStorage from "../hooks/useSessionStorage";
 import { toast, Toaster } from "react-hot-toast";
 import { SlOptionsVertical } from "react-icons/sl";
+import { LuArrowBigUp, LuArrowBigDown } from "react-icons/lu";
 
 const AllPosts = () => {
   const [user, setUser] = useSessionStorage("user");
@@ -92,6 +93,58 @@ const AllPosts = () => {
 
     navigate(`/profile/${username}`);
   }
+  const upvote = async (event, post) => {
+    event.stopPropagation();
+    console.log("Upvoting for postId:", post._id);
+    if (post.voteStatus === 1) {
+      post.votes -= 1;
+      post.voteStatus = 0;
+    } else {
+      post.votes -= post.voteStatus - 1;
+      post.voteStatus = 1;
+    }
+
+    try {
+      const postId = post._id;
+      const response = await axios.post(`/posts/${postId}/votes`, {
+        userId: user._id,
+        voteStatus: post.voteStatus,
+        postId: postId,
+      });
+
+      console.log("Upvote response:", response.data);
+      fetchPosts();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const downvote = async (event, post) => {
+    event.stopPropagation();
+    console.log("Downvoting for postId:", post._id);
+
+    if (post.voteStatus === -1) {
+      post.votes += 1;
+      post.voteStatus = 0;
+    } else {
+      post.votes -= post.voteStatus + 1;
+      post.voteStatus = -1;
+    }
+
+    try {
+      const postId = post._id;
+      const response = await axios.post(`/posts/${postId}/votes`, {
+        userId: user._id,
+        voteStatus: post.voteStatus,
+        postId: postId,
+      });
+
+      console.log("Downvote response:", response.data);
+      fetchPosts();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="w-2/4 p-4 flex flex-col justify-center items-center space-y-4">
@@ -102,102 +155,133 @@ const AllPosts = () => {
         {posts.length === 0 ? "No Posts" : "All Posts"}
       </h1>
       <div className="min-w-[40rem] m-4">
-        {posts.map((post, index) => (
-          <div
-            key={index}
-            onClick={() => navigate(`/posts/${post._id}`)}
-            className="rounded-lg shadow-md p-4 bg-white transform transition-transform duration-500 hover:shadow-blue-400 mb-4"
-          >
-            <div className="flex justify-between items-center">
-              <div className="flex gap-3 text-lg font-semibold">
-                Post By
-                <div
-                  onClick={(event) => viewProfileofOthers(event, post.author)}
-                  className=" cursor-pointer bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent"
-                >
-                  {post.author}
-                </div>
-              </div>
-              {/* {user.username === post.author && ( */}
-              <div className="relative inline-block text-left">
-                <div>
+        {posts.map((post, index) => {
+          const totalVotes = post.votes.reduce(
+            (total, vote) => total + vote.voteStatus,
+            0
+          );
+          return (
+            <div
+              key={index}
+              onClick={() => navigate(`/posts/${post._id}`)}
+              className="rounded-lg shadow-md p-4 bg-white transform transition-transform duration-500 hover:shadow-blue-400 mb-4"
+            >
+              <div className="flex  ">
+                {" "}
+                {/*  */}
+                <div className="flex flex-col items-center space-y-2 px-1 mr-3 bg-gradient-to-r from-blue-600 to-sky-400">
                   <button
-                    type="button"
-                    className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
-                    id="options-menu"
-                    aria-haspopup="true"
-                    aria-expanded="true"
-                    onClick={handleShowOptions}
+                    onClick={(event) => upvote(event, post)}
+                    className="text-green-500 text-2xl"
                   >
-                    <SlOptionsVertical className="h-5 w-5" aria-hidden="true" />
+                    <LuArrowBigUp />
+                  </button>
+                  <div className="text-lg font-bold">{totalVotes}</div>
+                  <button
+                    onClick={(event) => downvote(event, post)}
+                    className="text-red-500 text-2xl"
+                  >
+                    <LuArrowBigDown />
                   </button>
                 </div>
-
-                {showOptions && (
-                  <div className="z-20 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                    <div
-                      className="py-1 "
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="options-menu"
-                    >
-                      {(user.username === post.author || user.isMod) && (
-                        <button
-                          onClick={(event) => {
-                            handleDeletePost(event, post._id);
-                          }}
-                          className="block  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                          role="menuitem"
-                        >
-                          <MdDeleteOutline className="inline-block mr-2 text-red-700 text-xl" />
-                          Delete
-                        </button>
-                      )}
-
-                      <button
-                        onClick={(event) => {
-                          handleReportPost(event, post._id);
-                        }}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                        role="menuitem"
+                {/*  */}
+                <div className="">
+                  <div className="flex justify-between items-center">
+                    <div className="flex gap-3 text-lg font-semibold">
+                      Post By
+                      <div
+                        onClick={(event) =>
+                          viewProfileofOthers(event, post.author)
+                        }
+                        className=" cursor-pointer bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent"
                       >
-                        <MdReport className="inline-block mr-2 text-red-700 text-xl" />
-                        Report
-                      </button>
+                        {post.author}
+                      </div>
                     </div>
+                    {/* {user.username === post.author && ( */}
+                    <div className="relative inline-block text-left">
+                      <div>
+                        <button
+                          type="button"
+                          className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+                          id="options-menu"
+                          aria-haspopup="true"
+                          aria-expanded="true"
+                          onClick={handleShowOptions}
+                        >
+                          <SlOptionsVertical
+                            className="h-5 w-5"
+                            aria-hidden="true"
+                          />
+                        </button>
+                      </div>
+
+                      {showOptions && (
+                        <div className="z-20 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                          <div
+                            className="py-1 "
+                            role="menu"
+                            aria-orientation="vertical"
+                            aria-labelledby="options-menu"
+                          >
+                            {(user.username === post.author || user.isMod) && (
+                              <button
+                                onClick={(event) => {
+                                  handleDeletePost(event, post._id);
+                                }}
+                                className="block  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                role="menuitem"
+                              >
+                                <MdDeleteOutline className="inline-block mr-2 text-red-700 text-xl" />
+                                Delete
+                              </button>
+                            )}
+
+                            <button
+                              onClick={(event) => {
+                                handleReportPost(event, post._id);
+                              }}
+                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                              role="menuitem"
+                            >
+                              <MdReport className="inline-block mr-2 text-red-700 text-xl" />
+                              Report
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    {/* )} */}
                   </div>
-                )}
+                  {post.nsfw && (
+                    <p className="inline rounded-sm text-red-600 border border-red-800 text-sm mt-4 pr-1 pl-1">
+                      NSFW
+                    </p>
+                  )}
+                  <div className="flex justify-center">
+                    {post.imageUrl.includes(".") && (
+                      <img
+                        onClick={(event) => toggleBlur(index, event)}
+                        className={`object-contain rounded-t-lg h-1/3 ${
+                          blurStatus[index] && post.nsfw ? "blur-lg" : ""
+                        }`}
+                        src={post.imageUrl}
+                        alt={post.name}
+                      />
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h2 className="text-xl font-bold mb-2">{post.name}</h2>
+                    <p className="bg-gradient-to-r from-sky-700 to-indigo-900 bg-clip-text text-transparent mb-2">
+                      {post.category}
+                    </p>
+                    <p className="text-gray-600 text-sm">{post.description}</p>
+                  </div>
+                </div>
               </div>
-              {/* )} */}
             </div>
-
-            {post.nsfw && (
-              <p className="inline rounded-sm text-red-600 border border-red-800 text-sm mt-4 pr-1 pl-1">
-                NSFW
-              </p>
-            )}
-            <div className="flex justify-center">
-              {post.imageUrl.includes(".") && (
-                <img
-                  onClick={(event) => toggleBlur(index, event)}
-                  className={`object-contain rounded-t-lg h-1/3 ${
-                    blurStatus[index] && post.nsfw ? "blur-lg" : ""
-                  }`}
-                  src={post.imageUrl}
-                  alt={post.name}
-                />
-              )}
-            </div>
-
-            <div className="p-4">
-              <h2 className="text-xl font-bold mb-2">{post.name}</h2>
-              <p className="bg-gradient-to-r from-sky-700 to-indigo-900 bg-clip-text text-transparent mb-2">
-                {post.category}
-              </p>
-              <p className="text-gray-600 text-sm">{post.description}</p>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

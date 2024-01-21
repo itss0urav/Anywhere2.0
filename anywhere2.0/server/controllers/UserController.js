@@ -3,11 +3,10 @@
 const User = require("../models/User");
 const Support = require("../models/Support");
 const Verification = require("../models/Verification");
-const Post = require("../models/Post");
+// const Post = require("../models/Post");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// const generateAccessToken = require("../utils/generateToken");
 
 const UserController = {
   getCurrentUser: async (req, res) => {
@@ -107,7 +106,6 @@ const UserController = {
           .json({ message: "Invalid credentials", passed: false });
       }
 
-      // const accessToken = generateAccessToken(user._id);
       const token = jwt.sign({ user: user.username }, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });

@@ -8,6 +8,7 @@ import { SiAdguard } from "react-icons/si";
 import { useParams } from "react-router-dom";
 
 export default function OtherUserProfile() {
+  // const currentUserFromSession = sessionStorage.getItem("user");
   const { username } = useParams();
   // const nav = useNavigate();
   const [user, setUser] = useState([]);
@@ -21,7 +22,7 @@ export default function OtherUserProfile() {
   //   return [year, month, day].join("-");
   // };
 
-  const [alertMessage, setAlertMessage] = useState("");
+  // const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
@@ -48,6 +49,7 @@ export default function OtherUserProfile() {
       console.error("Error fetching user:", error);
     }
   };
+  // function handleFollow() {}
 
   return (
     <div>
@@ -60,11 +62,20 @@ export default function OtherUserProfile() {
             </h3>
           </div>
           <div className="  lg:flex border-t border-gray-200 p-4 justify-center items-center">
-            <img
-              alt="profile pic"
-              src={user.imageUrl}
-              className=" mb-3 rounded-lg w-[10rem] object-contain mr-8"
-            />
+            <div className="flex flex-col gap-2 justify-center mr-6">
+              <img
+                alt="profile pic"
+                src={user.imageUrl}
+                className=" mb-3 rounded-lg w-[10rem] object-contain mr-8"
+              />
+              {/* <button
+                className="w-[10rem] bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100  transition-all duration-200 hover:bg-blue-500 hover:text-white font-bold py-2 px-4 rounded mt-4"
+                onClick={() => handleFollow(user._id)}
+              >
+                Follow
+              </button> */}
+            </div>
+
             <dl className="bg-gray-100 border p-4">
               <div className="grid grid-cols-3 gap-4 py-4">
                 <dt className="text-sm font-medium text-gray-500">Username</dt>
@@ -107,14 +118,6 @@ export default function OtherUserProfile() {
             </dl>
           </div>
         </div>
-        {/* <div className="flex gap-2">
-          <button
-            className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100  transition-all duration-200 hover:bg-blue-500 hover:text-white font-bold py-2 px-4 rounded mt-4"
-            onClick={() => setEditMode(true)}
-          >
-            Follow
-          </button>
-        </div> */}
       </div>
     </div>
   );

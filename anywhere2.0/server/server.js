@@ -7,6 +7,7 @@ const postRoutes = require("./routes/postRoutes");
 const commentRoutes = require("./routes/commentRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const replyRoutes = require("./routes/replyRoute");
+const voteRoutes = require("./routes/voteRoutes");
 
 require("dotenv").config();
 
@@ -31,6 +32,7 @@ app.use("/api/posts/reports", adminRoutes);
 
 app.use("/api/posts", postRoutes);
 app.use("/api/posts", adminRoutes);
+app.use("/api/posts", voteRoutes);
 app.use("/api/posts/:id/comments", commentRoutes); // <- This route should come before the /votes route
 app.use("/api/posts/:id/comments/:commentId/votes", commentRoutes); // <- This route handles comment votes
 app.use("/api/posts/:id/comments/:commentId/delete", commentRoutes); // <- This route handles comment votes
