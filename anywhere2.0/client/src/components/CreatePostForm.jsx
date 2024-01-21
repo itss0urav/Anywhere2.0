@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import Navbar from "./Navbar";
 import useSessionStorage from "../hooks/useSessionStorage";
-import { toast,Toaster } from "react-hot-toast"; // import react-hot-toast
+import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 
 const CreatePostForm = () => {
   const [user] = useSessionStorage("user");
@@ -33,11 +33,17 @@ const CreatePostForm = () => {
   const navigate = useNavigate(); // initialize useNavigate
 
   const handleSubmit = async () => {
+    // Set default imageUrl if it's empty
+    if (postData.imageUrl === "") {
+      postData.imageUrl =
+        "https://cdn.mos.cms.futurecdn.net/4MLyNZ66GSMUp7z49Q8k3K.jpg";
+    }
+
     if (
       postData.name &&
       postData.category &&
       postData.description &&
-      postData.imageUrl !== ""
+      postData.imageUrl
     ) {
       try {
         setLoading(true);
@@ -97,7 +103,9 @@ const CreatePostForm = () => {
   return (
     <div className="">
       <Navbar />
-      <div><Toaster/></div>
+      <div>
+        <Toaster />
+      </div>
       <div className="flex flex-col items-center justify-center mt-4">
         <div className="font-bold mb-4 text-2xl">Create Post</div>
 

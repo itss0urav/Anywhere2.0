@@ -17,6 +17,8 @@ const postSchema = new mongoose.Schema({
   },
   imageUrl: {
     type: String,
+    default:
+      "https://www.ejiltalk.org/wp-content/uploads/2021/03/pexels-photo-110854.jpeg",
     required: true,
   },
   nsfw: {
