@@ -9,12 +9,25 @@ import Logo from "../assets/Anywhere-Transparent.png";
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
   const [user] = useSessionStorage("user");
+  const [showImage, setShowImage] = useState(false);
   const nav = useNavigate();
   const location = useLocation();
   const forColor = useLocation().pathname.split("/")[1];
   console.log(forColor);
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
+    if (user) {
+      const currentDate = new Date();
+      const dob = new Date(user.dob);
+
+      // Compare only the date parts of the Date objects
+      if (
+        currentDate.getDate() === dob.getDate() &&
+        currentDate.getMonth() === dob.getMonth()
+      ) {
+        setShowImage(true);
+      }
+    }
   }, [user]);
 
   const handleMenu = () => setMenu(!menu);
@@ -41,82 +54,78 @@ const Navbar = () => {
           <img className="w-24 md:w-12 mr-2" src={Logo} alt="" />
         </Link>
         <div className="flex items-center space-x-4">
-          {user !== null && undefined ? (
-            <>
-              {menu && (
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <input
-                    onClick={() => {
-                      if (location.pathname !== "/searchpage") {
-                        nav("/searchpage");
-                      }
-                    }}
-                    className="rounded p-2 border transition-all duration-200 w-full sm:w-auto"
-                    type="text"
-                    placeholder="Search..."
-                  />
-                  <Link
-                    to="/About"
-                    className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white w-full sm:w-auto text-center"
-                  >
-                    <MdInfo className="inline-block mr-1" /> About
-                  </Link>
-                  <Link
-                    to="/Services"
-                    className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white w-full sm:w-auto text-center"
-                  >
-                    <MdBuild className="inline-block mr-1" /> Services
-                  </Link>
-                  <Link
-                    to="/ContactUs"
-                    className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white w-full sm:w-auto text-center"
-                  >
-                    <MdContactMail className="inline-block mr-1" /> Contact Us
-                  </Link>
-                  <Link
-                    to="/UserProfile"
-                    className="flex justify-center items-center bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white w-full sm:w-auto"
-                  >
-                    <img
-                      alt="profile pic"
-                      src={user.imageUrl}
-                      onClick={() => nav("/UserProfile")}
-                      className="w-6 rounded-full mr-4 text-white "
-                    />
-                    Profile
-                  </Link>
-                  {user.username ? (
-                    <button
-                      onClick={handleLogout}
-                      className="bg-gradient-to-r from-red-500 to-rose-900 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white w-full sm:w-auto text-center"
-                    >
-                      <FaUser className="inline-block mr-1" /> Logout
-                    </button>
-                  ) : (
-                    <button
-                      onClick={handleLogin}
-                      className="bg-gradient-to-r from-green-500 to-green-200 text-green-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white w-full sm:w-auto text-center"
-                    >
-                      <FaUser className="inline-block mr-1" /> Login
-                    </button>
-                  )}
-                </div>
-              )}
-              <BsMenuButtonWideFill
-                className="text-2xl text-white"
-                onClick={handleMenu}
+          {menu && (
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input
+                onClick={() => {
+                  if (location.pathname !== "/searchpage") {
+                    nav("/searchpage");
+                  }
+                }}
+                className="rounded p-2 border transition-all duration-200 w-full sm:w-auto"
+                type="text"
+                placeholder="Search..."
               />
-            </>
-          ) : (
-            <>
-              <button
-                onClick={handleLogin}
-                className="bg-gradient-to-r from-green-600 to-green-400 text-gray-800 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white w-full sm:w-auto text-center"
+              <Link
+                to="/About"
+                className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white w-full sm:w-auto text-center"
               >
-                <FaUser className="inline-block mr-1" /> Login
-              </button>
-            </>
+                <MdInfo className="inline-block mr-1" /> About
+              </Link>
+              <Link
+                to="/Services"
+                className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white w-full sm:w-auto text-center"
+              >
+                <MdBuild className="inline-block mr-1" /> Services
+              </Link>
+              <Link
+                to="/ContactUs"
+                className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white w-full sm:w-auto text-center"
+              >
+                <MdContactMail className="inline-block mr-1" /> Contact Us
+              </Link>
+              <Link
+                to="/UserProfile"
+                className="flex justify-center items-center bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white w-full sm:w-auto"
+              >
+                <img
+                  alt="profile pic"
+                  src={user.imageUrl}
+                  onClick={() => nav("/UserProfile")}
+                  className="w-6 rounded-full mr-4 text-white "
+                />
+                Profile
+              </Link>
+              {user.username ? (
+                <button
+                  onClick={handleLogout}
+                  className="bg-gradient-to-r from-red-500 to-rose-900 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white w-full sm:w-auto text-center"
+                >
+                  <FaUser className="inline-block mr-1" /> Logout
+                </button>
+              ) : (
+                <button
+                  onClick={handleLogin}
+                  className="bg-gradient-to-r from-green-500 to-green-900 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white w-full sm:w-auto text-center"
+                >
+                  <FaUser className="inline-block mr-1" /> Login
+                </button>
+              )}
+            </div>
           )}
+          <div>
+            {showImage && user && (
+              <img
+                className="w-24 animate-pulse"
+                src="https://static.vecteezy.com/system/resources/previews/001/201/729/large_2x/birthday-text-png.png"
+                alt="bday image"
+              />
+            )}
+          </div>
+          <BsMenuButtonWideFill
+            className="text-2xl text-white"
+            onClick={handleMenu}
+          />
         </div>
       </div>
     </nav>

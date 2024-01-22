@@ -9,6 +9,8 @@ export default function UserProfile() {
   const nav = useNavigate();
   const [user, setUser] = useSessionStorage("user");
   const [editMode, setEditMode] = useState(false);
+  const [showImage, setShowImage] = useState(false);
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -34,6 +36,18 @@ export default function UserProfile() {
 
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
+    if (user) {
+      const currentDate = new Date();
+      const dob = new Date(user.dob);
+
+      // Compare only the date parts of the Date objects
+      if (
+        currentDate.getDate() === dob.getDate() &&
+        currentDate.getMonth() === dob.getMonth()
+      ) {
+        setShowImage(true);
+      }
+    }
     fetchUser();
 
     // Set up interval for automatic refresh (every 5 minutes in this example)
@@ -206,12 +220,24 @@ export default function UserProfile() {
                 User Profile
               </h3>
             </div>
+
             <div className="  lg:flex border-t border-gray-200 p-4 justify-center items-center">
-              <img
-                alt="profile pic"
-                src={user.imageUrl}
-                className=" mb-3 rounded-lg w-[10rem] object-contain mr-8"
-              />
+              <div className="flex items-center">
+                <img
+                  alt="profile pic"
+                  src={user.imageUrl}
+                  className=" mb-3 rounded-lg w-64 object-contain mr-8"
+                />
+                <div>
+                  {showImage && user && (
+                    <img
+                      className="w-64 "
+                      src="https://static.vecteezy.com/system/resources/previews/001/201/729/large_2x/birthday-text-png.png"
+                      alt="bday image"
+                    />
+                  )}
+                </div>
+              </div>
               <dl className="bg-gray-100 border p-4">
                 <div className="grid grid-cols-3 gap-4 py-4">
                   <dt className="text-sm font-medium text-gray-500">

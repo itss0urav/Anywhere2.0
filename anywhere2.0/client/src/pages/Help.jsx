@@ -48,12 +48,14 @@ const Help = () => {
 
   return (
     <div className="">
-      <Navbar />
+      <div className="text-white text-center bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20 ">
+        Give feedback or raise an issue here
+      </div>
       <div className="flex flex-col items-center justify-center  bg-gray-100">
         <div>
           <Toaster />
         </div>
-        <div className="w-full min-h-screen max-w-md">
+        <div className="mt-8 w-full min-h-screen max-w-md">
           <form
             onSubmit={handleSubmit}
             className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"

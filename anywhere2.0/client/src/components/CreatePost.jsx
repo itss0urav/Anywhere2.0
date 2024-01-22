@@ -10,7 +10,7 @@ const CreatePost = () => {
   }, [user]);
   const nav = useNavigate();
   return (
-    <div className="bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20 w-2/4">
+    <div className="bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20 w-2/4 rounded-md">
       <div className="flex justify-between flex-col md:flex-row items-center">
         {/* <img
           className="w-12 h-12 rounded-full mr-4"
@@ -38,7 +38,7 @@ const CreatePost = () => {
           }}
           className="w-full rounded p-2 "
           type="text"
-          placeholder="Create Post"
+          placeholder="Have something to discuss?"
         />
 
         {/* <div className="flex justify-center">
