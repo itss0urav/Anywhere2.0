@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const connectDB = () => {
   try {
-    mongoose.connect("mongodb://127.0.0.1:27017/anywhere").then(() => {
+    mongoose.connect(process.env.MONGODB_URI).then(() => {
       console.log("Connected to MongoDB");
     });
   } catch (error) {
