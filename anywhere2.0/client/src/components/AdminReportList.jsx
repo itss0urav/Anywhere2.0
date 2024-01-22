@@ -4,7 +4,7 @@ import axios from "../config/axios";
 export default function AdminReportList() {
   const [reports, setReports] = useState([]);
   const fetchReports = async () => {
-    console.log("Fetching/Updating...")
+    console.log("Fetching/Updating...");
     try {
       const result = await axios.get("/posts/reports/get");
       setReports(result.data);
@@ -14,22 +14,23 @@ export default function AdminReportList() {
   };
   useEffect(() => {
     fetchReports();
-      // Set up interval for automatic refresh (every 5 minutes in this example)
-      const refreshInterval = setInterval(
-        fetchReports,
-        // 5 *
-        // 60 *
-        2000
-      );
-  
-      // Clean up interval on component unmount
-      return () => clearInterval(refreshInterval);
+    // Set up interval for automatic refresh (every 5 minutes in this example)
+    const refreshInterval = setInterval(
+      fetchReports,
+      // 5 *
+      // 60 *
+      2000
+    );
+
+    // Clean up interval on component unmount
+    return () => clearInterval(refreshInterval);
   }, []);
-  async function handleRemoveReport(postId) {
+  async function handleRemoveReport(postId, reportId) {
     try {
       const result = await axios.delete("/posts/reports/delete", {
         data: { postId },
       });
+      handleIgnoreReport(reportId);
       fetchReports();
       if (Array.isArray(result.data)) {
         setReports(result.data);
@@ -114,7 +115,7 @@ export default function AdminReportList() {
                     <td className="flex gap-2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <button
                         onClick={() => {
-                          handleRemoveReport(report.postId);
+                          handleRemoveReport(report.postId, report._id);
                         }}
                         className="bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded"
                       >

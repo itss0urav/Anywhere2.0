@@ -55,6 +55,13 @@ const SignUp = () => {
     } else {
       // Set alert message for password mismatch
       setAlertMessage("Passwords do not match. Please try again.");
+      toast.error("Passwords do not match. Please try again.", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
     }
   };
 

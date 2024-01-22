@@ -9,12 +9,12 @@ router.route("/").get(postController.getPosts).post(
   verifyToken,
   postController.createPost
 );
-router.post("/search", postController.getFilteredPosts);
-router.post("/:id", postController.reportPost);
+router.post("/search",verifyToken, postController.getFilteredPosts);
+router.post("/:id",verifyToken, postController.reportPost);
 
-router.get("/categories", postController.getCategories);
-router.get("/:id", postController.getPost);
-router.delete("/:id", postController.deletePost);
-router.get("/category/:category", postController.getPostsByCategory);
+router.get("/categories",verifyToken, postController.getCategories);
+router.get("/:id",verifyToken, postController.getPost);
+router.delete("/:id",verifyToken, postController.deletePost);
+router.get("/category/:category",verifyToken, postController.getPostsByCategory);
 
 module.exports = router;

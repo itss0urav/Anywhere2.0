@@ -5,8 +5,7 @@ import axios from "../config/axios";
 import vid from "../assets/v3.mp4";
 import useSessionStorage from "../hooks/useSessionStorage";
 const AdminLogin = () => {
-  const [admin, setAdmin] = useSessionStorage("admin");
-  const [token, setToken] = useSessionStorage("admintoken");
+  const [user, setUser] = useSessionStorage("user");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [alertMessage, setAlertMessage] = useState(null);
@@ -24,8 +23,8 @@ const AdminLogin = () => {
       const req = await axios.post("/admin/login", adminCredentials);
       console.log("from login", req.data.token);
 
-      setAdmin(req.data.admin);
-      setToken(req.data.token);
+      setUser(req.data.admin);
+      sessionStorage.setItem("token",req.data.token);
 
       nav("/adminhome");
     } catch (error) {

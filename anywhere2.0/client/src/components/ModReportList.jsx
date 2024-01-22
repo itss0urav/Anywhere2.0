@@ -25,11 +25,12 @@ export default function ModReportList() {
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);
   }, []);
-  async function handleRemoveReport(postId) {
+  async function handleRemoveReport(postId,reportId) {
     try {
       const result = await axios.delete("/posts/reports/delete", {
         data: { postId },
       });
+      handleIgnoreReport(reportId);
       fetchReports();
       if (Array.isArray(result.data)) {
         setReports(result.data);
@@ -114,7 +115,7 @@ export default function ModReportList() {
                     <td className="flex gap-2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <button
                         onClick={() => {
-                          handleRemoveReport(report.postId);
+                          handleRemoveReport(report.postId, report._id);
                         }}
                         className="bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded"
                       >

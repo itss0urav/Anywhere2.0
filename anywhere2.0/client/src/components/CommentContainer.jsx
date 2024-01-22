@@ -7,9 +7,10 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import axios from "../config/axios";
 import useSessionStorage from "../hooks/useSessionStorage";
+import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 
 export default function CommentContainer() {
-  const [user,setUser] = useSessionStorage("user");
+  const [user, setUser] = useSessionStorage("user");
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
     fetchUser();
@@ -153,9 +154,24 @@ export default function CommentContainer() {
         }
       );
       console.log("Reply response:", response.data);
+
       setReply("");
       setReplyingTo(null);
+      toast.success("Reply added!", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
     } catch (error) {
+      toast.error("Failed to add reply", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
       console.error(error);
     }
   };
@@ -174,6 +190,9 @@ export default function CommentContainer() {
 
   return (
     <div className="mt-4 p-4 max-w-xl mx-auto bg-white rounded-xl shadow-md space-y-4 sm:py-4">
+      <div>
+        <Toaster />
+      </div>
       <h2 className="text-3xl font-bold text-center">Comments</h2>
       {mostLikedComment && (
         <div className="bg-green-100 p-4 rounded-md">
@@ -250,7 +269,7 @@ export default function CommentContainer() {
                     {reply.user}
                   </div>
                 </h4>
-                <p className="text-gray-600">{reply.text}</p>
+                <p className="text-gray-600 mt-2">{reply.text}</p>
               </div>
             ))}
             {replyingTo === comment._id && (
@@ -259,6 +278,7 @@ export default function CommentContainer() {
                 className="mt-2"
               >
                 <input
+                  required
                   type="text"
                   value={reply}
                   onChange={(e) => setReply(e.target.value)}

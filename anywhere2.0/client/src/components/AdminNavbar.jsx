@@ -26,7 +26,7 @@ const AdminNavbar = () => {
     sessionStorage.removeItem("admintoken");
     nav("/Login");
   };
-  const handleLogin = () => nav("/adminLogin");
+  // const handleLogin = () => nav("/adminLogin");
 
   return (
     <nav className="bg-gradient-to-r from-red-500 to-rose-900 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20">
@@ -40,7 +40,7 @@ const AdminNavbar = () => {
         <div className="text-white text-xl">/AdminConsole...</div>
         <div className="flex items-center space-x-4">
           {menu && (
-            <div className="sm:flex sm:flex-col gap-3">
+            <div className="flex flex-col md:flex-row gap-3">
               {/* <input
                 onClick={() => {
                   if (location.pathname !== "/searchpage") {
@@ -70,25 +70,24 @@ const AdminNavbar = () => {
                 <MdContactMail className="inline-block mr-1" /> Contact Us
               </Link> */}
 
-              {admin.username ? (
-                <button
-                  onClick={handleLogout}
-                  className="bg-gradient-to-r from-red-900 to-rose-500 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
-                >
-                  <FaUser className="inline-block mr-1" /> Logout
-                </button>
-              ) : (
-                <button
-                  onClick={handleLogin}
-                  className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
-                >
-                  <FaUser className="inline-block mr-1" /> Login
-                </button>
-              )}
+              <button
+                onClick={handleLogout}
+                className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
+              >
+                <FaUser className="inline-block mr-1" /> Logout
+              </button>
+              <button
+                onClick={() => {
+                  nav("/");
+                }}
+                className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
+              >
+                <FaUser className="inline-block mr-1" /> UserLogin
+              </button>
             </div>
           )}
           <BsMenuButtonWideFill
-            className="text-2xl text-white"
+            className="text-2xl text-white cursor-pointer"
             onClick={handleMenu}
           />
         </div>

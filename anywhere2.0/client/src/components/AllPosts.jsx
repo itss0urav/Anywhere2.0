@@ -42,10 +42,12 @@ const AllPosts = () => {
     // eslint-disable-next-line
   }, []);
   const fetchUser = async () => {
+    // un comment below code to refresh post every 2 sec
+    // fetchPosts();
     try {
       const userId = user._id;
       const response = await axios.get(`/users/current/${userId}`);
-      console.log(response.data);
+      // console.log(response.data);
       setUser(response.data);
     } catch (error) {
       console.error("Error fetching user:", error);

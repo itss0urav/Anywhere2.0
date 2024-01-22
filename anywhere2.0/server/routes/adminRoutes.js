@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const AdminController = require("../controllers/AdminController");
+const verifyToken = require("../middlewares/authMiddleware");
 // const protect = require("../middlewares/authMiddleware");
 
 router.post("/signup", AdminController.createAdmin);
@@ -9,21 +10,19 @@ router.post(
   // (req, res, next) => protect(req, res, next, handleUnauthorizedError),
   AdminController.adminLogin
 );
-router.get("/get", AdminController.getReports);
-router.delete("/ignore", AdminController.ignoreReports);
-router.delete("/delete", AdminController.deleteReports);
+router.get("/get", verifyToken, AdminController.getReports);
+router.delete("/ignore",verifyToken,  AdminController.ignoreReports);
+router.delete("/delete",verifyToken,  AdminController.deleteReports);
 
+router.get("/support/get", verifyToken, AdminController.getSupports);
+router.delete("/support/delete",verifyToken,  AdminController.deleteSupports);
 
-router.get("/support/get", AdminController.getSupports);
-router.delete("/support/delete", AdminController.deleteSupports);
+router.put("/banunbanuser",verifyToken,  AdminController.banUnbanUser);
+router.put("/modunmoduser",verifyToken,  AdminController.modUnmodUser);
 
-
-router.put("/banunbanuser", AdminController.banUnbanUser);
-router.put("/modunmoduser", AdminController.modUnmodUser);
-
-router.get("/verification", AdminController.getVerification);
-router.put("/verification", AdminController.toggleVerification);
-router.delete("/verification", AdminController.ignoreVerification);
+router.get("/verification",verifyToken,  AdminController.getVerification);
+router.put("/verification",verifyToken,  AdminController.toggleVerification);
+router.delete("/verification",verifyToken,  AdminController.ignoreVerification);
 
 module.exports = router;
 

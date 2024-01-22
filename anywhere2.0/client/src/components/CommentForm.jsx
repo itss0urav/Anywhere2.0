@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../config/axios";
 import useSessionStorage from "../hooks/useSessionStorage";
 import { useParams } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 
 const CommentForm = () => {
   const { postId } = useParams();
@@ -32,7 +33,21 @@ const CommentForm = () => {
       });
       console.log(response.data.post);
       setInput("");
+      toast.success("Comment added!", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
     } catch (error) {
+      toast.error("Failed to add comment", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
       console.error(error);
     }
   };

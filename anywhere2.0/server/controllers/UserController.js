@@ -7,7 +7,6 @@ const Verification = require("../models/Verification");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-
 const UserController = {
   getCurrentUser: async (req, res) => {
     try {
@@ -107,7 +106,7 @@ const UserController = {
       }
 
       const token = jwt.sign({ user: user.username }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
+        expiresIn: "1d",
       });
 
       res
@@ -155,7 +154,7 @@ const UserController = {
         ...(imageUrl && { imageUrl }), // Add imageUrl to updates
       };
 
-      if (newPassword && newPassword.trim() !== "") {
+      if (newPassword && newPassword.trim() !== "" && newPassword.length >= 8) {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(newPassword, salt);
         updates.password = hashedPassword;

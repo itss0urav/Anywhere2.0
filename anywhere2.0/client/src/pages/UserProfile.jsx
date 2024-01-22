@@ -5,6 +5,8 @@ import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { MdVerified } from "react-icons/md";
 import { SiAdguard } from "react-icons/si";
+import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
+
 export default function UserProfile() {
   const nav = useNavigate();
   const [user, setUser] = useSessionStorage("user");
@@ -84,12 +86,20 @@ export default function UserProfile() {
           withCredentials: true,
         });
         if (response.data.passed) {
+          toast.success("Profile updated!", {
+            style: {
+              borderRadius: "10px",
+              background: "#333",
+              color: "#fff",
+            },
+          });
           sessionStorage.removeItem("user");
           setUser(response.data.user); // This should update the session data
           console.log("Updated User from server", response.data.user);
           setEditMode(false);
         } else {
           setAlertMessage(response.data.message);
+
           console.error(response.data.message);
         }
       } catch (error) {
@@ -97,12 +107,22 @@ export default function UserProfile() {
       }
     } else {
       setAlertMessage("Must Provide Old Password for updation");
+      toast.error("Must Provide Old Password for updation", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
     }
   };
 
   if (editMode) {
     return (
       <div>
+        <div>
+          <Toaster />
+        </div>
         <Navbar />
         <div className="container mx-auto px-4">
           <div className="bg-white shadow-md rounded-lg p-6 mt-4">
@@ -212,6 +232,9 @@ export default function UserProfile() {
   } else {
     return (
       <div>
+        <div>
+          <Toaster />
+        </div>
         <Navbar />
         <div className="container mx-auto p-8">
           <div className="bg-white shadow-md rounded-lg p-8 mt-4">

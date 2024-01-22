@@ -61,10 +61,10 @@ const AdminController = {
 
       // const accessToken = generateAccessToken(user._id);
       const token = jwt.sign(
-        { admin: admin.username },
+        { user: admin.username },
         process.env.JWT_SECRET,
         {
-          expiresIn: "1h",
+          expiresIn: "1d",
         }
       );
 

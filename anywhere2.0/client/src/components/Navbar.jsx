@@ -123,7 +123,7 @@ const Navbar = () => {
             )}
           </div>
           <BsMenuButtonWideFill
-            className="text-2xl text-white"
+            className="text-2xl text-white cursor-pointer"
             onClick={handleMenu}
           />
         </div>
