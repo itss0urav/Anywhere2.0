@@ -188,7 +188,7 @@ const AllPosts = () => {
                 </div>
                 {/*  */}
                 <div className="">
-                  <div className="d">
+                  <div className="">
                     <div className="flex justify-between items-center">
                       <div className="flex gap-3 text-lg font-semibold">
                         Post By

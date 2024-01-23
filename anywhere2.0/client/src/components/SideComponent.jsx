@@ -4,20 +4,21 @@ import { Link } from "react-router-dom";
 
 const SideComponent = () => {
   const [categories, setCategories] = useState([]);
-
+  const fetchCategories = async () => {
+    console.log("fetching category");
+    try {
+      const { data } = await axios.get("/posts/categories");
+      setCategories(data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data } = await axios.get("/posts/categories");
-        setCategories(data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
     fetchCategories();
   }, []);
 
   const renderCategories = () => {
+    console.log("renderCategories");
     if (categories.length === 0) {
       return <div>Empty Here</div>;
     }
