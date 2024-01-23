@@ -35,6 +35,16 @@ const getPosts = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch posts" });
   }
 };
+const getTotalPosts = async (req, res) => {
+  try {
+    const posts = await Post.find({ author: req.params.author });
+    res.json(posts.length);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ error: "Failed to fetch posts" });
+  }
+};
+
 const getFilteredPosts = async (req, res) => {
   try {
     const { postName } = req.body;
@@ -116,6 +126,7 @@ const reportPost = async (req, res) => {
 module.exports = {
   createPost,
   getPosts,
+  getTotalPosts,
   getCategories,
   getPost,
   getPostsByCategory,

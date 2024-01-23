@@ -171,7 +171,7 @@ const AllPosts = () => {
               <div className="flex  ">
                 {" "}
                 {/*  */}
-                <div className="flex flex-col items-center space-y-2 px-1 mr-3 bg-gradient-to-r from-blue-600 to-sky-400">
+                <div className="flex flex-col items-center space-y-2 px-2 mr-3 bg-gradient-to-r from-blue-600 to-sky-400">
                   <button
                     onClick={(event) => upvote(event, post)}
                     className="mt-2 text-green-300 text-2xl"

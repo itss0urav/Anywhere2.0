@@ -16,5 +16,7 @@ router.get("/categories",verifyToken, postController.getCategories);
 router.get("/:id",verifyToken, postController.getPost);
 router.delete("/:id",verifyToken, postController.deletePost);
 router.get("/category/:category",verifyToken, postController.getPostsByCategory);
+router.get("/current/totalposts/:author", verifyToken, postController.getTotalPosts);
+
 
 module.exports = router;

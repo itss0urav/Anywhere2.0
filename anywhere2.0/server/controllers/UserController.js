@@ -67,6 +67,7 @@ const UserController = {
         });
         await newUser.save();
         res.status(201).json({ message: "User created successfully" });
+        console.log("user signed up");
       } else {
         res
           .status(400)
@@ -117,6 +118,7 @@ const UserController = {
         })
         .status(200)
         .json({ message: "Login successful", passed: true, token, user: user });
+      console.log("user logged in");
     } catch (error) {
       console.error("Error during login:", error);
       res

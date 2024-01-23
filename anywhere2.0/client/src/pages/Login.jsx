@@ -27,7 +27,7 @@ const Login = () => {
       console.log("from login", req.data.token);
 
       setUser(req.data.user);
-      sessionStorage.setItem("token",req.data.token);
+      sessionStorage.setItem("token", req.data.token);
 
       nav("/home");
     } catch (error) {
@@ -94,7 +94,7 @@ const Login = () => {
             />
           </div>
 
-          <div className="mb-4 flex items-center">
+          {/* <div className="mb-4 flex items-center">
             <input
               type="checkbox"
               id="remember"
@@ -104,17 +104,17 @@ const Login = () => {
             <label htmlFor="remember" className="text-gray-600 ml-2">
               Remember Me
             </label>
-          </div>
+          </div> */}
 
-          <div className="mb-6 text-blue-500">
+          {/* <div className="mb-6 text-blue-500">
             <Link to="/" className="hover:underline">
               Forgot Password?
             </Link>
-          </div>
+          </div> */}
 
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
+            className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
           >
             Login
           </button>

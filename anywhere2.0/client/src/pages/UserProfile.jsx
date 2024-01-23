@@ -12,6 +12,7 @@ export default function UserProfile() {
   const [user, setUser] = useSessionStorage("user");
   const [editMode, setEditMode] = useState(false);
   const [showImage, setShowImage] = useState(false);
+  const [postCount,setPostCount]=useState(0)
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -74,6 +75,17 @@ export default function UserProfile() {
       console.error("Error fetching user:", error);
     }
   };
+  const totalPosts = async () => {
+    try {
+      const author = user.username;
+      const response = await axios.get(`/posts/current/totalposts/${author}`);
+      console.log("total posts", response.data);
+      setPostCount(response.data);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+  };
+  totalPosts();
   const handleInputChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -302,6 +314,18 @@ export default function UserProfile() {
                     {new Date(user.createdAt).toLocaleDateString()}
                   </dd>
                 </div>
+                {user.isVerified === true ? (
+                  <div className="grid grid-cols-3 gap-4 py-4">
+                    <dt className="text-sm font-medium text-gray-500">
+                      Total Posts Created
+                    </dt>
+                    <dd className="mt-1 text-sm text-gray-900 col-span-2">
+                      {postCount}
+                    </dd>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
               </dl>
             </div>
           </div>
