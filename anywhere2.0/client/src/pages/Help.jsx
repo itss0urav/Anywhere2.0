@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "../config/axios";
 import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 // import Navbar from "../components/Navbar";
-import TawkTo from "../config/tawkto";
+import TawkTo from "../config/TawkTo";
 TawkTo();
 
 const Help = () => {
