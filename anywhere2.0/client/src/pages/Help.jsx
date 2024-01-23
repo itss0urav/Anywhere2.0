@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "../config/axios";
 import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
+import TawkTo from "../config/tawkto";
+TawkTo();
 
 const Help = () => {
   const [form, setForm] = useState({
