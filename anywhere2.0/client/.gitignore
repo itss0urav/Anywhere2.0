@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/src/config/tawkto.js
+/src/config/tawkto
 /.pnp
 .pnp.js
 

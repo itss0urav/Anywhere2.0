@@ -2,10 +2,9 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import TawkTo from "../config/tawkto";
+TawkTo();
 const ContactUsPage = () => {
   const navigate = useNavigate();
-
-  TawkTo();
 
   return (
     <div className="">
