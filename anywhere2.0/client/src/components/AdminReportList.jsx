@@ -73,7 +73,7 @@ export default function AdminReportList() {
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:w-20 md:w-[40rem] break-words"
                   >
                     Reason
                   </th>

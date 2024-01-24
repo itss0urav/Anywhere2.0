@@ -103,7 +103,7 @@ export default function ModReportList() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {report.username}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 sm:w-20 md:w-[40rem] break-words">
                       {report.reason}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

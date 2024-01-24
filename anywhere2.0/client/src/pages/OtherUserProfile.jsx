@@ -115,6 +115,22 @@ export default function OtherUserProfile() {
                   {new Date(user.createdAt).toLocaleDateString()}
                 </dd>
               </div>
+              <div className="grid grid-cols-3 gap-4 py-4">
+                <dt className="text-sm font-medium text-gray-500">
+                  User Status 
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 col-span-2">
+                {user.isBanned ? (
+                <div className="inline bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded">
+                  Banned
+                </div>
+              ) : (
+                <div className="inline bg-gradient-to-r from-green-500 to-green-900 text-white font-bold py-2 px-4 rounded">
+                  Active
+                </div>
+              )}
+                </dd>
+              </div>
             </dl>
           </div>
         </div>

@@ -90,9 +90,10 @@ export default function AdminSupportList() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {support.email}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 text-sm text-gray-500 sm:w-20 md:w-[40rem] break-words">
                       {support.message}
                     </td>
+
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {support._id}
                     </td>

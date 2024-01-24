@@ -47,7 +47,7 @@ const PostView = () => {
         fetchPost();
         setTimeout(() => {
           nav("/home");
-        }, 2000);
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
@@ -71,13 +71,13 @@ const PostView = () => {
       <div>
         <Toaster />
       </div>
-      {user.username === post.author ? (
+      {user.username === post.author || user.isMod ? (
         <div className="flex justify-end items-center p-4">
           <button
             onClick={(event) => {
               handleDeletePost(event, post._id);
             }}
-            className="flex items-center text-red-700 text-xl hover:text-red-500"
+            className="flex justify-center items-center bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded"
           >
             <MdDeleteOutline /> <span className="ml-2">Delete</span>
           </button>

@@ -60,7 +60,7 @@ export default function AdminPostList() {
               "Description",
               "Author",
               "NSFW",
-              "Votes",
+              "[Unique User Interaction] Votes",
               "Comments",
               "Actions",
             ].map((header) => (
