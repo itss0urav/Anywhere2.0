@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import Logo from "../assets/Anywhere-Transparent.png";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "../config/axios";
 import vid from "../assets/v3.mp4";
 import useSessionStorage from "../hooks/useSessionStorage";
+import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
+
 const AdminLogin = () => {
+  // eslint-disable-next-line
   const [user, setUser] = useSessionStorage("user");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -24,17 +27,27 @@ const AdminLogin = () => {
       console.log("from login", req.data.token);
 
       setUser(req.data.admin);
-      sessionStorage.setItem("token",req.data.token);
+      sessionStorage.setItem("token", req.data.token);
 
       nav("/adminhome");
     } catch (error) {
       console.error("Error during login:", error);
+      toast.error("Invalid credentials. Please try again.", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
       setAlertMessage("Invalid credentials. Please try again.");
     }
   };
 
   return (
-    <div className="bg-gray-100 flex justify-center items-center h-screen">
+    <div className="bg-white flex justify-center items-center h-screen">
+      <div>
+        <Toaster />
+      </div>
       <div className="w-2/4 h-screen hidden lg:block relative">
         <video
           muted
@@ -92,15 +105,6 @@ const AdminLogin = () => {
             {alertMessage}
           </div>
         )}
-
-        {/* <div className="flex mt-6 text-gray-500 text-center">
-          New Here?
-          <div className="pl-2 text-blue-500 text-center">
-            <Link to="/SignUp" className="hover:underline">
-              Sign up
-            </Link>
-          </div>
-        </div> */}
       </div>
     </div>
   );

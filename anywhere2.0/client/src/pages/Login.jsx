@@ -7,6 +7,7 @@ import useSessionStorage from "../hooks/useSessionStorage";
 import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 
 const Login = () => {
+  // eslint-disable-next-line
   const [user, setUser] = useSessionStorage("user");
   // const [token, setToken] = useSessionStorage("token");
   const [username, setUsername] = useState("");
@@ -45,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gray-100 flex justify-center items-center h-screen">
+    <div className="bg-white flex justify-center items-center h-screen">
       <div>
         <Toaster />
       </div>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { LuArrowBigUp, LuArrowBigDown } from "react-icons/lu";
 import { BiMessageRounded } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 import { useParams } from "react-router-dom";
 import axios from "../config/axios";
@@ -10,6 +11,8 @@ import useSessionStorage from "../hooks/useSessionStorage";
 import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 
 export default function CommentContainer() {
+  const navigate = useNavigate();
+
   const [user, setUser] = useSessionStorage("user");
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
@@ -188,6 +191,12 @@ export default function CommentContainer() {
     }
   };
 
+  function viewProfileofOthers(event, username) {
+    event.stopPropagation();
+
+    navigate(`/profile/${username}`);
+  }
+
   return (
     <div className="mt-4 p-4 max-w-xl mx-auto bg-white rounded-xl shadow-md space-y-4 sm:py-4">
       <div>
@@ -237,7 +246,12 @@ export default function CommentContainer() {
               <div className="space-y-2">
                 <h3 className="flex gap-4 text-xl font-bold text-gray-800">
                   Comment by
-                  <div className="bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent">
+                  <div
+                    onClick={(event) =>
+                      viewProfileofOthers(event, comment.user)
+                    }
+                    className=" cursor-pointer bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent"
+                  >
                     {comment.user}
                   </div>
                 </h3>
@@ -265,7 +279,10 @@ export default function CommentContainer() {
               >
                 <h4 className="flex gap-2 font-semibold text-gray-700">
                   Replied By
-                  <div className="bg-gradient-to-r from-sky-600 to-cyan-900 bg-clip-text text-transparent">
+                  <div
+                    onClick={(event) => viewProfileofOthers(event, reply.user)}
+                    className="cursor-pointer bg-gradient-to-r from-sky-600 to-cyan-900 bg-clip-text text-transparent"
+                  >
                     {reply.user}
                   </div>
                 </h4>
