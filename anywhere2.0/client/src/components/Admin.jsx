@@ -5,6 +5,7 @@ import AdminPostList from "./AdminPostList";
 import AdminReportList from "./AdminReportList";
 import AdminVerificationRequest from "./AdminVerificationRequest";
 import AdminSupportList from "./AdminSupportList";
+import AdminInsights from "./AdminInsights";
 
 export default function Admin() {
   const [currentOption, setCurrentOption] = useState("");
@@ -52,6 +53,14 @@ export default function Admin() {
         >
           Support
         </button>
+        <button
+          onClick={() => {
+            setCurrentOption("manage-insights");
+          }}
+          className=" px-4 py-2 bg-gradient-to-r from-red-500 to-rose-900 hover:text-red-100 text-white hover:bg-rose-500"
+        >
+          Server Insights
+        </button>
       </div>
       <div className="flex justify-center mt-8">
         {currentOption === "manage-users" ? (
@@ -85,6 +94,13 @@ export default function Admin() {
         {currentOption === "manage-support" ? (
           <>
             <AdminSupportList />
+          </>
+        ) : (
+          <></>
+        )}
+        {currentOption === "manage-insights" ? (
+          <>
+            <AdminInsights />
           </>
         ) : (
           <></>

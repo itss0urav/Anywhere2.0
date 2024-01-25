@@ -60,13 +60,9 @@ const AdminController = {
       }
 
       // const accessToken = generateAccessToken(user._id);
-      const token = jwt.sign(
-        { user: admin.username },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: "1d",
-        }
-      );
+      const token = jwt.sign({ user: admin.username }, process.env.JWT_SECRET, {
+        expiresIn: "1d",
+      });
 
       res
         .cookie("token", token, {
@@ -89,6 +85,41 @@ const AdminController = {
     }
   },
 
+  getInsights: async (req, res) => {
+    try {
+      const totalAdmins = await Admin.find();
+      const totalPosts = await Post.find();
+      const totalReports = await Report.find();
+      const totalSupport = await Support.find();
+      const totalUsers = await User.find();
+      const totalMods = await User.countDocuments({ isMod: true });
+
+      const totalVerificationRequests = await Verification.find();
+
+      console.log(
+        "insight data from server:",
+        totalAdmins.length,
+        totalPosts.length,
+        totalReports.length,
+        totalSupport.length,
+        totalUsers.length,
+        totalVerificationRequests.length,
+        totalMods
+      );
+      res.status(200).json({
+        totalAdmins: totalAdmins.length,
+        totalPosts: totalPosts.length,
+        totalReports: totalReports.length,
+        totalSupport: totalSupport.length,
+        totalUsers: totalUsers.length,
+        totalVerificationRequests: totalVerificationRequests.length,
+        totalMods
+      });
+    } catch (error) {
+      res.status(404).json({ message: "Resources not found!" });
+      console.log(error);
+    }
+  },
   banUnbanUser: async (req, res) => {
     try {
       const { userId } = req.body;
