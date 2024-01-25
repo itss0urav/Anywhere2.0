@@ -12,7 +12,7 @@ export default function UserProfile() {
   const [user, setUser] = useSessionStorage("user");
   const [editMode, setEditMode] = useState(false);
   const [showImage, setShowImage] = useState(false);
-  const [postCount,setPostCount]=useState(0)
+  const [postCount, setPostCount] = useState(0);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -232,7 +232,7 @@ export default function UserProfile() {
               </div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="blue-gradient-btn w-full"
               >
                 Submit
               </button>
@@ -332,13 +332,13 @@ export default function UserProfile() {
           <div className="flex gap-2">
             {" "}
             <button
-              className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100  transition-all duration-200 hover:bg-blue-500 hover:text-white font-bold py-2 px-4 rounded mt-4"
+              className=" blue-gradient-btn mt-4"
               onClick={() => setEditMode(true)}
             >
               Edit Profile
             </button>
             <button
-              className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 hover:text-white transition-all duration-200 hover:bg-blue-500  font-bold py-2 px-4 rounded mt-4"
+              className="blue-gradient-btn mt-4"
               onClick={() => nav("/Verification")}
             >
               Apply for Verification
@@ -346,7 +346,7 @@ export default function UserProfile() {
             {user.isMod === true ? (
               <>
                 <button
-                  className="bg-gradient-to-r from-red-500 to-rose-900  text-red-100 hover:text-white font-bold py-2 px-4 rounded mt-4"
+                  className="red-gradient-btn mt-4"
                   onClick={() => nav("/modhome")}
                 >
                   Mod Menu

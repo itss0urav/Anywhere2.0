@@ -102,7 +102,7 @@ export default function AdminSupportList() {
                         onClick={() => {
                           handleRemoveSupport(support._id);
                         }}
-                        className="bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded"
+                        className="red-gradient-btn"
                       >
                         Remove
                       </button>

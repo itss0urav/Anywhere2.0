@@ -69,20 +69,16 @@ const AdminNavbar = () => {
               >
                 <MdContactMail className="inline-block mr-1" /> Contact Us
               </Link> */}
-
-              <button
-                onClick={handleLogout}
-                className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
-              >
-                <FaUser className="inline-block mr-1" /> Logout
-              </button>
               <button
                 onClick={() => {
                   nav("/");
                 }}
-                className="bg-red-800 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white"
+                className="red-btn"
               >
                 <FaUser className="inline-block mr-1" /> UserLogin
+              </button>
+              <button onClick={handleLogout} className="red-btn">
+                <FaUser className="inline-block mr-1" /> Logout
               </button>
             </div>
           )}
