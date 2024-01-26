@@ -117,7 +117,7 @@ export default function ModReportList() {
                         onClick={() => {
                           handleRemoveReport(report.postId, report._id);
                         }}
-                        className="bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded"
+                        className="red-gradient-btn"
                       >
                         Remove
                       </button>
@@ -125,7 +125,7 @@ export default function ModReportList() {
                         onClick={() => {
                           handleIgnoreReport(report._id);
                         }}
-                        className="bg-gradient-to-r from-green-500 to-green-900 text-white font-bold py-2 px-4 rounded"
+                        className="green-gradient-btn"
                       >
                         Ignore
                       </button>

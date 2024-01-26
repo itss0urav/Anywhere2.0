@@ -77,22 +77,22 @@ export default function ModUserList() {
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
               {user.isMod ? (
-                <div className="bg-gradient-to-r from-green-500 to-green-900  text-white font-bold py-2 px-4 rounded">
+                <div className="green-gradient-btn">
                   Yes
                 </div>
               ) : (
-                <div className="bg-gradient-to-r from-red-500 to-rose-900  text-white font-bold py-2 px-4 rounded">
+                <div className="red-gradient-btn">
                   No
                 </div>
               )}
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
               {user.isBanned ? (
-                <div className="bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded">
+                <div className="red-gradient-btn">
                   Banned
                 </div>
               ) : (
-                <div className="bg-gradient-to-r from-green-500 to-green-900 text-white font-bold py-2 px-4 rounded">
+                <div className="green-gradient-btn">
                   Active
                 </div>
               )}
@@ -108,14 +108,14 @@ export default function ModUserList() {
               {user.isBanned ? (
                 <button
                   onClick={() => handleBanUnban(user._id)}
-                  className="bg-gradient-to-r from-green-500 to-green-900 text-white font-bold py-2 px-4 rounded"
+                  className="green-gradient-btn"
                 >
                   Unban
                 </button>
               ) : (
                 <button
                   onClick={() => handleBanUnban(user._id)}
-                  className="bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded"
+                  className="red-gradient-btn"
                 >
                   Ban
                 </button>

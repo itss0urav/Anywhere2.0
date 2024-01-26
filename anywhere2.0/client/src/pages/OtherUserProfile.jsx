@@ -121,11 +121,11 @@ export default function OtherUserProfile() {
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 col-span-2">
                 {user.isBanned ? (
-                <div className="inline bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded">
+                <div className="inline red-gradient-btn">
                   Banned
                 </div>
               ) : (
-                <div className="inline bg-gradient-to-r from-green-500 to-green-900 text-white font-bold py-2 px-4 rounded">
+                <div className="inline green-gradient-btn">
                   Active
                 </div>
               )}

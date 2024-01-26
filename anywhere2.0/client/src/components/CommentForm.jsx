@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../config/axios";
 import useSessionStorage from "../hooks/useSessionStorage";
 import { useParams } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
+import { toast } from "react-hot-toast"; // import react-hot-toast
 
 const CommentForm = () => {
   const { postId } = useParams();
@@ -13,16 +13,9 @@ const CommentForm = () => {
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
   }, [user]);
-  const [votes, setVotes] = useState(0);
   const [input, setInput] = useState("");
 
-  const upvote = () => {
-    setVotes(votes + 1);
-  };
 
-  const downvote = () => {
-    setVotes(votes - 1);
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -54,17 +47,6 @@ const CommentForm = () => {
 
   return (
     <div className="p-4 max-w-xl mx-auto bg-white rounded-xl shadow-md space-y-2 sm:py-4">
-      {/* <div className="text-2xl font-bold">{username}</div>
-      <p className="text-gray-500">{commentText}</p> */}
-      {/* <div className="flex items-center space-x-2">
-        <button onClick={upvote} className="text-green-500">
-          <LuArrowBigUp />
-        </button>
-        <button onClick={downvote} className="text-red-500">
-          <LuArrowBigDown />
-        </button>
-        <span>{votes}</span>
-      </div> */}
       <form onSubmit={handleSubmit} className="mt-4">
         <input
           type="text"

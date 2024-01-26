@@ -268,7 +268,7 @@ export default function UserProfile() {
                     <img
                       className="w-64 "
                       src="https://static.vecteezy.com/system/resources/previews/001/201/729/large_2x/birthday-text-png.png"
-                      alt="bday image"
+                      alt="bday wish"
                     />
                   )}
                 </div>

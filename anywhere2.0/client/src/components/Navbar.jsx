@@ -41,9 +41,11 @@ const Navbar = () => {
   return (
     <nav
       className={`${
-        forColor !== "report"
-          ? "bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20"
-          : "bg-gradient-to-r from-slate-800 to-gray-900 p-4 backdrop-blur-lg bg-opacity-40 border border-gray-900 border-opacity-20"
+        forColor === "modhome"
+          ? "bg-gradient-to-r from-blue-900 to-blue-600 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20"
+          : forColor !== "report"
+            ? "bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20"
+            : "bg-gradient-to-r from-slate-800 to-gray-900 p-4 backdrop-blur-lg bg-opacity-40 border border-gray-900 border-opacity-20"
       }`}
     >
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -66,27 +68,18 @@ const Navbar = () => {
                 type="text"
                 placeholder="Search..."
               />
-              <Link
-                to="/About"
-                className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white w-full sm:w-auto text-center"
-              >
+              <Link to="/About" className="blue-gradient-btn sm:w-auto ">
                 <MdInfo className="inline-block mr-1" /> About
               </Link>
-              <Link
-                to="/Services"
-                className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white w-full sm:w-auto text-center"
-              >
+              <Link to="/Services" className="blue-gradient-btn sm:w-auto ">
                 <MdBuild className="inline-block mr-1" /> Services
               </Link>
-              <Link
-                to="/ContactUs"
-                className="bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white w-full sm:w-auto text-center"
-              >
+              <Link to="/ContactUs" className="blue-gradient-btn sm:w-auto">
                 <MdContactMail className="inline-block mr-1" /> Contact Us
               </Link>
               <Link
                 to="/UserProfile"
-                className="flex justify-center items-center bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white w-full sm:w-auto"
+                className="md:flex justify-center items-center blue-gradient-btn sm:w-auto"
               >
                 <img
                   alt="profile pic"
@@ -99,14 +92,14 @@ const Navbar = () => {
               {user.username ? (
                 <button
                   onClick={handleLogout}
-                  className="bg-gradient-to-r from-red-500 to-rose-900 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white w-full sm:w-auto text-center"
+                  className="red-gradient-btn sm:w-auto"
                 >
                   <FaUser className="inline-block mr-1" /> Logout
                 </button>
               ) : (
                 <button
                   onClick={handleLogin}
-                  className="bg-gradient-to-r from-green-500 to-green-900 text-red-100 rounded px-4 py-2 transition-all duration-200 hover:bg-red-500 hover:text-white w-full sm:w-auto text-center"
+                  className="green-gradient-btn sm:w-auto"
                 >
                   <FaUser className="inline-block mr-1" /> Login
                 </button>
@@ -118,7 +111,7 @@ const Navbar = () => {
               <img
                 className="w-24 animate-pulse"
                 src="https://static.vecteezy.com/system/resources/previews/001/201/729/large_2x/birthday-text-png.png"
-                alt="bday image"
+                alt="bday wish"
               />
             )}
           </div>

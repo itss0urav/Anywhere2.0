@@ -29,7 +29,7 @@ const PostView = () => {
   };
   useEffect(() => {
     fetchPost();
-  
+  // eslint-disable-next-line
   }, []);
 
   const handleDeletePost = (event, postId) => {
@@ -77,7 +77,7 @@ const PostView = () => {
             onClick={(event) => {
               handleDeletePost(event, post._id);
             }}
-            className="flex justify-center items-center bg-gradient-to-r from-red-500 to-rose-900 text-white font-bold py-2 px-4 rounded"
+            className="flex justify-center items-center red-gradient-btn"
           >
             <MdDeleteOutline /> <span className="ml-2">Delete</span>
           </button>

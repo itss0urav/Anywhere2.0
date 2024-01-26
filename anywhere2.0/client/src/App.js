@@ -22,7 +22,6 @@ import OtherUserProfile from "./pages/OtherUserProfile"
 
 //components
 import CreatePostForm from "./components/CreatePostForm";
-import IntroComponent from "./components/IntoComponent";
 import Admin from "./components/Admin";
 import VerificationForm from "./components/VerificationForm";
 import Mod from "./components/Mod";
@@ -65,8 +64,7 @@ function App() {
           <Route path="/searchpage" element={<SearchPage />} />
           {/* Components */}
           <Route path="/createpostform" element={<CreatePostForm />} />
-          {/* Test Components */}
-          <Route path="/IntroComponent" element={<IntroComponent />} />
+          
         </Routes>
         {/* </GlobalContext.Provider> */}
       </BrowserRouter>
