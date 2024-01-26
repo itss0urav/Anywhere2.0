@@ -106,6 +106,14 @@ export default function AdminInsights() {
                     {data.totalVerificationRequests}
                   </td>
                 </tr>
+                <tr>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Total Verified Users
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {data.totalVerifiedUsers}
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

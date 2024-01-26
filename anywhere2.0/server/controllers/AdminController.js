@@ -93,8 +93,8 @@ const AdminController = {
       const totalSupport = await Support.find();
       const totalUsers = await User.find();
       const totalMods = await User.countDocuments({ isMod: true });
-
       const totalVerificationRequests = await Verification.find();
+      const totalVerifiedUsers = await User.countDocuments({ isVerified: true });
 
       console.log(
         "insight data from server:",
@@ -104,6 +104,7 @@ const AdminController = {
         totalSupport.length,
         totalUsers.length,
         totalVerificationRequests.length,
+        totalVerifiedUsers,
         totalMods
       );
       res.status(200).json({
@@ -113,7 +114,8 @@ const AdminController = {
         totalSupport: totalSupport.length,
         totalUsers: totalUsers.length,
         totalVerificationRequests: totalVerificationRequests.length,
-        totalMods
+        totalVerifiedUsers,
+        totalMods,
       });
     } catch (error) {
       res.status(404).json({ message: "Resources not found!" });
