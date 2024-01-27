@@ -7,6 +7,8 @@ import Navbar from "../components/Navbar";
 import { FaSearch } from "react-icons/fa";
 import { toast, Toaster } from "react-hot-toast";
 import { SlOptionsVertical } from "react-icons/sl";
+import { LuFileEdit } from "react-icons/lu";
+
 import useSessionStorage from "../hooks/useSessionStorage";
 
 const SearchPage = () => {
@@ -80,6 +82,11 @@ const SearchPage = () => {
         });
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleEditPost = (event, postId) => {
+    event.stopPropagation();
+    navigate(`/posts/edit/${postId}`);
   };
 
   const handleReportPost = (event, postId) => {
@@ -159,16 +166,28 @@ const SearchPage = () => {
                           aria-labelledby="options-menu"
                         >
                           {(user.username === post.author || user.isMod) && (
-                            <button
-                              onClick={(event) => {
-                                handleDeletePost(event, post._id);
-                              }}
-                              className="block  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                              role="menuitem"
-                            >
-                              <MdDeleteOutline className="inline-block mr-2 text-red-700 text-xl" />
-                              Delete
-                            </button>
+                            <div className="">
+                              <button
+                                onClick={(event) => {
+                                  handleEditPost(event, post._id);
+                                }}
+                                className="block  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                role="menuitem"
+                              >
+                                <LuFileEdit className="inline-block mr-2 text-red-700 text-xl" />
+                                Edit
+                              </button>
+                              <button
+                                onClick={(event) => {
+                                  handleDeletePost(event, post._id);
+                                }}
+                                className="block  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                role="menuitem"
+                              >
+                                <MdDeleteOutline className="inline-block mr-2 text-red-700 text-xl" />
+                                Delete
+                              </button>
+                            </div>
                           )}
 
                           <button

@@ -1,24 +1,14 @@
-// controllers/postController.js
-
 const jwt = require("jsonwebtoken");
-const Post = require("../models/Post"); // replace with your actual Post model path
+// models
+const Post = require("../models/Post");
 const Report = require("../models/Report");
+
 const createPost = async (req, res) => {
   try {
-    // const token = req.cookies.token; // access the token from cookies
-    // console.log("token from createPost", token);
-    // req.user is available here after token verification
-    // const username = req.user;
-
-    // create a new post
     const newPost = new Post({
       ...req.body,
     });
-
-    // save the post
     const savedPost = await newPost.save();
-
-    // send the saved post in the response
     res.json(savedPost);
   } catch (error) {
     console.error("Error creating post:", error);
@@ -28,6 +18,7 @@ const createPost = async (req, res) => {
 
 const getPosts = async (req, res) => {
   try {
+    console.log("Fetching posts every 2 sec on focus...")
     const posts = await Post.find();
     res.json(posts);
   } catch (error) {
@@ -35,6 +26,51 @@ const getPosts = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch posts" });
   }
 };
+
+const updatePost = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const { name, category, description, imageUrl, nsfw } = req.body;
+
+    console.log("Updating post with ID:", postId);
+
+    const post = await Post.findById(postId);
+    if (!post) {
+      console.log("Post not found");
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    console.log("Found post:", post);
+
+    const updates = {
+      ...(name && { name }),
+      ...(category && { category }),
+      ...(description && { description }),
+      ...(imageUrl && { imageUrl }),
+      ...(nsfw && { nsfw }),
+    };
+
+    console.log("Applying updates:", updates);
+
+    const updatedPost = await Post.findByIdAndUpdate(
+      postId,
+      { $set: updates },
+      { new: true }
+    );
+
+    console.log("Updated post:", updatedPost);
+
+    res.status(200).json({
+      message: "Post updated successfully",
+      user: updatedPost,
+      passed: true,
+    });
+  } catch (error) {
+    console.error("Error updating post:", error);
+    res.status(500).json({ message: error.message || "Failed to update post" });
+  }
+};
+
 const getTotalPosts = async (req, res) => {
   try {
     const posts = await Post.find({ author: req.params.author });
@@ -48,11 +84,9 @@ const getTotalPosts = async (req, res) => {
 const getFilteredPosts = async (req, res) => {
   try {
     const { postName } = req.body;
-    // Use a case-insensitive regular expression to find posts containing the specified letters
     const posts = await Post.find({
       name: { $regex: new RegExp(postName, "i") },
     });
-    // const posts = await Post.find({ name: postName });
     res.json(posts);
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -92,6 +126,7 @@ const getPostsByCategory = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch posts by category" });
   }
 };
+
 const deletePost = async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.id);
@@ -101,16 +136,15 @@ const deletePost = async (req, res) => {
     (err) => console.log(err);
   }
 };
+
 const reportPost = async (req, res) => {
   try {
     const { postId, reason, username } = req.body;
-
     console.log({
       reason,
       username,
       postId,
     });
-
     const post = await Post.findById(postId);
     if (!post) {
       return res.status(404).json({ error: "Post not found" });
@@ -126,6 +160,7 @@ const reportPost = async (req, res) => {
 module.exports = {
   createPost,
   getPosts,
+  updatePost,
   getTotalPosts,
   getCategories,
   getPost,

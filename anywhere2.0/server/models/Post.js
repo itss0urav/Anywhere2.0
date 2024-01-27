@@ -31,11 +31,11 @@ const postSchema = new mongoose.Schema({
   },
   votes: {
     type: [voteSchema],
-    default: [], // defaults to an empty array
+    default: [],
   },
   comments: {
     type: [commentSchema],
-    default: [], // defaults to an empty array
+    default: [],
   },
 });
 

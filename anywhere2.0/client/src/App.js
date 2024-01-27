@@ -12,13 +12,13 @@ import AboutPage from "./pages/AboutPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import ServicesPage from "./pages/ServicesPage";
 import PostView from "./pages/PostView";
+import EditPostPage from "./pages/EditPostPage";
 import PostFromCategory from "./pages/PostFromCategory"; // Import the new page
 import SearchPage from "./pages/SearchPage";
 import AdminLogin from "./pages/AdminLogin";
 import ReportPage from "./pages/ReportPage";
 import UserProfile from "./pages/UserProfile";
-import OtherUserProfile from "./pages/OtherUserProfile"
-
+import OtherUserProfile from "./pages/OtherUserProfile";
 
 //components
 import CreatePostForm from "./components/CreatePostForm";
@@ -53,6 +53,7 @@ function App() {
           <Route path="/UserProfile" element={<UserProfile />} />
           <Route path="/About" element={<AboutPage />} />
           <Route path="/posts/:postId" element={<PostView />} />
+          <Route path="/posts/edit/:postId" element={<EditPostPage />} />
           <Route path="/profile/:username" element={<OtherUserProfile />} />
           <Route
             path="/posts/category/:category"
@@ -64,7 +65,6 @@ function App() {
           <Route path="/searchpage" element={<SearchPage />} />
           {/* Components */}
           <Route path="/createpostform" element={<CreatePostForm />} />
-          
         </Routes>
         {/* </GlobalContext.Provider> */}
       </BrowserRouter>

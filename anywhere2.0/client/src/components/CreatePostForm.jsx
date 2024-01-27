@@ -158,7 +158,7 @@ const CreatePostForm = () => {
           </div>
           <button
             onClick={handleSubmit}
-            className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white mt-2 w-full"
+            className="blue-gradient-btn border border-blue-800 "
             disabled={loading}
           >
             {loading ? "Submitting..." : "Submit"}

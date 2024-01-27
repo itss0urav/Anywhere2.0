@@ -1,37 +1,32 @@
-// controllers/UserController.js
-
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+// models
 const User = require("../models/User");
 const Support = require("../models/Support");
 const Verification = require("../models/Verification");
-// const Post = require("../models/Post");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 const UserController = {
   getCurrentUser: async (req, res) => {
     try {
-      const userId = req.params.id; // Extract userId from request parameters
+      const userId = req.params.id;
       const user = await User.findById(userId);
-
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-
       res.status(200).send(user);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
     }
   },
+
   getOtherUser: async (req, res) => {
     try {
-      const username = req.params.username; // Extract userId from request parameters
+      const username = req.params.username;
       const user = await User.findOne({ username });
-
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-
       res.status(200).send(user);
     } catch (err) {
       console.error(err);
@@ -41,6 +36,7 @@ const UserController = {
 
   getUsers: async (req, res) => {
     try {
+      console.log("Fetching users every 2 sec on focus...");
       const users = await User.find();
       if (users.length === 0) {
         return res.status(404).json({ message: "No users" });
@@ -85,31 +81,25 @@ const UserController = {
     try {
       const { username, password } = req.body;
       const user = await User.findOne({ username });
-
       if (!user) {
         return res
           .status(404)
           .json({ message: "Invalid credentials", passed: false });
       }
-
-      // Check if user is banned
       if (user.isBanned) {
         return res
           .status(403)
           .json({ message: "You have been banned, contact admins." });
       }
-
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch) {
         return res
           .status(401)
           .json({ message: "Invalid credentials", passed: false });
       }
-
       const token = jwt.sign({ user: user.username }, process.env.JWT_SECRET, {
         expiresIn: "1d",
       });
-
       res
         .cookie("token", token, {
           httpOnly: true,
@@ -139,35 +129,29 @@ const UserController = {
         imageUrl,
       } = req.body;
       const user = await User.findById(userId);
-
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-
       const passwordMatch = await bcrypt.compare(oldPassword, user.password);
       if (!passwordMatch) {
         return res.status(401).json({ message: "Invalid old password" });
       }
-
       const updates = {
         ...(username && { username }),
         ...(dob && { dob }),
         ...(email && { email }),
-        ...(imageUrl && { imageUrl }), // Add imageUrl to updates
+        ...(imageUrl && { imageUrl }),
       };
-
       if (newPassword && newPassword.trim() !== "" && newPassword.length >= 8) {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(newPassword, salt);
         updates.password = hashedPassword;
       }
-
       const updatedUser = await User.findByIdAndUpdate(
         userId,
         { $set: updates },
         { new: true }
       );
-
       res.status(200).json({
         message: "User updated successfully",
         user: updatedUser,
@@ -180,6 +164,7 @@ const UserController = {
       });
     }
   },
+
   createVerification: async (req, res) => {
     try {
       const {
@@ -217,18 +202,16 @@ const UserController = {
       });
     }
   },
+
   createSupport: async (req, res) => {
     try {
       const { username, email, message } = req.body;
-
       console.log({
         username,
         email,
         message,
       });
-
       const support = await Support.create({ username, email, message });
-
       res
         .status(201)
         .json({ message: "Support request created ", support: support });

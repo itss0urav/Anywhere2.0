@@ -60,6 +60,22 @@ export default function AdminInsights() {
                 </tr>
                 <tr>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Total Active Users
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {data.totalActiveUsers}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Total Banned Users
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {data.totalBannedUsers}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     Total Admins
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

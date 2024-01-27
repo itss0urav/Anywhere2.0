@@ -1,15 +1,12 @@
-// controllers/AdminController.js
-
-const Admin = require("../models/Admin");
-const User = require("../models/User");
-const Report = require("../models/Report");
-const Post = require("../models/Post");
-const Verification = require("../models/Verification");
-const Support = require("../models/Support");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
-// const generateAccessToken = require("../utils/generateToken");user
+// models
+const User = require("../models/User");
+const Post = require("../models/Post");
+const Admin = require("../models/Admin");
+const Report = require("../models/Report");
+const Support = require("../models/Support");
+const Verification = require("../models/Verification");
 
 const AdminController = {
   createAdmin: async (req, res) => {
@@ -21,7 +18,6 @@ const AdminController = {
         const hashedPassword = await bcrypt.hash(password, salt);
         const newAdmin = new Admin({
           username,
-
           email,
           password: hashedPassword,
           imageUrl,
@@ -40,17 +36,16 @@ const AdminController = {
       });
     }
   },
+
   adminLogin: async (req, res) => {
     try {
       const { username, password } = req.body;
       const admin = await Admin.findOne({ username });
-
       if (!admin) {
         return res
           .status(404)
           .json({ message: "Invalid credentials", passed: false });
       }
-
       const passwordMatch = await bcrypt.compare(password, admin.password);
       console.log(passwordMatch);
       if (!passwordMatch) {
@@ -58,12 +53,9 @@ const AdminController = {
           .status(401)
           .json({ message: "Invalid credentials", passed: false });
       }
-
-      // const accessToken = generateAccessToken(user._id);
       const token = jwt.sign({ user: admin.username }, process.env.JWT_SECRET, {
         expiresIn: "1d",
       });
-
       res
         .cookie("token", token, {
           httpOnly: true,
@@ -87,56 +79,62 @@ const AdminController = {
 
   getInsights: async (req, res) => {
     try {
-      const totalAdmins = await Admin.find();
-      const totalPosts = await Post.find();
-      const totalReports = await Report.find();
-      const totalSupport = await Support.find();
-      const totalUsers = await User.find();
+      const totalAdmins = await Admin.countDocuments();
+      const totalPosts = await Post.countDocuments();
+      const totalReports = await Report.countDocuments();
+      const totalSupport = await Support.countDocuments();
+      const totalUsers = await User.countDocuments();
+      const totalActiveUsers = await User.countDocuments({ isBanned: false });
+      const totalBannedUsers = await User.countDocuments({ isBanned: true });
       const totalMods = await User.countDocuments({ isMod: true });
-      const totalVerificationRequests = await Verification.find();
-      const totalVerifiedUsers = await User.countDocuments({ isVerified: true });
-
-      console.log(
-        "insight data from server:",
-        totalAdmins.length,
-        totalPosts.length,
-        totalReports.length,
-        totalSupport.length,
-        totalUsers.length,
-        totalVerificationRequests.length,
-        totalVerifiedUsers,
-        totalMods
-      );
+      const totalVerificationRequests = await Verification.countDocuments();
+      const totalVerifiedUsers = await User.countDocuments({
+        isVerified: true,
+      });
+      // console.log(
+      //   "insight data from server:",
+      //   totalUsers,
+      //   totalActiveUsers,
+      //   totalBannedUsers,
+      //   totalAdmins,
+      //   totalMods,
+      //   totalPosts,
+      //   totalReports,
+      //   totalSupport,
+      //   totalVerifiedUsers,
+      //   totalVerificationRequests
+      // );
+      console.log("Fetching insights every 2 sec on focus");
       res.status(200).json({
-        totalAdmins: totalAdmins.length,
-        totalPosts: totalPosts.length,
-        totalReports: totalReports.length,
-        totalSupport: totalSupport.length,
-        totalUsers: totalUsers.length,
-        totalVerificationRequests: totalVerificationRequests.length,
-        totalVerifiedUsers,
+        totalUsers,
+        totalActiveUsers,
+        totalBannedUsers,
+        totalAdmins,
         totalMods,
+        totalPosts,
+        totalReports,
+        totalSupport,
+        totalVerifiedUsers,
+        totalVerificationRequests,
       });
     } catch (error) {
       res.status(404).json({ message: "Resources not found!" });
       console.log(error);
     }
   },
+
   banUnbanUser: async (req, res) => {
     try {
       const { userId } = req.body;
       const user = await User.findById(userId);
-
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-
       const updatedUser = await User.findByIdAndUpdate(
         userId,
         { $set: { isBanned: !user.isBanned } },
         { new: true }
       );
-
       res.status(200).json({
         message: "User updated successfully",
         user: updatedUser,
@@ -154,17 +152,14 @@ const AdminController = {
     try {
       const { userId } = req.body;
       const user = await User.findById(userId);
-
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-
       const updatedUser = await User.findByIdAndUpdate(
         userId,
         { $set: { isMod: !user.isMod } },
         { new: true }
       );
-
       res.status(200).json({
         message: "User updated successfully",
         user: updatedUser,
@@ -180,14 +175,15 @@ const AdminController = {
 
   getReports: async (req, res) => {
     try {
-      console.log("Fetching reports...");
+      console.log("Fetching reports every 2 sec on focus...");
       const Reports = await Report.find();
-      console.log("Reports fetched successfully:", Reports);
+      // console.log("Reports fetched successfully:", Reports);
       res.status(200).send(Reports);
     } catch (error) {
       console.log("Error occurred while fetching reports:", error);
     }
   },
+
   deleteReports: async (req, res) => {
     try {
       console.log("Fetching report...");
@@ -200,6 +196,7 @@ const AdminController = {
       console.log("Error occurred while deleting reports:", error);
     }
   },
+
   ignoreReports: async (req, res) => {
     try {
       console.log("Fetching report...");
@@ -211,8 +208,10 @@ const AdminController = {
       console.log("Error occurred while deleting reports:", error);
     }
   },
+
   getVerification: async (req, res) => {
     try {
+      console.log("Fetching verification requests every 2 sec on focus");
       const requests = await Verification.find({});
       res.status(200).send(requests);
     } catch (error) {
@@ -224,17 +223,15 @@ const AdminController = {
       });
     }
   },
+
   ignoreVerification: async (req, res) => {
     try {
       const { reqId } = req.body;
-
-      // Check if reqId is defined before attempting to delete
       if (!reqId) {
         return res
           .status(400)
           .json({ message: "Invalid request. reqId is undefined." });
       }
-
       const requests = await Verification.findByIdAndDelete(reqId);
       res.status(200).send(requests);
     } catch (error) {
@@ -250,38 +247,30 @@ const AdminController = {
   toggleVerification: async (req, res) => {
     try {
       const { userId, reqId } = req.body;
-
       console.log("userId:", userId);
       console.log("reqId:", reqId);
-
       const user = await User.findOne({ _id: userId });
       console.log("user:", user);
-
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-
       const updatedUser = await User.findByIdAndUpdate(
         userId,
         { $set: { isVerified: !user.isVerified } },
         { new: true }
       );
       console.log("updatedUser:", updatedUser);
-
       const requestFromDB = await Verification.findOne({ _id: reqId });
       console.log("requestFromDB:", requestFromDB);
-
       if (!requestFromDB) {
         return res.status(404).json({ message: "Request not found" });
       }
-
       const toggledRequest = await Verification.findByIdAndUpdate(
         reqId,
         { $set: { isVerified: !requestFromDB.isVerified } },
         { new: true }
       );
       console.log("toggledRequest:", toggledRequest);
-
       res.status(200).json({
         message: "User and verification request updated successfully",
         user: updatedUser,
@@ -297,16 +286,17 @@ const AdminController = {
       });
     }
   },
+
   getSupports: async (req, res) => {
     try {
       console.log("Fetching Support every 2 sec on focus...");
       const Supports = await Support.find();
-
       res.status(200).send(Supports);
     } catch (error) {
       console.log("Error occurred while fetching Support:", error);
     }
   },
+
   deleteSupports: async (req, res) => {
     try {
       console.log("Fetching report...");

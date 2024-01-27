@@ -178,6 +178,35 @@ export default function CommentContainer() {
       console.error(error);
     }
   };
+  const handleReplyDelete = async (postId, commentId, text) => {
+    console.log("ReplyIDD", text);
+    try {
+      // console.log("Deleting reply...", "PostId:", postId, "CommentId:", commentId, "ReplyId:", replyId);
+
+      const response = await axios.delete(
+        `/posts/${postId}/comments/${commentId}/replies/${text}`
+      );
+
+      // console.log("Reply delete response:", response.data);
+      toast.success("Reply deleted!", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      fetchComments();
+    } catch (error) {
+      toast.error("Failed to delete reply", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      console.error("Error deleting reply:", error);
+    }
+  };
 
   const handleDeleteComment = async (postId, commentId) => {
     try {
@@ -264,7 +293,7 @@ export default function CommentContainer() {
                   {user.username === comment.user || user.isMod === true ? (
                     <MdDeleteOutline
                       onClick={() => handleDeleteComment(postId, comment._id)}
-                      className="cursor-pointer text-blue-800"
+                      className="cursor-pointer text-red-800"
                     />
                   ) : (
                     <></>
@@ -272,11 +301,8 @@ export default function CommentContainer() {
                 </div>
               </div>
             </div>
-            {comment.replies.map((reply) => (
-              <div
-                key={reply._id}
-                className="ml-4 mt-2 bg-gray-100 p-2 rounded"
-              >
+            {comment.replies.map((reply, index) => (
+              <div key={index} className="ml-4 mt-2 bg-gray-100 p-2 rounded">
                 <h4 className="flex gap-2 font-semibold text-gray-700">
                   Replied By
                   <div
@@ -284,6 +310,18 @@ export default function CommentContainer() {
                     className="cursor-pointer bg-gradient-to-r from-sky-600 to-cyan-900 bg-clip-text text-transparent"
                   >
                     {reply.user}
+                  </div>
+                  <div className="flex items-center">
+                    {user.username === reply.user || user.isMod === true ? (
+                      <MdDeleteOutline
+                        onClick={() =>
+                          handleReplyDelete(postId, comment._id, reply.text)
+                        }
+                        className="cursor-pointer text-red-800"
+                      />
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </h4>
                 <p className="text-gray-600 mt-2">{reply.text}</p>

@@ -6,7 +6,7 @@ export default function AdminPostList() {
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = async () => {
-    console.log("Fetching/Updating...")
+    console.log("Fetching/Updating...");
     try {
       const response = await axios.get("/posts");
       setPosts(response.data);
@@ -33,8 +33,8 @@ export default function AdminPostList() {
 
   useEffect(() => {
     fetchPosts();
-     // Set up interval for automatic refresh (every 5 minutes in this example)
-     const refreshInterval = setInterval(
+    // Set up interval for automatic refresh (every 5 minutes in this example)
+    const refreshInterval = setInterval(
       fetchPosts,
       // 5 *
       // 60 *
@@ -86,8 +86,8 @@ export default function AdminPostList() {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">{post.name}</td>
               <td className="px-6 py-4 whitespace-nowrap">{post.category}</td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {post.description.split(" ").slice(0, 3).join(" ") + "..."}
+              <td className="px-6 py-4 text-sm text-gray-500 sm:w-20 md:w-[40rem] break-words">
+                {post.description}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">{post.author}</td>
               <td className="px-6 py-4 whitespace-nowrap">

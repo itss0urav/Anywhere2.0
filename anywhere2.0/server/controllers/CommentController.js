@@ -1,3 +1,4 @@
+// models
 const Post = require("../models/Post");
 
 exports.createComment = async (req, res) => {
@@ -44,18 +45,15 @@ exports.deleteComment = async (req, res) => {
       console.log("Post not found");
       return res.status(404).json({ message: "Post not found" });
     }
-
     const comment = post.comments.id(req.params.commentId);
     if (!comment) {
       console.log("Comment not found");
       return res.status(404).json({ message: "Comment not found" });
     }
-
     post.comments.pull(req.params.commentId); // Used pull to remove the comment
     console.log("Comment removed");
     await post.save();
     console.log("Post saved");
-
     res.status(201).json({ message: "Comment deleted successfully" });
   } catch (error) {
     console.log("Error:", error.message);
@@ -84,49 +82,57 @@ exports.addReply = async (req, res) => {
   }
 };
 
+exports.deleteReply = async (req, res) => {
+  console.log("Deleting reply...");
+  const post = await Post.findById(req.params.postId);
+  if (!post) {
+    console.log("Post not found");
+    return res.status(404).json({ message: "Post not found" });
+  }
+  const comment = post.comments.id(req.params.commentId);
+  if (!comment) {
+    console.log("Comment not found");
+    return res.status(404).json({ message: "Comment not found" });
+  }
+  const initialRepliesLength = comment.replies.length;
+  comment.replies = comment.replies.filter(
+    (reply) => reply.text !== req.params.text
+  );
+  const finalRepliesLength = comment.replies.length;
+  if (initialRepliesLength === finalRepliesLength) {
+    console.log("Reply not found");
+    return res.status(404).json({ message: "Reply not found" });
+  }
+  await post.save();
+  console.log("Reply deleted successfully");
+  res.status(200).json({ message: "Reply deleted successfully" });
+};
+
 exports.addVoteToComment = async (req, res) => {
   try {
     const { commentId } = req.params;
-
     const { userId, voteStatus, postId } = req.body;
-
-    // Log received parameters for debugging
     console.log("Received postId:", postId);
     console.log("Received commentId:", commentId);
     console.log("Received userId:", userId);
     console.log("Received voteStatus:", voteStatus);
-
-    // Find the post
-
     const post = await Post.findById(postId);
-
     if (!post) {
       console.log("Post not found");
       return res.status(404).json({ message: "Post not found." });
     }
-
-    // Find the comment
     const comment = post.comments.id(commentId);
-
     if (!comment) {
       console.log("Comment not found");
       return res.status(404).json({ message: "Comment not found." });
     }
-
-    // Find the vote of this user
     const vote = comment.votes.find((v) => v.user === userId);
-
     if (vote) {
-      // If the user has already voted, update the voteStatus
       vote.voteStatus = voteStatus;
     } else {
-      // If the user hasn't voted yet, add their vote
       comment.votes.push({ user: userId, voteStatus });
     }
-
-    // Save the post
     await post.save();
-
     console.log("Vote updated successfully");
     res.status(200).json({
       message: "Vote updated successfully.",

@@ -5,7 +5,7 @@ import { MdDeleteOutline, MdReport } from "react-icons/md";
 import useSessionStorage from "../hooks/useSessionStorage";
 import { toast, Toaster } from "react-hot-toast";
 import { SlOptionsVertical } from "react-icons/sl";
-import { LuArrowBigUp, LuArrowBigDown } from "react-icons/lu";
+import { LuArrowBigUp, LuArrowBigDown, LuFileEdit } from "react-icons/lu";
 
 const AllPosts = () => {
   const [user, setUser] = useSessionStorage("user");
@@ -77,6 +77,10 @@ const AllPosts = () => {
         });
       })
       .catch((err) => console.log(err));
+  };
+  const handleEditPost = (event, postId) => {
+    event.stopPropagation();
+    navigate(`/posts/edit/${postId}`);
   };
 
   const handleReportPost = (event, postId) => {
@@ -229,20 +233,6 @@ const AllPosts = () => {
                                 aria-orientation="vertical"
                                 aria-labelledby="options-menu"
                               >
-                                {(user.username === post.author ||
-                                  user.isMod) && (
-                                  <button
-                                    onClick={(event) => {
-                                      handleDeletePost(event, post._id);
-                                    }}
-                                    className="block  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                                    role="menuitem"
-                                  >
-                                    <MdDeleteOutline className="inline-block mr-2 text-red-700 text-xl" />
-                                    Delete
-                                  </button>
-                                )}
-
                                 <button
                                   onClick={(event) => {
                                     handleReportPost(event, post._id);
@@ -253,6 +243,31 @@ const AllPosts = () => {
                                   <MdReport className="inline-block mr-2 text-red-700 text-xl" />
                                   Report
                                 </button>
+                                {(user.username === post.author ||
+                                  user.isMod) && (
+                                  <div>
+                                    <button
+                                      onClick={(event) => {
+                                        handleEditPost(event, post._id);
+                                      }}
+                                      className="block  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                      role="menuitem"
+                                    >
+                                      <LuFileEdit className="inline-block mr-2 text-red-700 text-xl" />
+                                      Edit
+                                    </button>
+                                    <button
+                                      onClick={(event) => {
+                                        handleDeletePost(event, post._id);
+                                      }}
+                                      className="block  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                      role="menuitem"
+                                    >
+                                      <MdDeleteOutline className="inline-block mr-2 text-red-700 text-xl" />
+                                      Delete
+                                    </button>
+                                  </div>
+                                )}
                               </div>
                             </div>
                           )}

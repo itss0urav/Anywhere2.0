@@ -11,7 +11,7 @@ const commentSchema = new mongoose.Schema({
     required: true,
   },
   votes: [voteSchema],
-  replies: [this], // This allows for comments on comments
+  replies: [this],
 });
 
 module.exports = commentSchema;
