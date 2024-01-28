@@ -2,13 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 // import v1 from "../assets/v1.mp4";
 import v3 from "../assets/v3.mp4";
-
+import { FaGithub } from "react-icons/fa";
 function Introduction() {
   // const bgs = [
-    // v1,
+  // v1,
   //   v3
   // ];
   // const videoBg = bgs[Math.floor(Math.random() * bgs.length)];
+ 
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-900 to-black animate-fade-in-down">
@@ -62,8 +63,11 @@ function Introduction() {
         user-friendly interface, Anywhere provides a platform for individuals to
         come together and engage in a range of conversations.
       </p>
-      <div className="absolute bottom-0 right-0 p-1 text-black font-bold text-sm md:text-lg neon-text  opacity-100">
-        Coded with <span className="text-red-500">❤️</span> by @itss0urav
+
+      <div
+        className="absolute flex bottom-0 right-0 p-1 text-black font-bold text-sm md:text-lg neon-text  opacity-100"
+      >
+        Created by @itss0urav <FaGithub className="mx-1" />
       </div>
     </div>
   );

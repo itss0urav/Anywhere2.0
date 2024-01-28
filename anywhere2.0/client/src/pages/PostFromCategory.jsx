@@ -4,12 +4,32 @@ import axios from "../config/axios";
 import Navbar from "../components/Navbar";
 import PostContainer from "../components/PostContainer";
 import SideComponent from "../components/SideComponent";
+import useSessionStorage from "../hooks/useSessionStorage";
 
 const PostFromCategory = () => {
   const [posts, setPosts] = useState([]);
   const { category } = useParams();
+  const [user] = useSessionStorage("user");
+  
   const navigate = useNavigate();
 
+  // to calculate age for post filtering
+  const calculateAge = (dob) => {
+    const currentDate = new Date();
+    const birthDate = new Date(dob);
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+    const monthDiff = currentDate.getMonth() - birthDate.getMonth();
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+    return age;
+  };
+  const userAge = user.dob ? calculateAge(user.dob) : 0;
+  console.log("Current Age:",userAge)
+  
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -34,13 +54,20 @@ const PostFromCategory = () => {
       <div className="flex flex-col items-center">
         <div className="flex justify-center w-full m-4">
           <div className="w-3/4">
-            {posts.map((post) => (
-              <PostContainer
-                key={post._id}
-                value={post}
-                onClick={() => handlePostClick(post._id)}
-              />
-            ))}
+            {posts.map((post) => {
+              // Skip rendering this post if user is under 18 and post is NSFW
+              if (userAge < 18 && post.nsfw) {
+                return null;
+              }
+
+              return (
+                <PostContainer
+                  key={post._id}
+                  value={post}
+                  onClick={() => handlePostClick(post._id)}
+                />
+              );
+            })}
           </div>
           <div className="max-w-[25%] ml-4">
             <SideComponent  />

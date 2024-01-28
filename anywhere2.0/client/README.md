@@ -52,6 +52,8 @@ Anywhere2.0 : [https://github.com/itss0urav/Anywhere2.0]
 - Login/SignUp
 - Create Post
 - Create Comment
+- Reply to Comments
+- NSFW posts are only accessible to 18+
 - Search posts
 - Delete own post & comments
 - UpVote or Downvote Posts & Comments

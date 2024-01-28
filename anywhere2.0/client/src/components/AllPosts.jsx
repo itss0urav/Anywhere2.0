@@ -8,6 +8,8 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { LuArrowBigUp, LuArrowBigDown, LuFileEdit } from "react-icons/lu";
 
 const AllPosts = () => {
+
+
   const [user, setUser] = useSessionStorage("user");
   const [posts, setPosts] = useState([]);
   const [blurStatus, setBlurStatus] = useState({});
@@ -27,6 +29,25 @@ const AllPosts = () => {
     }
   };
 
+  // to calculate age for post filtering
+  const calculateAge = (dob) => {
+    const currentDate = new Date();
+    const birthDate = new Date(dob);
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+    const monthDiff = currentDate.getMonth() - birthDate.getMonth();
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+    return age;
+  };
+  const userAge = user.dob ? calculateAge(user.dob) : 0;
+  console.log("Current Age:",userAge)
+
+
+  
   useEffect(() => {
     fetchPosts();
     // Set up interval for automatic refresh (every 5 minutes in this example)
@@ -166,6 +187,12 @@ const AllPosts = () => {
             (total, vote) => total + vote.voteStatus,
             0
           );
+
+          // Check if the user is under 18 and the post is marked as NSFW
+          if (userAge < 18 && post.nsfw) {
+            return null; // Skip rendering this post
+          }
+
           return (
             <div
               key={index}
