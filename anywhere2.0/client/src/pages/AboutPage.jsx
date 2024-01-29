@@ -5,8 +5,8 @@ const AboutPage = () => {
   return (
     <div className="">
       <Navbar />
-      <div className="flex justify-center ">
-        <div className="text-lg text-gray-600 text-center mt-6 w-3/4">
+      <div className="flex h-screen justify-center  text-center">
+        <div className="flex flex-col justify-center items-center text-lg text-gray-600 text-center mt-6 w-3/4">
           <div className="text-4xl font-bold tracking-widest font-roboto">Anywhere</div>
           Anywhere is a web application designed to foster a sense of community
           and encourage meaningful discussions among its users. With its

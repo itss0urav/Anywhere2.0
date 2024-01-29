@@ -79,7 +79,6 @@ Anywhere2.0 : [https://github.com/itss0urav/Anywhere2.0]
 - Ban user
 - Unban User
 
-
 ## Features
 
 ### Birthday Wishes
@@ -88,35 +87,32 @@ Anywhere 2.0 goes beyond just discussions and community engagement. We celebrate
 
 - **Automated Birthday Wishes:** Users receive personalized birthday wishes on their special day.
 
-
-
 ## Setup
 
 .env
 
 -PORT=
 -MONGODB_URI=
--JWT_SECRET = 
+-JWT_SECRET =
 -REACT_APP_API_BASE_URL=
 
 ## TawkTo
 
 Place tawkto.js inside client/src/config
 
-
 For more info Visit :[https://www.tawk.to/]
 
 function TawkTo() {
-  var Tawk_API = Tawk_API || {},
-    Tawk_LoadStart = new Date();
-  (function () {
-    var s1 = document.createElement("script"),
-      s0 = document.getElementsByTagName("script")[0];
-    s1.async = true;
-    s1.src = "REPLACE WITH YOUR URL";
-    s1.charset = "UTF-8";
-    s1.setAttribute("crossorigin", "*");
-    s0.parentNode.insertBefore(s1, s0);
-  })();
+var Tawk_API = Tawk_API || {},
+Tawk_LoadStart = new Date();
+(function () {
+var s1 = document.createElement("script"),
+s0 = document.getElementsByTagName("script")[0];
+s1.async = true;
+s1.src = "REPLACE WITH YOUR URL";
+s1.charset = "UTF-8";
+s1.setAttribute("crossorigin", "\*");
+s0.parentNode.insertBefore(s1, s0);
+})();
 }
 export default TawkTo;

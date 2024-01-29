@@ -3,6 +3,9 @@ import axios from "../config/axios";
 import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 // import Navbar from "../components/Navbar";
 import TawkTo from "../config/TawkTo";
+import Logo from "../assets/Anywhere-Transparent.png";
+import { Link } from "react-router-dom";
+
 TawkTo();
 
 const Help = () => {
@@ -50,8 +53,14 @@ const Help = () => {
 
   return (
     <div className="">
-      <div className="text-white text-center bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20 ">
-        Give feedback or raise an issue here
+      <div className="flex justify-between items-center text-white text-center bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20 ">
+        <Link
+          to="/home"
+          className="text-white font-bold text-xl flex items-center mb-4 md:mb-0"
+        >
+          <img className="w-24 md:w-12 mr-2" src={Logo} alt="" />
+        </Link>
+        <div className="">Give feedback or raise an issue here</div>
       </div>
       <div className="flex flex-col items-center justify-center  bg-gray-100">
         <div>
@@ -111,10 +120,7 @@ const Help = () => {
               ></textarea>
             </div>
             <div className="flex items-center justify-between">
-              <button
-                className="blue-gradient-btn"
-                type="submit"
-              >
+              <button className="blue-gradient-btn" type="submit">
                 Send
               </button>
             </div>
