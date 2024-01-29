@@ -6,6 +6,7 @@ import AdminReportList from "./AdminReportList";
 import AdminVerificationRequest from "./AdminVerificationRequest";
 import AdminSupportList from "./AdminSupportList";
 import AdminInsights from "./AdminInsights";
+import AdminBannerManagement from "./AdminBannerManagement";
 
 export default function Admin() {
   const [currentOption, setCurrentOption] = useState("");
@@ -61,6 +62,14 @@ export default function Admin() {
         >
           Server Insights
         </button>
+        <button
+          onClick={() => {
+            setCurrentOption("manage-banner");
+          }}
+          className=" red-gradient-btn"
+        >
+          Manage Banner
+        </button>
       </div>
       <div className="flex justify-center mt-8">
         {currentOption === "manage-users" ? (
@@ -101,6 +110,13 @@ export default function Admin() {
         {currentOption === "manage-insights" ? (
           <>
             <AdminInsights />
+          </>
+        ) : (
+          <></>
+        )}
+        {currentOption === "manage-banner" ? (
+          <>
+            <AdminBannerManagement />
           </>
         ) : (
           <></>

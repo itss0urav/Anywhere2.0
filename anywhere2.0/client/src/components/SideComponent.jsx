@@ -1,6 +1,7 @@
 import axios from "../config/axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CaroselContainer from "./CaroselContainer";
 
 const SideComponent = () => {
   const [categories, setCategories] = useState([]);
@@ -40,6 +41,7 @@ const SideComponent = () => {
       <div className="text-center rounded-sm text-white bg-gradient-to-r from-blue-700 to-blue-500 md:min-w-[11rem]">
         {renderCategories()}
       </div>
+      <CaroselContainer />
     </div>
   );
 };

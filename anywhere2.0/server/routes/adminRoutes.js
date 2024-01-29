@@ -2,10 +2,19 @@ const express = require("express");
 const router = express.Router();
 const verifyToken = require("../middlewares/authMiddleware");
 const AdminController = require("../controllers/AdminController");
-
+const BannerController = require("../controllers/BannerController");
 // auth
 router.post("/signup", AdminController.createAdmin);
 router.post("/login", AdminController.adminLogin);
+// banner
+router.post(
+  "/addbanner",
+  verifyToken,
+  BannerController.uploadBanner,
+  BannerController.createBanner
+);
+router.get("/getbanner", verifyToken, BannerController.getBanners);
+router.delete("/deletebanner", verifyToken, BannerController.deleteBanners);
 // insight
 router.get("/insights", verifyToken, AdminController.getInsights);
 // report

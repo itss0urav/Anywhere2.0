@@ -19,6 +19,8 @@ connectDB();
 
 // middlewares
 app.use(express.json());
+app.use(express.static('public'))
+
 // app.use(cookieParser());
 app.use(
   cors({
