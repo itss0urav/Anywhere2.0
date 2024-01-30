@@ -29,7 +29,7 @@ import Mod from "./components/Mod";
 //context
 // import GlobalContext from "./contexts/Context";
 function App() {
-  console.warn("%cMessage from Admin", "color: cyan; font-size: 20px;");
+  console.warn("%cMessage from Anywhere Admin", "color: cyan; font-size: 15px;");
   console.warn(
     "%cStop",
     "color: red; font-size: 15px;",
