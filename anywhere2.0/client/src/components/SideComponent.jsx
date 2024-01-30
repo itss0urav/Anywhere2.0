@@ -42,7 +42,7 @@ const SideComponent = () => {
         {renderCategories()}
       </div>
       <div className="mt-4 md:max-w-[13rem]">
-        <CaroselContainer />
+          <CaroselContainer />
       </div>
     </div>
   );

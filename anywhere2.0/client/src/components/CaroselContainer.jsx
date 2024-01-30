@@ -20,9 +20,9 @@ export default function CaroselContainer() {
     <div className="w-full bg-gradient-to-r from-blue-900 to-blue-500 rounded p-1">
       {bannerData.map((banner, index) => (
         <div key={index}>
-          <div className="text-center text-white">{banner.name}</div>
+          <div className="text-center text-white animate-pulse">{banner.name}</div>
           <img
-            className=" rounded-md shadow"
+            className=" rounded-md shadow "
             src={`${imagePath}${banner.image}`}
             alt={banner.name}
           />
