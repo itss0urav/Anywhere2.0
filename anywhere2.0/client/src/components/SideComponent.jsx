@@ -37,11 +37,13 @@ const SideComponent = () => {
 
   return (
     <div>
-      <div className="">Popular Categories</div>
-      <div className="text-center rounded-sm text-white bg-gradient-to-r from-blue-700 to-blue-500 md:min-w-[11rem]">
+      <div className="text-center">Popular Categories</div>
+      <div className="text-center rounded-sm text-white bg-gradient-to-r from-blue-700 to-blue-500 md:min-w-[13rem]">
         {renderCategories()}
       </div>
-      <CaroselContainer />
+      <div className="mt-4 md:max-w-[13rem]">
+        <CaroselContainer />
+      </div>
     </div>
   );
 };

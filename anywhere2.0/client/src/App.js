@@ -29,6 +29,13 @@ import Mod from "./components/Mod";
 //context
 // import GlobalContext from "./contexts/Context";
 function App() {
+  console.warn("%cMessage from Admin", "color: cyan; font-size: 20px;");
+  console.warn(
+    "%cStop",
+    "color: red; font-size: 15px;",
+    'This is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or "hack" someone\'s account, it is a scam and will give them access to your account.'
+  );
+
   // const [user, setUser] = useState(SessionStorageData);
   // const dataExpanded = {
   //   user,
