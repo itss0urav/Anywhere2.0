@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../config/axios";
-import { MdDeleteOutline, MdReport } from "react-icons/md";
 import Navbar from "../components/Navbar";
-import { FaSearch } from "react-icons/fa";
 import { toast, Toaster } from "react-hot-toast";
-import { SlOptionsVertical } from "react-icons/sl";
+// react icons
+import { FaSearch } from "react-icons/fa";
 import { LuFileEdit } from "react-icons/lu";
+import { SlOptionsVertical } from "react-icons/sl";
+import { MdDeleteOutline, MdReport } from "react-icons/md";
+// custom hooks
+import useCalculateAge from "../hooks/useCalculateAge";
 import useSessionStorage from "../hooks/useSessionStorage";
-
 const SearchPage = () => {
   const [user, setUser] = useSessionStorage("user");
   const [posts, setPosts] = useState([]);
@@ -17,20 +19,7 @@ const SearchPage = () => {
   const [postName, setPostName] = useState("");
   const navigate = useNavigate();
 
-  const calculateAge = (dob) => {
-    const currentDate = new Date();
-    const birthDate = new Date(dob);
-    let age = currentDate.getFullYear() - birthDate.getFullYear();
-    const monthDiff = currentDate.getMonth() - birthDate.getMonth();
-    if (
-      monthDiff < 0 ||
-      (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())
-    ) {
-      age--;
-    }
-    return age;
-  };
-  const userAge = user.dob ? calculateAge(user.dob) : 0;
+  const userAge = useCalculateAge(user.dob);
   console.log("Current Age:", userAge);
 
   const fetchPosts = async () => {

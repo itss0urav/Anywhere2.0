@@ -31,17 +31,13 @@ const updatePost = async (req, res) => {
   try {
     const postId = req.params.postId;
     const { name, category, description, imageUrl, nsfw } = req.body;
-
     console.log("Updating post with ID:", postId);
-
     const post = await Post.findById(postId);
     if (!post) {
       console.log("Post not found");
       return res.status(404).json({ message: "Post not found" });
     }
-
     console.log("Found post:", post);
-
     const updates = {
       ...(name && { name }),
       ...(category && { category }),
@@ -49,17 +45,13 @@ const updatePost = async (req, res) => {
       ...(imageUrl && { imageUrl }),
       ...(nsfw && { nsfw }),
     };
-
     console.log("Applying updates:", updates);
-
     const updatedPost = await Post.findByIdAndUpdate(
       postId,
       { $set: updates },
       { new: true }
     );
-
     console.log("Updated post:", updatedPost);
-
     res.status(200).json({
       message: "Post updated successfully",
       user: updatedPost,

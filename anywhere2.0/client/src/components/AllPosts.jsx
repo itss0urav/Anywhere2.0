@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
+// custom-hooks
 import useSessionStorage from "../hooks/useSessionStorage";
+import useCalculateAge from "../hooks/useCalculateAge";
 // react-icons
 import { SlOptionsVertical } from "react-icons/sl";
 import { MdDeleteOutline, MdReport } from "react-icons/md";
@@ -29,21 +31,7 @@ const AllPosts = () => {
     }
   };
 
-  // to calculate age for post filtering
-  const calculateAge = (dob) => {
-    const currentDate = new Date();
-    const birthDate = new Date(dob);
-    let age = currentDate.getFullYear() - birthDate.getFullYear();
-    const monthDiff = currentDate.getMonth() - birthDate.getMonth();
-    if (
-      monthDiff < 0 ||
-      (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())
-    ) {
-      age--;
-    }
-    return age;
-  };
-  const userAge = user.dob ? calculateAge(user.dob) : 0;
+  const userAge = useCalculateAge(user.dob);
   console.log("Current Age:", userAge);
 
   useEffect(() => {

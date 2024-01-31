@@ -50,7 +50,7 @@ exports.deleteComment = async (req, res) => {
       console.log("Comment not found");
       return res.status(404).json({ message: "Comment not found" });
     }
-    post.comments.pull(req.params.commentId); // Used pull to remove the comment
+    post.comments.pull(req.params.commentId); 
     console.log("Comment removed");
     await post.save();
     console.log("Post saved");

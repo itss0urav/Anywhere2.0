@@ -6,7 +6,6 @@ const Banner = require("../models/bannerModel.js");
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     fs.mkdirSync("public/files", { recursive: true });
-
     cb(null, "public/files");
   },
   filename: (req, file, cb) => {
@@ -24,7 +23,6 @@ exports.uploadBanner = upload.single("photo");
 exports.createBanner = (req, res) => {
   const { name } = req.body;
   const image = req.file.filename;
-
   const banner = new Banner({ name, image });
   banner
     .save()
@@ -49,7 +47,6 @@ exports.deleteBanners = async (req, res) => {
         console.log(`${filePath} was deleted`);
       });
     }
-
     res.status(200).json({ passed: true });
   } catch (err) {
     console.log(err);
