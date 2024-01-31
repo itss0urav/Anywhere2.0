@@ -1,41 +1,19 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
-// import useSessionStorage from "../hooks/useSessionStorage";
 import axios from "../config/axios";
-// import { useNavigate } from "react-router-dom";
-import { MdVerified } from "react-icons/md";
+import Navbar from "../components/Navbar";
 import { SiAdguard } from "react-icons/si";
+import { MdVerified } from "react-icons/md";
 import { useParams } from "react-router-dom";
 
 export default function OtherUserProfile() {
-  // const currentUserFromSession = sessionStorage.getItem("user");
   const { username } = useParams();
-  // const nav = useNavigate();
   const [user, setUser] = useState([]);
-  // const formatDate = (dateString) => {
-  //   const date = new Date(dateString);
-  //   const year = date.getFullYear();
-  //   let month = "" + (date.getMonth() + 1);
-  //   let day = "" + date.getDate();
-  //   if (month.length < 2) month = "0" + month;
-  //   if (day.length < 2) day = "0" + day;
-  //   return [year, month, day].join("-");
-  // };
-
-  // const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
     fetchUser();
 
-    // Set up interval for automatic refresh (every 5 minutes in this example)
-    const refreshInterval = setInterval(
-      fetchUser,
-      // 5 *
-      // 60 *
-      2000
-    );
-
+    const refreshInterval = setInterval(fetchUser, 2000);
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);
     // eslint-disable-next-line
@@ -49,7 +27,6 @@ export default function OtherUserProfile() {
       console.error("Error fetching user:", error);
     }
   };
-  // function handleFollow() {}
 
   return (
     <div>
@@ -68,12 +45,6 @@ export default function OtherUserProfile() {
                 src={user.imageUrl}
                 className=" mb-3 rounded-lg w-[10rem] object-contain mr-8"
               />
-              {/* <button
-                className="w-[10rem] bg-gradient-to-r from-blue-600 to-blue-900 text-blue-100  transition-all duration-200 hover:bg-blue-500 hover:text-white font-bold py-2 px-4 rounded mt-4"
-                onClick={() => handleFollow(user._id)}
-              >
-                Follow
-              </button> */}
             </div>
 
             <dl className="bg-gray-100 border p-4">
@@ -117,18 +88,14 @@ export default function OtherUserProfile() {
               </div>
               <div className="grid grid-cols-3 gap-4 py-4">
                 <dt className="text-sm font-medium text-gray-500">
-                  User Status 
+                  User Status
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 col-span-2">
-                {user.isBanned ? (
-                <div className="inline red-gradient-btn">
-                  Banned
-                </div>
-              ) : (
-                <div className="inline green-gradient-btn">
-                  Active
-                </div>
-              )}
+                  {user.isBanned ? (
+                    <div className="inline red-gradient-btn">Banned</div>
+                  ) : (
+                    <div className="inline green-gradient-btn">Active</div>
+                  )}
                 </dd>
               </div>
             </dl>

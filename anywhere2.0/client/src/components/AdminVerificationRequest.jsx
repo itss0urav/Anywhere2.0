@@ -6,13 +6,7 @@ export default function AdminVerificationRequest() {
   console.log(requests);
   useEffect(() => {
     fetchData();
-    // Set up interval for automatic refresh (every 5 minutes in this example)
-    const refreshInterval = setInterval(
-      fetchData,
-      // 5 *
-      // 60 *
-      2000
-    );
+    const refreshInterval = setInterval(fetchData, 2000);
 
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);
@@ -29,7 +23,7 @@ export default function AdminVerificationRequest() {
   };
   async function handleAcceptRequest(userId, reqId) {
     console.log("changes", userId);
-    // for user collection updation
+
     try {
       await axios.put("users/verification", { userId, reqId });
       console.log("verified sucessfully");
@@ -37,17 +31,9 @@ export default function AdminVerificationRequest() {
     } catch (error) {
       console.error(error);
     }
-
-    //for verification request collection
-    // try {
-    //   await axios.put("users/verification", { userId });
-    //   console.log("verified sucessfully");
-    // } catch (error) {
-    //   console.error(error);
-    // }
   }
   async function handleIgnoreRequest(reqId) {
-    console.log("reqId:", reqId); // Add this line for debugging
+    console.log("reqId:", reqId);
 
     try {
       await axios.delete("users/verification", { data: { reqId } });

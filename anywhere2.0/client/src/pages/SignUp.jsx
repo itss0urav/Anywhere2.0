@@ -3,10 +3,8 @@ import axios from "../config/axios";
 import Logo from "../assets/Anywhere-Transparent.png";
 import { Link, useNavigate } from "react-router-dom";
 import vid from "../assets/v3.mp4";
-import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
-
+import { toast, Toaster } from "react-hot-toast"; 
 const SignUp = () => {
-  // Initialize state variables for form inputs and alert message
   const [username, setUsername] = useState("");
   const [dob, setDob] = useState("");
   const [email, setEmail] = useState("");
@@ -19,7 +17,6 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create user object
     const user = {
       username,
       dob,
@@ -28,7 +25,6 @@ const SignUp = () => {
     };
 
     console.log("Data From Signup", user);
-    // Make POST request
     if (password.length < 8) {
       setAlertMessage("Password looks too short.");
       toast.error("Password looks too short", {
@@ -46,14 +42,12 @@ const SignUp = () => {
         nav("/login");
       } catch (error) {
         console.error(error);
-        // Set alert message on error
         setAlertMessage(
           error.response?.data?.message ||
             "An error occurred while signing up. Please try again."
         );
       }
     } else {
-      // Set alert message for password mismatch
       setAlertMessage("Passwords do not match. Please try again.");
       toast.error("Passwords do not match. Please try again.", {
         style: {

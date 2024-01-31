@@ -14,13 +14,7 @@ export default function AdminSupportList() {
   };
   useEffect(() => {
     fetchSupport();
-    // Set up interval for automatic refresh (every 5 minutes in this example)
-    const refreshInterval = setInterval(
-      fetchSupport,
-      // 5 *
-      // 60 *
-      2000
-    );
+    const refreshInterval = setInterval(fetchSupport, 2000);
 
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);

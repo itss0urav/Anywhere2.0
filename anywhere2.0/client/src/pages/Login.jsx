@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Logo from "../assets/Anywhere-Transparent.png";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "../config/axios";
 import vid from "../assets/v3.mp4";
+import axios from "../config/axios";
+import { toast, Toaster } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import Logo from "../assets/Anywhere-Transparent.png";
 import useSessionStorage from "../hooks/useSessionStorage";
-import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 
 const Login = () => {
   // eslint-disable-next-line
@@ -33,7 +33,6 @@ const Login = () => {
       nav("/home");
     } catch (error) {
       console.error("Error during login:", error);
-      // setAlertMessage("Invalid credentials. Please try again.");
       setAlertMessage(error.response.data.message);
       toast.error(error.response.data.message, {
         style: {
@@ -94,24 +93,6 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-
-          {/* <div className="mb-4 flex items-center">
-            <input
-              type="checkbox"
-              id="remember"
-              name="remember"
-              className="text-blue-500"
-            />
-            <label htmlFor="remember" className="text-gray-600 ml-2">
-              Remember Me
-            </label>
-          </div> */}
-
-          {/* <div className="mb-6 text-blue-500">
-            <Link to="/" className="hover:underline">
-              Forgot Password?
-            </Link>
-          </div> */}
 
           <button
             type="submit"

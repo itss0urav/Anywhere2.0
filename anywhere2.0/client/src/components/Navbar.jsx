@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { MdContactMail, MdBuild, MdInfo } from "react-icons/md";
-import { BsMenuButtonWideFill } from "react-icons/bs";
-import { FaUser } from "react-icons/fa";
-import useSessionStorage from "../hooks/useSessionStorage";
 import Logo from "../assets/Anywhere-Transparent.png";
+import useSessionStorage from "../hooks/useSessionStorage";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+// react-icons
+import { FaUser } from "react-icons/fa";
+import { BsMenuButtonWideFill } from "react-icons/bs";
+import { MdContactMail, MdBuild, MdInfo } from "react-icons/md";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
@@ -19,7 +20,6 @@ const Navbar = () => {
     if (user) {
       const currentDate = new Date();
       const dob = new Date(user.dob);
-
       // Compare only the date parts of the Date objects
       if (
         currentDate.getDate() === dob.getDate() &&

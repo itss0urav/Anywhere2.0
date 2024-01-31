@@ -1,10 +1,9 @@
-// src/components/CreatePostForm.js
-import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import axios from "../config/axios";
 import Navbar from "./Navbar";
+import axios from "../config/axios";
+import { useNavigate } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast"; 
 import useSessionStorage from "../hooks/useSessionStorage";
-import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 
 const CreatePostForm = () => {
   const [user] = useSessionStorage("user");
@@ -30,7 +29,7 @@ const CreatePostForm = () => {
     setPostData((prevPost) => ({ ...prevPost, nsfw: !prevPost.nsfw }));
   };
 
-  const navigate = useNavigate(); // initialize useNavigate
+  const navigate = useNavigate(); 
 
   const handleSubmit = async () => {
     // Set default imageUrl if it's empty
@@ -70,7 +69,7 @@ const CreatePostForm = () => {
         });
 
         setTimeout(() => {
-          navigate("/home"); // navigate to "/home" after 2 seconds
+          navigate("/home");
         }, 2000);
       } catch (error) {
         console.error("Error creating post:", error);

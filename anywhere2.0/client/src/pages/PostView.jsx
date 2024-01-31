@@ -1,16 +1,14 @@
-// PostView.js
-
 import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
-import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { MdDeleteOutline } from "react-icons/md";
+import { toast, Toaster } from "react-hot-toast"; 
 import CommentForm from "../components/CommentForm";
 import PostContainer from "../components/PostContainer";
-import CommentContainer from "../components/CommentContainer";
 import useSessionStorage from "../hooks/useSessionStorage";
-import { MdDeleteOutline } from "react-icons/md";
-import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
-import { useNavigate } from "react-router-dom";
+import CommentContainer from "../components/CommentContainer";
 const PostView = () => {
   const nav = useNavigate();
   const [user] = useSessionStorage("user");

@@ -33,11 +33,9 @@ export default function AdminPostList() {
 
   useEffect(() => {
     fetchPosts();
-    // Set up interval for automatic refresh (every 5 minutes in this example)
     const refreshInterval = setInterval(
       fetchPosts,
-      // 5 *
-      // 60 *
+
       2000
     );
 

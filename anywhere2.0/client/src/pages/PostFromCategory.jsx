@@ -10,7 +10,7 @@ const PostFromCategory = () => {
   const [posts, setPosts] = useState([]);
   const { category } = useParams();
   const [user] = useSessionStorage("user");
-  
+
   const navigate = useNavigate();
 
   // to calculate age for post filtering
@@ -28,8 +28,8 @@ const PostFromCategory = () => {
     return age;
   };
   const userAge = user.dob ? calculateAge(user.dob) : 0;
-  console.log("Current Age:",userAge)
-  
+  console.log("Current Age:", userAge);
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -70,7 +70,7 @@ const PostFromCategory = () => {
             })}
           </div>
           <div className="max-w-[25%] ml-4">
-            <SideComponent  />
+            <SideComponent />
           </div>
         </div>
       </div>

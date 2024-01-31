@@ -1,14 +1,13 @@
-// CommentContainer.js
 import React, { useEffect, useState } from "react";
-import { LuArrowBigUp, LuArrowBigDown } from "react-icons/lu";
-import { BiMessageRounded } from "react-icons/bi";
-import { MdDeleteOutline } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
-
-import { useParams } from "react-router-dom";
 import axios from "../config/axios";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast";
 import useSessionStorage from "../hooks/useSessionStorage";
-import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
+// react-icons
+import { MdDeleteOutline } from "react-icons/md";
+import { BiMessageRounded } from "react-icons/bi";
+import { LuArrowBigUp, LuArrowBigDown } from "react-icons/lu";
 
 export default function CommentContainer() {
   const navigate = useNavigate();
@@ -18,13 +17,7 @@ export default function CommentContainer() {
     console.log("Changes/Access Noticed in Session Data");
     fetchUser();
 
-    // Set up interval for automatic refresh (every 5 minutes in this example)
-    const refreshInterval = setInterval(
-      fetchUser,
-      // 5 *
-      // 60 *
-      2000
-    );
+    const refreshInterval = setInterval(fetchUser, 2000);
 
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);
@@ -42,14 +35,11 @@ export default function CommentContainer() {
   };
 
   const { postId } = useParams();
-  console.log("Post id from comment ", postId);
-
   const [comments, setComments] = useState([]);
   const [reply, setReply] = useState("");
   const [replyingTo, setReplyingTo] = useState(null);
-
-  // Add a state variable for the most liked comment
   const [mostLikedComment, setMostLikedComment] = useState(null);
+  console.log("Post id from comment ", postId);
 
   const fetchComments = async () => {
     try {
@@ -78,13 +68,7 @@ export default function CommentContainer() {
 
   useEffect(() => {
     fetchComments();
-    // Set up interval for automatic refresh (every 5 minutes in this example)
-    const refreshInterval = setInterval(
-      fetchComments,
-      // 5 *
-      // 60 *
-      2000
-    );
+    const refreshInterval = setInterval(fetchComments, 2000);
 
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);

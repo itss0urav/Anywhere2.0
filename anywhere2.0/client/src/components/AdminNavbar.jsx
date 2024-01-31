@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
-import {
-  Link,
-  useNavigate,
-  //  useLocation
-} from "react-router-dom";
-// import { MdContactMail, MdBuild, MdInfo } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
 import { BsMenuButtonWideFill } from "react-icons/bs";
-import { FaUser } from "react-icons/fa";
-import useSessionStorage from "../hooks/useSessionStorage";
 import Logo from "../assets/Anywhere-Transparent.png";
+import useSessionStorage from "../hooks/useSessionStorage";
+import { FaUser } from "react-icons/fa";
 
 const AdminNavbar = () => {
   const [menu, setMenu] = useState(false);
   const [admin] = useSessionStorage("admin");
   const nav = useNavigate();
-  // const location = useLocation();
 
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
@@ -26,7 +20,6 @@ const AdminNavbar = () => {
     sessionStorage.removeItem("admintoken");
     nav("/Login");
   };
-  // const handleLogin = () => nav("/adminLogin");
 
   return (
     <nav className="bg-gradient-to-r from-red-500 to-rose-900 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20">
@@ -41,34 +34,6 @@ const AdminNavbar = () => {
         <div className="flex items-center space-x-4">
           {menu && (
             <div className="flex flex-col md:flex-row gap-3">
-              {/* <input
-                onClick={() => {
-                  if (location.pathname !== "/searchpage") {
-                    nav("/searchpage");
-                  }
-                }}
-                className="rounded p-2 border transition-all duration-200"
-                type="text"
-                placeholder="Search..."
-              /> */}
-              {/* <Link
-                to="/About"
-                className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
-              >
-                <MdInfo className="inline-block mr-1" /> About
-              </Link>
-              <Link
-                to="/Services"
-                className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
-              >
-                <MdBuild className="inline-block mr-1" /> Services
-              </Link>
-              <Link
-                to="/ContactUs"
-                className="bg-blue-800 text-blue-100 rounded px-4 py-2 transition-all duration-200 hover:bg-blue-500 hover:text-white"
-              >
-                <MdContactMail className="inline-block mr-1" /> Contact Us
-              </Link> */}
               <button
                 onClick={() => {
                   nav("/");

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import axios from "../config/axios";
-import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
-// import Navbar from "../components/Navbar";
 import TawkTo from "../config/TawkTo";
-import Logo from "../assets/Anywhere-Transparent.png";
 import { Link } from "react-router-dom";
-
+import { toast, Toaster } from "react-hot-toast";
+import Logo from "../assets/Anywhere-Transparent.png";
 TawkTo();
 
 const Help = () => {
@@ -21,7 +19,6 @@ const Help = () => {
       [e.target.id]: e.target.value,
     });
   };
-
   const handleSubmit = async (e) => {
     console.log(form);
     e.preventDefault();

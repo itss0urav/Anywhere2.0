@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import axios from "../config/axios";
-import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
 import { useNavigate } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast";
 import useSessionStorage from "../hooks/useSessionStorage";
 export default function VerificationForm() {
   const [user] = useSessionStorage("user");
@@ -19,16 +19,15 @@ export default function VerificationForm() {
     companyName: "",
     companyRegNumber: "",
   });
-console.log(formData)
+  console.log(formData);
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
   function handleSubmit() {
     axios
-      .post("/users/verification", formData) // Assuming your backend route is "/admin/verification"
+      .post("/users/verification", formData)
       .then((res) => {
-        // Handle the response
         toast.success("Verification Request Submitted!", {
           style: {
             borderRadius: "10px",
@@ -39,12 +38,11 @@ console.log(formData)
         console.log(res);
 
         setTimeout(() => {
-          navigate("/home"); // navigate to "/home" after 2 seconds
+          navigate("/home");
         }, 2000);
       })
       .catch((err) => {
         console.log(err);
-        // Handle the error, you might want to show an error message to the user
         toast.error("Error submitting verification request");
       });
   }

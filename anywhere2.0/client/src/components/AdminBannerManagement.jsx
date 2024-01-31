@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// axios
 import axios from "../config/axios";
 
 export default function AdminBannerManagement() {
@@ -9,6 +10,10 @@ export default function AdminBannerManagement() {
 
   useEffect(() => {
     fetchData();
+    const refreshInterval = setInterval(fetchData, 2000);
+
+    // Clean up interval on component unmount
+    return () => clearInterval(refreshInterval);
   }, []);
 
   function fetchData() {

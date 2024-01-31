@@ -14,13 +14,7 @@ export default function AdminReportList() {
   };
   useEffect(() => {
     fetchReports();
-    // Set up interval for automatic refresh (every 5 minutes in this example)
-    const refreshInterval = setInterval(
-      fetchReports,
-      // 5 *
-      // 60 *
-      2000
-    );
+    const refreshInterval = setInterval(fetchReports, 2000);
 
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);

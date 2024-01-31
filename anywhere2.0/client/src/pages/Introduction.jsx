@@ -1,16 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-// import v1 from "../assets/v1.mp4";
 import v3 from "../assets/v3.mp4";
+import { Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 function Introduction() {
-  // const bgs = [
-  // v1,
-  //   v3
-  // ];
-  // const videoBg = bgs[Math.floor(Math.random() * bgs.length)];
- 
-
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-900 to-black animate-fade-in-down">
       <video

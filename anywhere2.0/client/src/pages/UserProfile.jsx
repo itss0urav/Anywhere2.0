@@ -5,8 +5,7 @@ import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { MdVerified } from "react-icons/md";
 import { SiAdguard } from "react-icons/si";
-import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
-
+import { toast, Toaster } from "react-hot-toast";
 export default function UserProfile() {
   const nav = useNavigate();
   const [user, setUser] = useSessionStorage("user");
@@ -25,7 +24,6 @@ export default function UserProfile() {
   };
 
   const [formData, setFormData] = useState({
-    // imageUrl: user.imageUrl === "" ? "https://i.pinimg.com/originals/36/ca/c0/36cac052d0c16bbf663b013495e53b97.jpg" : user.imageUrl,
     imageUrl: user.imageUrl,
     userId: user._id,
     username: user.username,
@@ -53,13 +51,7 @@ export default function UserProfile() {
     }
     fetchUser();
 
-    // Set up interval for automatic refresh (every 5 minutes in this example)
-    const refreshInterval = setInterval(
-      fetchUser,
-      // 5 *
-      // 60 *
-      2000
-    );
+    const refreshInterval = setInterval(fetchUser, 2000);
 
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);
@@ -106,7 +98,7 @@ export default function UserProfile() {
             },
           });
           sessionStorage.removeItem("user");
-          setUser(response.data.user); // This should update the session data
+          setUser(response.data.user);
           console.log("Updated User from server", response.data.user);
           setEditMode(false);
         } else {
@@ -230,10 +222,7 @@ export default function UserProfile() {
                   className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
-              <button
-                type="submit"
-                className="blue-gradient-btn w-full"
-              >
+              <button type="submit" className="blue-gradient-btn w-full">
                 Submit
               </button>
             </form>

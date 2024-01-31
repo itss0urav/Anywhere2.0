@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import Logo from "../assets/Anywhere-Transparent.png";
-import { useNavigate } from "react-router-dom";
-import axios from "../config/axios";
 import vid from "../assets/v3.mp4";
+import axios from "../config/axios";
+import { useNavigate } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast"; 
+import Logo from "../assets/Anywhere-Transparent.png";
 import useSessionStorage from "../hooks/useSessionStorage";
-import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
-
 const AdminLogin = () => {
   // eslint-disable-next-line
   const [user, setUser] = useSessionStorage("user");

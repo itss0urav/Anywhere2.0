@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
-import { MdDeleteOutline, MdReport } from "react-icons/md";
-import useSessionStorage from "../hooks/useSessionStorage";
 import { toast, Toaster } from "react-hot-toast";
+import useSessionStorage from "../hooks/useSessionStorage";
+// react-icons
 import { SlOptionsVertical } from "react-icons/sl";
+import { MdDeleteOutline, MdReport } from "react-icons/md";
 import { LuArrowBigUp, LuArrowBigDown, LuFileEdit } from "react-icons/lu";
 
 const AllPosts = () => {
-
-
   const [user, setUser] = useSessionStorage("user");
   const [posts, setPosts] = useState([]);
+  console.log(posts);
   const [blurStatus, setBlurStatus] = useState({});
   const [showOptions, setShowOptions] = useState(false);
   const navigate = useNavigate();
@@ -44,19 +44,11 @@ const AllPosts = () => {
     return age;
   };
   const userAge = user.dob ? calculateAge(user.dob) : 0;
-  console.log("Current Age:",userAge)
+  console.log("Current Age:", userAge);
 
-
-  
   useEffect(() => {
     fetchPosts();
-    // Set up interval for automatic refresh (every 5 minutes in this example)
-    const refreshInterval = setInterval(
-      fetchUser,
-      // 5 *
-      // 60 *
-      2000
-    );
+    const refreshInterval = setInterval(fetchUser, 2000);
 
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);
@@ -232,19 +224,9 @@ const AllPosts = () => {
                           {post.author}
                         </div>
                       </div>
-                      {/* {user.username === post.author && ( */}
                       <div className="flex">
                         <div className="relative inline-block text-left">
                           <div>
-                            {/* <button
-                              type="button"
-                              className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
-                              id="options-menu"
-                              aria-haspopup="true"
-                              aria-expanded="true"
-                              onClick={handleShowOptions}
-                              >
-                            </button> */}
                             <SlOptionsVertical
                               onClick={handleShowOptions}
                               className="text-xl"
@@ -300,7 +282,6 @@ const AllPosts = () => {
                           )}
                         </div>
                       </div>
-                      {/* )} */}
                     </div>
                     {post.nsfw && (
                       <p className="inline rounded-sm text-red-600 border border-red-800 text-sm mt-4 pr-1 pl-1">

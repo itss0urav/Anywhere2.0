@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "../config/axios";
 import Navbar from "../components/Navbar";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast"; // import react-hot-toast
-
+import { toast, Toaster } from "react-hot-toast"; 
 export default function EditPostPage() {
-  const navigate = useNavigate(); // initialize useNavigate
-
+  const navigate = useNavigate(); 
   const { postId } = useParams();
   const [formData, setFormData] = useState({
     name: "",
@@ -56,7 +54,7 @@ export default function EditPostPage() {
 
     try {
       console.log("Data from update form:", formData);
-      await axios.put(`/posts/edit/${postId}`, formData); // Replace with your backend API endpoint
+      await axios.put(`/posts/edit/${postId}`, formData); 
       console.log("Post updated successfully!");
       toast.success("Post updated successfully!", {
         style: {
@@ -66,7 +64,7 @@ export default function EditPostPage() {
         },
       });
       setTimeout(() => {
-        navigate("/home"); // navigate to "/home" after 2 seconds
+        navigate("/home"); 
       }, 2000);
     } catch (error) {
       console.error("Error updating post:", error);

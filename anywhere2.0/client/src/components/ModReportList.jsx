@@ -14,11 +14,8 @@ export default function ModReportList() {
   };
   useEffect(() => {
     fetchReports();
-    // Set up interval for automatic refresh (every 5 minutes in this example)
     const refreshInterval = setInterval(
       fetchReports,
-      // 5 *
-      // 60 *
       2000
     );
 

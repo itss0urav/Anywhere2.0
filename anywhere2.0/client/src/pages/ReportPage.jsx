@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
-import axios from "../config/axios";
-import useSessionStorage from "../hooks/useSessionStorage";
-import Navbar from "../components/Navbar";
 import v1 from "../assets/v2.mp4";
+import axios from "../config/axios";
+import Navbar from "../components/Navbar";
+import useSessionStorage from "../hooks/useSessionStorage";
 
 export default function ReportPage() {
   const [user] = useSessionStorage("user");
@@ -29,7 +29,7 @@ export default function ReportPage() {
             },
           });
           setTimeout(() => {
-            navigate("/home"); // navigate to "/home" after 2 seconds
+            navigate("/home"); 
           }, 2000);
         })
         .catch((err) => console.log(err));

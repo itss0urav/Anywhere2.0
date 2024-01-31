@@ -13,7 +13,7 @@ import ContactUsPage from "./pages/ContactUsPage";
 import ServicesPage from "./pages/ServicesPage";
 import PostView from "./pages/PostView";
 import EditPostPage from "./pages/EditPostPage";
-import PostFromCategory from "./pages/PostFromCategory"; // Import the new page
+import PostFromCategory from "./pages/PostFromCategory";
 import SearchPage from "./pages/SearchPage";
 import AdminLogin from "./pages/AdminLogin";
 import ReportPage from "./pages/ReportPage";
@@ -21,15 +21,18 @@ import UserProfile from "./pages/UserProfile";
 import OtherUserProfile from "./pages/OtherUserProfile";
 
 //components
-import CreatePostForm from "./components/CreatePostForm";
-import Admin from "./components/Admin";
-import VerificationForm from "./components/VerificationForm";
 import Mod from "./components/Mod";
+import Admin from "./components/Admin";
+import CreatePostForm from "./components/CreatePostForm";
+import VerificationForm from "./components/VerificationForm";
 
 //context
 // import GlobalContext from "./contexts/Context";
 function App() {
-  console.warn("%cMessage from Anywhere Admin", "color: cyan; font-size: 15px;");
+  console.warn(
+    "%cMessage from Anywhere Admin",
+    "color: cyan; font-size: 15px;"
+  );
   console.warn(
     "%cStop",
     "color: red; font-size: 15px;",

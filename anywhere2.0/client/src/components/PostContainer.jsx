@@ -1,9 +1,9 @@
 // PostContainer.js
 import React, { useState } from "react";
-import { LuArrowBigUp, LuArrowBigDown } from "react-icons/lu";
 import axios from "../config/axios";
-import useSessionStorage from "../hooks/useSessionStorage";
 import { useNavigate } from "react-router-dom";
+import useSessionStorage from "../hooks/useSessionStorage";
+import { LuArrowBigUp, LuArrowBigDown } from "react-icons/lu";
 
 const PostContainer = ({ value, onClick }) => {
   const [blurStatus, setBlurStatus] = useState(true);
@@ -35,7 +35,7 @@ const PostContainer = ({ value, onClick }) => {
       });
 
       console.log("Upvote response:", response.data);
-      window.location.reload(); // Add this line
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }

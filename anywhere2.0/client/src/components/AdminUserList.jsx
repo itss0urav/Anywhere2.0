@@ -16,13 +16,7 @@ export default function AdminUserList() {
       }
     };
     fetchData();
-    // Set up interval for automatic refresh (every 5 minutes in this example)
-    const refreshInterval = setInterval(
-      fetchData,
-      // 5 *
-      // 60 *
-      2000
-    );
+    const refreshInterval = setInterval(fetchData, 2000);
 
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);
@@ -86,24 +80,16 @@ export default function AdminUserList() {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 {user.isMod ? (
-                  <div className="green-gradient-btn">
-                    Yes
-                  </div>
+                  <div className="green-gradient-btn">Yes</div>
                 ) : (
-                  <div className="red-gradient-btn">
-                    No
-                  </div>
+                  <div className="red-gradient-btn">No</div>
                 )}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 {user.isBanned ? (
-                  <div className="red-gradient-btn">
-                    Banned
-                  </div>
+                  <div className="red-gradient-btn">Banned</div>
                 ) : (
-                  <div className="green-gradient-btn">
-                    Active
-                  </div>
+                  <div className="green-gradient-btn">Active</div>
                 )}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">

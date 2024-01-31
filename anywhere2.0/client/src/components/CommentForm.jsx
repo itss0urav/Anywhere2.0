@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-// import { LuArrowBigUp, LuArrowBigDown } from "react-icons/lu";
 import axios from "../config/axios";
-import useSessionStorage from "../hooks/useSessionStorage";
+import { toast } from "react-hot-toast"; 
 import { useParams } from "react-router-dom";
-import { toast } from "react-hot-toast"; // import react-hot-toast
+import useSessionStorage from "../hooks/useSessionStorage";
 
 const CommentForm = () => {
   const { postId } = useParams();

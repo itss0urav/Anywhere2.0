@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
+// axios
 import axios from "../config/axios";
 
 export default function AdminInsights() {
   useEffect(() => {
     fetchInsights();
-    // Set up interval for automatic refresh (every 5 minutes in this example)
-    const refreshInterval = setInterval(
-      fetchInsights,
-      // 5 *
-      // 60 *
-      2000
-    );
+    const refreshInterval = setInterval(fetchInsights, 2000);
 
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);

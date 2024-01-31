@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+// components
 import AdminNavbar from "./AdminNavbar";
 import AdminUserList from "./AdminUserList";
+import AdminInsights from "./AdminInsights";
 import AdminPostList from "./AdminPostList";
 import AdminReportList from "./AdminReportList";
-import AdminVerificationRequest from "./AdminVerificationRequest";
 import AdminSupportList from "./AdminSupportList";
-import AdminInsights from "./AdminInsights";
 import AdminBannerManagement from "./AdminBannerManagement";
+import AdminVerificationRequest from "./AdminVerificationRequest";
 
 export default function Admin() {
   const [currentOption, setCurrentOption] = useState("");

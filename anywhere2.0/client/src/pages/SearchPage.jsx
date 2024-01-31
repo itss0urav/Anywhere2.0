@@ -17,7 +17,6 @@ const SearchPage = () => {
   const [postName, setPostName] = useState("");
   const navigate = useNavigate();
 
-  // to calculate age for post filtering
   const calculateAge = (dob) => {
     const currentDate = new Date();
     const birthDate = new Date(dob);
@@ -51,13 +50,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     fetchPosts();
-    // Set up interval for automatic refresh (every 5 minutes in this example)
-    const refreshInterval = setInterval(
-      fetchUser,
-      // 5 *
-      // 60 *
-      2000
-    );
+    const refreshInterval = setInterval(fetchUser, 2000);
 
     // Clean up interval on component unmount
     return () => clearInterval(refreshInterval);
@@ -160,7 +153,6 @@ const SearchPage = () => {
                         {post.author}
                       </div>
                     </div>
-                    {/* {user.username === post.author && ( */}
                     <div className="relative inline-block text-left">
                       <div>
                         <button
@@ -225,7 +217,6 @@ const SearchPage = () => {
                         </div>
                       )}
                     </div>
-                    {/* )} */}
                   </div>
 
                   {post.nsfw && (
