@@ -19,65 +19,6 @@ Anywhere2.0 : [https://github.com/itss0urav/Anywhere2.0]
 
 ## Features
 
-<!-- ### Admin
-
-- Login
-- View Users
-- Ban & Unban Users
-- Delete Posts
-- Read Feedback/Support request and ignore or delete them
-- View Verification requests and ignore or delete them
-- View Reported Posts and ignore or delete them
-- Assign Moderator
-- Manage Banner (Create and Remove)
-- Server Insights
-  [
-  - - totalUsers,
-  - - totalActiveUsers,
-  - - totalBannedUsers,
-  - - totalAdmins,
-  - - totalMods,
-  - - totalPosts,
-  - - totalReports,
-  - - totalSupport,
-  - - totalVerifiedUsers,
-  - - totalVerificationRequests
-      ]
-
-### User
-
-- Login/SignUp
-- Create Post
-- Edit Post
-- Comment on post
-- Delete own post & comments & replies
-- Reply to comments
-- View banner content (announcement & ads)
-- Search posts
-- UpVote or Downvote Posts & Comments
-- View the votes on any post and comments
-- View most engaging comment of a post
-- Report a post
-- Select a category of posts
-- Apply for profile verification
-- verified users can view total number of posts created at profile
-- View profile
-- Update Profile
-- View Other's profile
-- Profile updation
-- Request for Help or Provide feedbacks
-- Chat with Admin [Real time chat enabled using Tawk.to Chatbot API]
-
-### Moderator
-
-- Delete Post
-- Delete comments
-- Delete Replies
-- Read Reports and take actions(ignore or delete post)
-- Ban user
-- Unban User -->
-  <!--  -->
-
 ## Admin Features
 
 ### User Management
@@ -165,8 +106,6 @@ Anywhere2.0 : [https://github.com/itss0urav/Anywhere2.0]
 
 Read Reports and take actions(ignore or delete post)
 
-<!--  -->
-
 ## Features
 
 ### Birthday Wishes
@@ -206,3 +145,17 @@ function TawkTo() {
 }
 export default TawkTo;
 </pre>
+
+# Preview
+
+## User
+
+<img src="/anywhere2.0/client/src/assets/Screenshots/User.png">
+
+## Moderator
+
+<img src="/anywhere2.0/client/src/assets/Screenshots/Moderator.png">
+
+## Admin
+
+<img src="/anywhere2.0/client/src/assets/Screenshots/Admin.png">

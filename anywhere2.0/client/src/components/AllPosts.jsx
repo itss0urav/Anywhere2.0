@@ -240,19 +240,21 @@ const AllPosts = () => {
                                   <MdReport className="inline-block mr-2 text-red-700 text-xl" />
                                   Report
                                 </button>
+                                {user.username === post.author && (
+                                  <button
+                                    onClick={(event) => {
+                                      handleEditPost(event, post._id);
+                                    }}
+                                    className="block  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                    role="menuitem"
+                                  >
+                                    <LuFileEdit className="inline-block mr-2 text-red-700 text-xl" />
+                                    Edit
+                                  </button>
+                                )}
                                 {(user.username === post.author ||
                                   user.isMod) && (
                                   <div>
-                                    <button
-                                      onClick={(event) => {
-                                        handleEditPost(event, post._id);
-                                      }}
-                                      className="block  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                                      role="menuitem"
-                                    >
-                                      <LuFileEdit className="inline-block mr-2 text-red-700 text-xl" />
-                                      Edit
-                                    </button>
                                     <button
                                       onClick={(event) => {
                                         handleDeletePost(event, post._id);
