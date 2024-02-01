@@ -1,32 +1,15 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
 # Anywhere 2.0
-
-## [Re-Use Not Allowed for now]
 
 [Remastered Version of "Anywhere" by myself @[itss0urav] ]
 
-My GitHub:[https://github.com/itss0urav]
-My Linkedin:[https://www.linkedin.com/in/itssourav/]
+- My GitHub:[https://github.com/itss0urav]
+- My Linkedin:[https://www.linkedin.com/in/itssourav/]
 
 Anywhere :
--client [https://github.com/itss0urav/Anywhere-frontend]
--server [https://github.com/itss0urav/Anywhere-BackEnd]
--admin [https://github.com/itss0urav/Anywhere-Admin]
+
+- client [https://github.com/itss0urav/Anywhere-frontend]
+- server [https://github.com/itss0urav/Anywhere-BackEnd]
+- admin [https://github.com/itss0urav/Anywhere-Admin]
 
 Anywhere2.0 : [https://github.com/itss0urav/Anywhere2.0]
 
@@ -36,7 +19,7 @@ Anywhere2.0 : [https://github.com/itss0urav/Anywhere2.0]
 
 ## Features
 
-### Admin
+<!-- ### Admin
 
 - Login
 - View Users
@@ -46,22 +29,36 @@ Anywhere2.0 : [https://github.com/itss0urav/Anywhere2.0]
 - View Verification requests and ignore or delete them
 - View Reported Posts and ignore or delete them
 - Assign Moderator
+- Manage Banner (Create and Remove)
+- Server Insights
+  [
+  - - totalUsers,
+  - - totalActiveUsers,
+  - - totalBannedUsers,
+  - - totalAdmins,
+  - - totalMods,
+  - - totalPosts,
+  - - totalReports,
+  - - totalSupport,
+  - - totalVerifiedUsers,
+  - - totalVerificationRequests
+      ]
 
 ### User
 
 - Login/SignUp
 - Create Post
-- Create Comment
-- Reply to Comments
-- NSFW posts are only accessible to 18+
+- Edit Post
+- Comment on post
+- Delete own post & comments & replies
+- Reply to comments
+- View banner content (announcement & ads)
 - Search posts
-- Delete own post & comments
 - UpVote or Downvote Posts & Comments
 - View the votes on any post and comments
 - View most engaging comment of a post
 - Report a post
 - Select a category of posts
-- Provide Feedback
 - Apply for profile verification
 - verified users can view total number of posts created at profile
 - View profile
@@ -75,9 +72,99 @@ Anywhere2.0 : [https://github.com/itss0urav/Anywhere2.0]
 
 - Delete Post
 - Delete comments
+- Delete Replies
 - Read Reports and take actions(ignore or delete post)
 - Ban user
+- Unban User -->
+  <!--  -->
+
+## Admin Features
+
+### User Management
+
+- Login
+- View Users
+- Ban & Unban Users
+- Assign Moderator
+
+### Post Management
+
+- Delete Posts
+- View Reported Posts and ignore or delete them
+
+### Feedback and Support
+
+- Read Feedback/Support request and ignore or delete them
+
+### Verification Management
+
+- View Verification requests and ignore or delete them
+
+### Banner Management
+
+- Manage Banner (Create and Remove)
+
+### Server Insights
+
+- Total Users
+- Total Active Users
+- Total Banned Users
+- Total Admins
+- Total Moderators
+- Total Posts
+- Total Reports
+- Total Support
+- Total Verified Users
+- Total Verification Requests
+- User Features
+
+### Account Management
+
+- Login/SignUp
+- View Profile
+- Update Profile
+- Apply for profile verification
+- Verified users can view total number of posts created at profile
+
+### Post Interaction
+
+- Create Post
+- Edit Post
+- Comment on post
+- Reply to comments
+- Delete own post & comments & replies
+- UpVote or Downvote Posts & Comments
+- View the votes on any post and comments
+- View most engaging comment of a post
+- Report a post
+- Select a category of posts
+
+### Community Interaction
+
+- View banner content (announcement & ads)
+- Search posts
+- View Other’s profile
+- Request for Help or Provide feedbacks
+- Chat with Admin [Real time chat enabled using Tawk.to Chatbot API]
+
+## Moderator Features
+
+### Post Management
+
+- Delete Post
+- Delete comments
+- Delete Replies
+
+### User Management
+
+- Ban user
 - Unban User
+
+### Report Management
+
+Read Reports and take actions(ignore or delete post)
+
+<!--  -->
 
 ## Features
 
@@ -91,10 +178,10 @@ Anywhere 2.0 goes beyond just discussions and community engagement. We celebrate
 
 .env
 
--PORT=
--MONGODB_URI=
--JWT_SECRET =
--REACT_APP_API_BASE_URL=
+- PORT=
+- MONGODB_URI=
+- JWT_SECRET =
+- REACT_APP_API_BASE_URL=
 
 ## TawkTo
 
@@ -102,17 +189,19 @@ Place tawkto.js inside client/src/config
 
 For more info Visit :[https://www.tawk.to/]
 
+<pre>
 function TawkTo() {
-var Tawk_API = Tawk_API || {},
-Tawk_LoadStart = new Date();
-(function () {
-var s1 = document.createElement("script"),
-s0 = document.getElementsByTagName("script")[0];
-s1.async = true;
-s1.src = "REPLACE WITH YOUR URL";
-s1.charset = "UTF-8";
-s1.setAttribute("crossorigin", "\*");
-s0.parentNode.insertBefore(s1, s0);
+  var Tawk_API = Tawk_API || {},
+  Tawk_LoadStart = new Date();
+  (function () {
+  var s1 = document.createElement("script"),
+  s0 = document.getElementsByTagName("script")[0];
+  s1.async = true;
+  s1.src = "REPLACE WITH YOUR URL";
+  s1.charset = "UTF-8";
+  s1.setAttribute("crossorigin", "\*");
+  s0.parentNode.insertBefore(s1, s0);
 })();
 }
 export default TawkTo;
+</pre>
