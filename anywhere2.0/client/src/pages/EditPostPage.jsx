@@ -3,9 +3,9 @@ import axios from "../config/axios";
 import Navbar from "../components/Navbar";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast"; 
+import { toast, Toaster } from "react-hot-toast";
 export default function EditPostPage() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const { postId } = useParams();
   const [formData, setFormData] = useState({
     name: "",
@@ -14,6 +14,7 @@ export default function EditPostPage() {
     imageUrl: "",
     nsfw: false,
   });
+  console.log("toogle data", formData);
   const fetchData = async () => {
     try {
       const response = await axios.get(`/posts/${postId}`);
@@ -32,7 +33,7 @@ export default function EditPostPage() {
 
   useEffect(() => {
     fetchData();
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [postId]);
 
   const handleInputChange = (e) => {
@@ -43,10 +44,10 @@ export default function EditPostPage() {
   };
 
   const handleCheckboxChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.checked,
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: !prevData[e.target.name],
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -54,7 +55,7 @@ export default function EditPostPage() {
 
     try {
       console.log("Data from update form:", formData);
-      await axios.put(`/posts/edit/${postId}`, formData); 
+      await axios.put(`/posts/edit/${postId}`, formData);
       console.log("Post updated successfully!");
       toast.success("Post updated successfully!", {
         style: {
@@ -64,7 +65,7 @@ export default function EditPostPage() {
         },
       });
       setTimeout(() => {
-        navigate("/home"); 
+        navigate("/home");
       }, 2000);
     } catch (error) {
       console.error("Error updating post:", error);

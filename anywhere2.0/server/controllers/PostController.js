@@ -18,7 +18,7 @@ const createPost = async (req, res) => {
 
 const getPosts = async (req, res) => {
   try {
-    console.log("Fetching posts every 2 sec on focus...")
+    console.log("Fetching posts every 2 sec on focus...");
     const posts = await Post.find();
     res.json(posts);
   } catch (error) {
@@ -43,8 +43,10 @@ const updatePost = async (req, res) => {
       ...(category && { category }),
       ...(description && { description }),
       ...(imageUrl && { imageUrl }),
-      ...(nsfw && { nsfw }),
     };
+    if (typeof nsfw !== "undefined") {
+      updates.nsfw = nsfw;
+    }
     console.log("Applying updates:", updates);
     const updatedPost = await Post.findByIdAndUpdate(
       postId,
