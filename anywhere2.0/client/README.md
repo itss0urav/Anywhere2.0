@@ -116,7 +116,8 @@ Anywhere2.0 : [https://github.com/itss0urav/Anywhere2.0]
 - Total Support
 - Total Verified Users
 - Total Verification Requests
-- User Features
+
+## User Features
 
 ### Account Management
 
