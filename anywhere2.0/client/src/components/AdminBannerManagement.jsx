@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 // axios
 import axios from "../config/axios";
 import { toast } from "react-hot-toast";
-
+import ProtectedUrls from "../config/ProtectedUrls";
 export default function AdminBannerManagement() {
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState(null);
   const [bannerData, setBannerData] = useState([]);
-  const imagePath = "http://localhost:5000/files/";
+  const imagePath = ProtectedUrls.bannerPath;
 
   useEffect(() => {
     fetchData();
@@ -64,7 +64,6 @@ export default function AdminBannerManagement() {
 
   return (
     <div>
-      
       <div className="flex flex-col items-center justify-center">
         <div className="w-3/4">
           <div className="  bg-gradient-to-r from-red-500 to-rose-900 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20">

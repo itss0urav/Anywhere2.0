@@ -4,6 +4,10 @@
 /node_modules
 /src/config/tawkto
 /src/config/tawkto.js
+/src/config/ProtectedUrls
+/src/config/ProtectedUrls.js
+
+
 /.pnp
 .pnp.js
 
