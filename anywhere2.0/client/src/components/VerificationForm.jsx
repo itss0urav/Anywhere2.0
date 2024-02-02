@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import useSessionStorage from "../hooks/useSessionStorage";
 export default function VerificationForm() {
   const [user] = useSessionStorage("user");
@@ -50,9 +50,7 @@ export default function VerificationForm() {
   return (
     <div className="">
       <Navbar />
-      <div>
-        <Toaster />
-      </div>
+      
 
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
         <form className="w-full max-w-sm bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">

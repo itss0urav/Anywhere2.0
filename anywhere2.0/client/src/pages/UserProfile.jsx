@@ -5,7 +5,7 @@ import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { MdVerified } from "react-icons/md";
 import { SiAdguard } from "react-icons/si";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 export default function UserProfile() {
   const nav = useNavigate();
   const [user, setUser] = useSessionStorage("user");
@@ -124,9 +124,6 @@ export default function UserProfile() {
   if (editMode) {
     return (
       <div>
-        <div>
-          <Toaster />
-        </div>
         <Navbar />
         <div className="container mx-auto px-4">
           <div className="bg-white shadow-md rounded-lg p-6 mt-4">
@@ -233,9 +230,6 @@ export default function UserProfile() {
   } else {
     return (
       <div>
-        <div>
-          <Toaster />
-        </div>
         <Navbar />
         <div className="container mx-auto p-8">
           <div className="bg-white shadow-md rounded-lg p-8 mt-4">

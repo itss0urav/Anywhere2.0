@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 // custom-hooks
 import useSessionStorage from "../hooks/useSessionStorage";
 import useCalculateAge from "../hooks/useCalculateAge";
@@ -155,9 +155,6 @@ const AllPosts = () => {
 
   return (
     <div className="w-2/4 p-4 flex flex-col justify-center items-center space-y-4">
-      <div>
-        <Toaster />
-      </div>
       <h1 className="text-3xl font-bold mb-4 text-blue-700">
         {posts.length === 0 ? "No Posts" : "All Posts"}
       </h1>

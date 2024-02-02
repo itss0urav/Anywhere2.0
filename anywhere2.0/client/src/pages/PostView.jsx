@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
-import { toast, Toaster } from "react-hot-toast"; 
+import { toast } from "react-hot-toast"; 
 import CommentForm from "../components/CommentForm";
 import PostContainer from "../components/PostContainer";
 import useSessionStorage from "../hooks/useSessionStorage";
@@ -66,9 +66,7 @@ const PostView = () => {
   return (
     <div className="">
       <Navbar />
-      <div>
-        <Toaster />
-      </div>
+     
       {user.username === post.author || user.isMod ? (
         <div className="flex justify-end items-center p-4">
           <button

@@ -3,7 +3,7 @@ import axios from "../config/axios";
 import Navbar from "../components/Navbar";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 export default function EditPostPage() {
   const navigate = useNavigate();
   const { postId } = useParams();
@@ -75,9 +75,7 @@ export default function EditPostPage() {
   return (
     <div className="">
       <Navbar />
-      <div>
-        <Toaster />
-      </div>
+      
       <div className="">
         <div className="flex flex-col justify-center items-center mx-auto p-6 ">
           <h2 className="text-2xl font-bold mb-4">Edit Post</h2>

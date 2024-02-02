@@ -51,6 +51,11 @@ const UserController = {
   createUser: async (req, res) => {
     try {
       const { username, dob, email, password } = req.body;
+      if (username.toLowerCase() === "admin") {
+        return res.status(400).json({
+          message: "Admin is a reserved username, Try different username",
+        });
+      }
       const userFromDatabase = await User.findOne({ username });
       if (!userFromDatabase) {
         const salt = await bcrypt.genSalt(10);

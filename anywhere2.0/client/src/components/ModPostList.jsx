@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 export default function ModPostList() {
   const [posts, setPosts] = useState([]);
@@ -41,9 +41,7 @@ export default function ModPostList() {
 
   return (
     <div>
-      <div>
-        <Toaster />
-      </div>
+     
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>

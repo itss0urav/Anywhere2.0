@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import v1 from "../assets/v2.mp4";
 import axios from "../config/axios";
 import Navbar from "../components/Navbar";
@@ -56,9 +56,7 @@ export default function ReportPage() {
       />
       <Navbar />
       <div className="flex items-center justify-center h-screen  z-20">
-        <div>
-          <Toaster />
-        </div>
+        
         <div className="w-full max-w-md shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-white bg-opacity-80">
           <h2 className="pb-5 text-2xl font-bold text-center text-gray-800">
             Report Post

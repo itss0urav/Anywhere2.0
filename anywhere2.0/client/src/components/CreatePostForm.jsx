@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast"; 
+import { toast } from "react-hot-toast";
 import useSessionStorage from "../hooks/useSessionStorage";
 
 const CreatePostForm = () => {
@@ -29,7 +29,7 @@ const CreatePostForm = () => {
     setPostData((prevPost) => ({ ...prevPost, nsfw: !prevPost.nsfw }));
   };
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     // Set default imageUrl if it's empty
@@ -102,9 +102,7 @@ const CreatePostForm = () => {
   return (
     <div className="">
       <Navbar />
-      <div>
-        <Toaster />
-      </div>
+     
       <div className="flex flex-col items-center justify-center mt-4">
         <div className="font-bold mb-4 text-2xl">Start Discussion here</div>
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "../config/axios";
 import TawkTo from "../config/TawkTo";
 import { Link } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import Logo from "../assets/Anywhere-Transparent.png";
 TawkTo();
 
@@ -60,9 +60,7 @@ const Help = () => {
         <div className="">Give feedback or raise an issue here</div>
       </div>
       <div className="flex flex-col items-center justify-center  bg-gray-100">
-        <div>
-          <Toaster />
-        </div>
+        
         <div className="mt-8 w-full min-h-screen max-w-md">
           <form
             onSubmit={handleSubmit}

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-
+import { Toaster } from 'react-hot-toast';
 //pages
 import Help from "./pages/Help";
 import Home from "./pages/Home";
@@ -21,7 +21,8 @@ import OtherUserProfile from "./pages/OtherUserProfile";
 
 //components
 import Mod from "./components/Mod";
-import Admin from "./components/Admin";
+// import Admin from "./components/Admin";
+import { AdminWrapper } from "./components/AdminWrapper";
 import CreatePostForm from "./components/CreatePostForm";
 import VerificationForm from "./components/VerificationForm";
 
@@ -38,6 +39,7 @@ function App() {
 
   return (
     <div className="App">
+       <Toaster />
       <BrowserRouter>
         <Routes>
           {/* pages */}
@@ -52,14 +54,18 @@ function App() {
           <Route path="/UserProfile" element={<UserProfile />} />
           <Route path="/posts/:postId" element={<PostView />} />
           <Route path="/posts/edit/:postId" element={<EditPostPage />} />
-          <Route path="/posts/category/:category" element={<PostFromCategory />}/>
+          <Route
+            path="/posts/category/:category"
+            element={<PostFromCategory />}
+          />
           <Route path="/profile/:username" element={<OtherUserProfile />} />
           <Route path="/ContactUs" element={<ContactUsPage />} />
           <Route path="/Services" element={<ServicesPage />} />
           <Route path="/searchpage" element={<SearchPage />} />
           {/* Components */}
           <Route path="/modhome" element={<Mod />} />
-          <Route path="/adminhome" element={<Admin />} />
+          {/* <Route path="/adminhome" element={<Admin />} /> */}
+          <Route path="/adminhome" element={<AdminWrapper />} />
           <Route path="/verification" element={<VerificationForm />} />
           <Route path="/createpostform" element={<CreatePostForm />} />
         </Routes>

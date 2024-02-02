@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import useSessionStorage from "../hooks/useSessionStorage";
 // react-icons
 import { MdDeleteOutline } from "react-icons/md";
@@ -212,9 +212,7 @@ export default function CommentContainer() {
 
   return (
     <div className="mt-4 p-4 max-w-xl mx-auto bg-white rounded-xl shadow-md space-y-4 sm:py-4">
-      <div>
-        <Toaster />
-      </div>
+     
       <h2 className="text-3xl font-bold text-center">Comments</h2>
       {mostLikedComment && (
         <div className="bg-green-100 p-4 rounded-md">

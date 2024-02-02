@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import vid from "../assets/v3.mp4";
 import axios from "../config/axios";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/Anywhere-Transparent.png";
 import useSessionStorage from "../hooks/useSessionStorage";
@@ -46,9 +46,7 @@ const Login = () => {
 
   return (
     <div className="bg-white flex justify-center items-center h-screen">
-      <div>
-        <Toaster />
-      </div>
+    
 
       <div className="w-2/4 h-screen hidden lg:block relative">
         <video

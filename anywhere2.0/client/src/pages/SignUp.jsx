@@ -3,7 +3,7 @@ import axios from "../config/axios";
 import Logo from "../assets/Anywhere-Transparent.png";
 import { Link, useNavigate } from "react-router-dom";
 import vid from "../assets/v3.mp4";
-import { toast, Toaster } from "react-hot-toast"; 
+import { toast } from "react-hot-toast";
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [dob, setDob] = useState("");
@@ -42,6 +42,13 @@ const SignUp = () => {
         nav("/login");
       } catch (error) {
         console.error(error);
+        toast.error(error.response?.data?.message, {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
         setAlertMessage(
           error.response?.data?.message ||
             "An error occurred while signing up. Please try again."
@@ -61,9 +68,7 @@ const SignUp = () => {
 
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
-      <div>
-        <Toaster />
-      </div>
+      
       {/* Left: Image */}
       <div className="w-2/4 h-screen hidden lg:block relative">
         <video

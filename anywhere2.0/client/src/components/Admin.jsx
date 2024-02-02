@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // components
 import AdminNavbar from "./AdminNavbar";
 import AdminUserList from "./AdminUserList";
@@ -8,8 +9,17 @@ import AdminReportList from "./AdminReportList";
 import AdminSupportList from "./AdminSupportList";
 import AdminBannerManagement from "./AdminBannerManagement";
 import AdminVerificationRequest from "./AdminVerificationRequest";
+import useSessionStorage from "../hooks/useSessionStorage";
 
 export default function Admin() {
+  const nav = useNavigate();
+  const [user] = useSessionStorage("user");
+  useEffect(() => {
+    if (user && user.username !== "admin") {
+      console.log("access restricted");
+      nav("/");
+    }
+  }, []);
   const [currentOption, setCurrentOption] = useState("");
   return (
     <div className="bg-blue-50 min-h-screen">

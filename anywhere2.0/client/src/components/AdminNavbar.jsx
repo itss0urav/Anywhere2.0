@@ -16,8 +16,8 @@ const AdminNavbar = () => {
 
   const handleMenu = () => setMenu(!menu);
   const handleLogout = () => {
-    sessionStorage.removeItem("admin");
-    sessionStorage.removeItem("admintoken");
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("token");
     nav("/Login");
   };
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../config/axios";
 import Navbar from "../components/Navbar";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 // react icons
 import { FaSearch } from "react-icons/fa";
 import { LuFileEdit } from "react-icons/lu";
@@ -116,9 +116,7 @@ const SearchPage = () => {
       </div>
       <div className="flex justify-center">
         <div className="w-2/4 p-4 flex flex-col justify-center items-center space-y-4">
-          <div>
-            <Toaster />
-          </div>
+          
           <h1 className="text-3xl font-bold mb-4 text-blue-700">
             {posts.length === 0 ? "No Posts" : "Posts"}
           </h1>
