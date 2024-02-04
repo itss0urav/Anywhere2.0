@@ -7,7 +7,7 @@ const axios = Axios.create({
 
 axios.interceptors.request.use(
   (config) => {
-    // Retrieve your JWT token from cookies or sessionStorage
+    // Retrieve your JWT token from sessionStorage
     const token = sessionStorage.getItem("token");
     console.log("token from axios", token);
 

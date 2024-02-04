@@ -57,11 +57,11 @@ const AdminController = {
         expiresIn: "1d",
       });
       res
-        .cookie("token", token, {
-          httpOnly: true,
-          secure: true,
-          maxAge: 1000 * 60 * 60,
-        })
+        // .cookie("token", token, {
+        //   httpOnly: true,
+        //   secure: true,
+        //   maxAge: 1000 * 60 * 60,
+        // })
         .status(200)
         .json({
           message: "Login successful",

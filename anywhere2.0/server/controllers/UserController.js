@@ -106,11 +106,11 @@ const UserController = {
         expiresIn: "1d",
       });
       res
-        .cookie("token", token, {
-          httpOnly: true,
-          secure: true,
-          maxAge: 1000 * 60 * 60 * 2,
-        })
+        // .cookie("token", token, {
+        //   httpOnly: true,
+        //   secure: true,
+        //   maxAge: 1000 * 60 * 60 * 2,
+        // })
         .status(200)
         .json({ message: "Login successful", passed: true, token, user: user });
       console.log("user logged in");

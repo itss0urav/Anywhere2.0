@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const bannerSchema = new mongoose.Schema(
   { name: String, image: String },
-  { strict: true }
+  { strict: true, timestamps: true }
 );
 
 const Banner =
