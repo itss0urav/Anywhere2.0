@@ -9,7 +9,7 @@ import useCalculateAge from "../hooks/useCalculateAge";
 import { SlOptionsVertical } from "react-icons/sl";
 import { MdDeleteOutline, MdReport } from "react-icons/md";
 import { LuArrowBigUp, LuArrowBigDown, LuFileEdit } from "react-icons/lu";
-
+import { FaUser } from "react-icons/fa";
 const AllPosts = () => {
   const [user, setUser] = useSessionStorage("user");
   const [posts, setPosts] = useState([]);
@@ -275,6 +275,7 @@ const AllPosts = () => {
                         NSFW
                       </p>
                     )}
+
                     <div className="flex justify-center">
                       {post.imageUrl.includes(".") && (
                         <img
@@ -288,11 +289,14 @@ const AllPosts = () => {
                       )}
                     </div>
                     <div className="p-4">
+                      <p className="flex items-center gap-2 text-gray-600 ">
+                        {post.votes.length} <FaUser /> voted
+                      </p>
                       <h2 className="text-xl font-bold mb-2">{post.name}</h2>
                       <p className="bg-gradient-to-r from-sky-700 to-indigo-900 bg-clip-text text-transparent mb-2">
                         {post.category}
                       </p>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-600 text-sm mb-2">
                         {post.description}
                       </p>
                     </div>
