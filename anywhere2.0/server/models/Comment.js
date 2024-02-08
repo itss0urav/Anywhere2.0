@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const voteSchema = require("./vote");
-
 const commentSchema = new mongoose.Schema({
   text: {
     type: String,
@@ -11,7 +10,8 @@ const commentSchema = new mongoose.Schema({
     required: true,
   },
   votes: [voteSchema],
-  replies: [this],
 });
+
+commentSchema.add({ replies: [commentSchema] });
 
 module.exports = commentSchema;

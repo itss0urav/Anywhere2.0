@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import axios from "../config/axios";
 import TawkTo from "../config/TawkTo";
 import { Link } from "react-router-dom";
@@ -7,6 +7,9 @@ import Logo from "../assets/Anywhere-Transparent.png";
 TawkTo();
 
 const Help = () => {
+  useEffect(() => {
+    toast.success('Use the chat bot to talk to admins live!');
+  }, []);
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -52,7 +55,7 @@ const Help = () => {
     <div className="">
       <div className="flex justify-between items-center text-white text-center bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20 ">
         <Link
-          to="/home"
+          to="/"
           className="text-white font-bold text-xl flex items-center mb-4 md:mb-0"
         >
           <img className="w-24 md:w-12 mr-2" src={Logo} alt="" />

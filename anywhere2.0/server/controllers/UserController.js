@@ -51,29 +51,40 @@ const UserController = {
   createUser: async (req, res) => {
     try {
       const { username, dob, email, password } = req.body;
+      const age = new Date().getFullYear() - new Date(dob).getFullYear();
       if (username.toLowerCase() === "admin") {
         return res.status(400).json({
           message: "Admin is a reserved username, Try different username",
         });
       }
-      const userFromDatabase = await User.findOne({ username });
-      if (!userFromDatabase) {
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        const newUser = new User({
-          username,
-          dob,
-          email,
-          password: hashedPassword,
+      if (age < 13) {
+        return res.status(400).json({
+          message: "User must be at least 13 years old to sign up",
         });
-        await newUser.save();
-        res.status(201).json({ message: "User created successfully" });
-        console.log("user signed up");
-      } else {
-        res
+      }
+      const userFromDatabase = await User.findOne({ username });
+      if (userFromDatabase) {
+        return res
           .status(400)
           .json({ message: "User already exists with same username!" });
       }
+      const emailFromDatabase = await User.findOne({ email });
+      if (emailFromDatabase) {
+        return res
+          .status(400)
+          .json({ message: "User already exists with same email!" });
+      }
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      const newUser = new User({
+        username,
+        dob,
+        email,
+        password: hashedPassword,
+      });
+      await newUser.save();
+      res.status(201).json({ message: "User created successfully" });
+      console.log("user signed up");
     } catch (error) {
       console.error("Error creating user:", error);
       res.status(500).json({
