@@ -2,6 +2,7 @@ const express = require("express");
 const connectDB = require("./config/db");
 const cors = require("cors");
 require("dotenv").config();
+const {logMiddleware} = require("./middlewares/logMiddleware")
 // const cookieParser = require("cookie-parser");
 //routes
 const userRoutes = require("./routes/userRoutes");
@@ -10,6 +11,7 @@ const commentRoutes = require("./routes/commentRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const replyRoutes = require("./routes/replyRoute");
 const voteRoutes = require("./routes/voteRoutes");
+const logRoutes=require("./routes/logRoutes")
 
 
 const app = express();
@@ -20,6 +22,7 @@ connectDB();
 // middlewares
 app.use(express.json());
 app.use(express.static('public'))
+app.use(logMiddleware);
 
 // app.use(cookieParser());
 app.use(
@@ -27,9 +30,10 @@ app.use(
     origin: "http://localhost:3000",
     credentials: true,
   })
-);
-
-//routes
+  );
+  
+  //routes
+  app.use(logRoutes)
 app.use("/api/users", userRoutes);
 app.use("/api/users", adminRoutes);
 app.use("/api/admin/", adminRoutes);

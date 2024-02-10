@@ -10,6 +10,7 @@ import AdminSupportList from "./AdminSupportList";
 import AdminBannerManagement from "./AdminBannerManagement";
 import AdminVerificationRequest from "./AdminVerificationRequest";
 import useSessionStorage from "../hooks/useSessionStorage";
+import AdminLogs from "./AdminLogs";
 
 export default function Admin() {
   const nav = useNavigate();
@@ -81,6 +82,14 @@ export default function Admin() {
         >
           Manage Banner
         </button>
+        <button
+          onClick={() => {
+            setCurrentOption("manage-logs");
+          }}
+          className=" red-gradient-btn"
+        >
+          Logs
+        </button>
       </div>
       <div className="flex justify-center mt-8">
         {currentOption === "manage-users" ? (
@@ -128,6 +137,13 @@ export default function Admin() {
         {currentOption === "manage-banner" ? (
           <>
             <AdminBannerManagement />
+          </>
+        ) : (
+          <></>
+        )}
+        {currentOption === "manage-logs" ? (
+          <>
+            <AdminLogs />
           </>
         ) : (
           <></>
