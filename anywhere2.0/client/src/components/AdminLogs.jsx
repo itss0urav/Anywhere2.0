@@ -31,11 +31,11 @@ const AdminLogs = () => {
 
   const getRowColor = (requestCode) => {
     if (requestCode.includes("users")) {
-      return "bg-blue-200";
+      return "bg-green-100";
     } else if (requestCode.includes("admin")) {
-      return "bg-red-200";
+      return "bg-red-100 font-bold";
     } else if (requestCode.includes("posts")) {
-      return "bg-green-200";
+      return "bg-cyan-100";
     } else {
       return "";
     }
