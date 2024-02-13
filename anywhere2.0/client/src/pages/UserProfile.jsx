@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { MdVerified } from "react-icons/md";
 import { SiAdguard } from "react-icons/si";
 import { toast } from "react-hot-toast";
+import CurrentUserPost from "../components/CurrentUserPost";
 export default function UserProfile() {
   const nav = useNavigate();
   const [user, setUser] = useSessionStorage("user");
@@ -61,7 +62,7 @@ export default function UserProfile() {
     try {
       const userId = user._id;
       const response = await axios.get(`/users/current/${userId}`);
-      console.log(response.data);
+      // console.log(response.data);
       setUser(response.data);
     } catch (error) {
       console.error("Error fetching user:", error);
@@ -71,7 +72,7 @@ export default function UserProfile() {
     try {
       const author = user.username;
       const response = await axios.get(`/posts/current/totalposts/${author}`);
-      console.log("total posts", response.data);
+      // console.log("total posts", response.data);
       setPostCount(response.data);
     } catch (error) {
       console.error("Error fetching user:", error);
@@ -339,6 +340,7 @@ export default function UserProfile() {
               <></>
             )}
           </div>
+          <CurrentUserPost />
         </div>
       </div>
     );

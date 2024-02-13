@@ -14,7 +14,7 @@ const Navbar = () => {
   const nav = useNavigate();
   const location = useLocation();
   const forColor = useLocation().pathname.split("/")[1];
-  console.log(forColor);
+  // console.log(forColor);
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
     if (user) {

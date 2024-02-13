@@ -13,7 +13,7 @@ import { FaUser } from "react-icons/fa";
 const AllPosts = () => {
   const [user, setUser] = useSessionStorage("user");
   const [posts, setPosts] = useState([]);
-  console.log(posts);
+  // console.log(posts);
   const [blurStatus, setBlurStatus] = useState({});
   const [showOptions, setShowOptions] = useState(false);
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const AllPosts = () => {
   };
 
   const userAge = useCalculateAge(user.dob);
-  console.log("Current Age:", userAge);
+  // console.log("Current Age:", userAge);
 
   useEffect(() => {
     fetchPosts();

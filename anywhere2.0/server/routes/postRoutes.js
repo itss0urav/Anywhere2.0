@@ -12,6 +12,7 @@ router.post("/search", verifyToken, postController.getFilteredPosts);
 router.post("/:id", verifyToken, postController.reportPost);
 router.get("/categories", verifyToken, postController.getCategories);
 router.get("/:id", verifyToken, postController.getPost);
+router.get("/userpost/:author", verifyToken, postController.getCurrentUserPosts);
 router.delete("/:id", verifyToken, postController.deletePost);
 router.get(
   "/category/:category",
