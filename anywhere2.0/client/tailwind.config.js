@@ -8,6 +8,18 @@ module.exports = {
         roboto: ["Roboto", "sans-serif"],
         "fira-code": ["Fira Code", "monospace"],
       },
+      backdropFilter: {
+        'none': 'none',
+        'blur': 'blur(20px)',
+      },
+      opacity: {
+        '20': '0.2',
+      },
+    },
+  },
+  variants: {
+    extend: {
+      backdropFilter: ['responsive'], // or other variants you need
     },
   },
   plugins: [

@@ -7,6 +7,7 @@ import { MdVerified } from "react-icons/md";
 import { SiAdguard } from "react-icons/si";
 import { toast } from "react-hot-toast";
 import CurrentUserPost from "../components/CurrentUserPost";
+import bgimg from "../assets/Anywhere-Transparent.png";
 export default function UserProfile() {
   const nav = useNavigate();
   const [user, setUser] = useSessionStorage("user");
@@ -127,7 +128,12 @@ export default function UserProfile() {
       <div>
         <Navbar />
         <div className="container mx-auto px-4">
-          <div className="bg-white shadow-md rounded-lg p-6 mt-4">
+          <div className="bg-gradient-to-r from-blue-700 to-cyan-400 backdrop-blur-lg bg-opacity-80 shadow-md rounded-lg p-6 mt-4 relative">
+            <img
+              src={bgimg}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover z-[-1] blur-lg "
+            />
             <div className="mb-4">
               <h3 className="text-xl text-center font-semibold text-gray-900">
                 Edit Profile
@@ -140,7 +146,7 @@ export default function UserProfile() {
             </div>
             <form onSubmit={handleUpdateProfile} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Image URL
                 </label>
                 <input
@@ -150,7 +156,7 @@ export default function UserProfile() {
                   onChange={handleInputChange}
                   className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
-                <label className="block text-sm font-medium text-gray-700">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Username
                 </label>
                 <input
@@ -163,7 +169,7 @@ export default function UserProfile() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Date of Birth
                 </label>
                 <input
@@ -176,7 +182,7 @@ export default function UserProfile() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Email
                 </label>
                 <input
@@ -190,7 +196,7 @@ export default function UserProfile() {
               </div>
               <div>
                 <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium text-gray-700">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Old Password
                   </label>
                   <span className="text-sm font-bold text-red-500">
@@ -208,7 +214,7 @@ export default function UserProfile() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   New Password
                 </label>
                 <input
@@ -220,7 +226,7 @@ export default function UserProfile() {
                   className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
-              <button type="submit" className="blue-gradient-btn w-full">
+              <button type="submit" className="blue-gradient-btn border border-blue-800">
                 Submit
               </button>
             </form>

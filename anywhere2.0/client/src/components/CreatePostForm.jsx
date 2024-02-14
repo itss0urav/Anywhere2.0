@@ -4,7 +4,7 @@ import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import useSessionStorage from "../hooks/useSessionStorage";
-
+import bgimg from "../assets/Anywhere-Transparent.png";
 const CreatePostForm = () => {
   const [user] = useSessionStorage("user");
   useEffect(() => {
@@ -100,58 +100,100 @@ const CreatePostForm = () => {
   };
 
   return (
-    <div className="">
+    <div>
       <Navbar />
-     
-      <div className="flex flex-col items-center justify-center mt-4">
-        <div className="font-bold mb-4 text-2xl">Start Discussion here</div>
 
-        <div className="rounded-md bg-gradient-to-r from-blue-700 to-blue-500 p-4 backdrop-blur-lg bg-opacity-40 border border-blue-300 border-opacity-20 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 flex flex-col items-center justify-center">
-          <input
-            required
-            name="name"
-            value={postData.name}
-            onChange={handleChange}
-            className="w-full rounded p-2"
-            type="text"
-            placeholder="Post Name"
+      <div className="mt-[9%]">
+        <div className="mb-2 text-center font-bold text-2xl">
+          Start Discussion here
+        </div>
+        <div className="max-w-sm mx-auto bg-gradient-to-r from-blue-700 to-cyan-400 p-4 rounded-md  backdrop-blur-lg bg-opacity-80 relative">
+          <img
+            src={bgimg}
+            alt=""
+            className=" blur absolute inset-0 w-full h-full object-cover z-[-1]"
           />
-          <input
-            required
-            name="category"
-            value={postData.category}
-            onChange={handleChange}
-            className="w-full rounded p-2 mt-2"
-            type="text"
-            placeholder="Category"
-          />
-          <textarea
-            required
-            name="description"
-            value={postData.description}
-            onChange={handleChange}
-            className="w-full rounded p-2 mt-2"
-            placeholder="Description"
-          />
-          <input
-            required
-            name="imageUrl"
-            value={postData.imageUrl}
-            onChange={handleChange}
-            className="w-full rounded p-2 mt-2"
-            type="text"
-            placeholder="Image URL"
-          />
-          <div className="w-full flex justify-start items-center mt-2">
+          <div className="mb-5">
+            <label
+              for="Name"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Name
+            </label>
             <input
               required
-              name="nsfw"
-              checked={postData.nsfw}
-              onChange={handleCheck}
-              className="mr-2"
-              type="checkbox"
+              name="name"
+              value={postData.name}
+              onChange={handleChange}
+              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              type="text"
+              placeholder="Post Name"
             />
-            <label className="flex items-center">NSFW</label>
+          </div>
+          <div className="mb-5">
+            <label
+              for="Category"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Category
+            </label>
+            <input
+              required
+              name="category"
+              value={postData.category}
+              onChange={handleChange}
+              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              type="text"
+              placeholder="Category"
+            />
+          </div>
+          <div className="mb-5">
+            <label
+              for="Description"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Description
+            </label>
+            <textarea
+              required
+              name="description"
+              value={postData.description}
+              onChange={handleChange}
+              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              placeholder="Description"
+            />
+          </div>
+          <div className="mb-5">
+            <label
+              for="ImageUrl"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              ImageUrl
+            </label>
+            <input
+              required
+              name="imageUrl"
+              value={postData.imageUrl}
+              onChange={handleChange}
+              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              type="text"
+              placeholder="Image URL"
+            />
+          </div>
+          <div className="flex items-start mb-5">
+            <div className="flex items-center h-5">
+              <input
+                required
+                name="nsfw"
+                checked={postData.nsfw}
+                onChange={handleCheck}
+                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                type="checkbox"
+              />
+              <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                NSFW
+              </label>
+            </div>
           </div>
           <button
             onClick={handleSubmit}

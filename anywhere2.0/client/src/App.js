@@ -25,7 +25,7 @@ import Mod from "./components/Mod";
 import { AdminWrapper } from "./components/AdminWrapper";
 import CreatePostForm from "./components/CreatePostForm";
 import VerificationForm from "./components/VerificationForm";
-
+import CreateCommunityForm from "./components/CreateCommunityForm";
 function App() {
   console.warn(
     "%cMessage from Anywhere Admin",
@@ -64,10 +64,10 @@ function App() {
           <Route path="/searchpage" element={<SearchPage />} />
           {/* Components */}
           <Route path="/modhome" element={<Mod />} />
-          {/* <Route path="/adminhome" element={<Admin />} /> */}
           <Route path="/adminhome" element={<AdminWrapper />} />
           <Route path="/verification" element={<VerificationForm />} />
           <Route path="/createpostform" element={<CreatePostForm />} />
+          <Route path="/CreateCommunity" element={<CreateCommunityForm />} />
         </Routes>
       </BrowserRouter>
     </div>

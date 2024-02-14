@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "../config/axios";
 import TawkTo from "../config/TawkTo";
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ TawkTo();
 
 const Help = () => {
   useEffect(() => {
-    toast.success('Use the chat bot to talk to admins live!');
+    toast.success("Use the chat bot to talk to admins live!", { id: 103 });
   }, []);
   const [form, setForm] = useState({
     username: "",
@@ -29,6 +29,7 @@ const Help = () => {
       const response = await axios.post("/users/support", form);
       console.log(response.data);
       toast.success("Request Created!", {
+        id: 100, // Use the custom ID
         style: {
           borderRadius: "10px",
           background: "#333",
@@ -40,6 +41,7 @@ const Help = () => {
         error.response?.data?.message ||
           "Error creating Request. Please try again.",
         {
+          id: 101,
           style: {
             borderRadius: "10px",
             background: "#333",
@@ -63,15 +65,19 @@ const Help = () => {
         <div className="">Give feedback or raise an issue here</div>
       </div>
       <div className="flex flex-col items-center justify-center  bg-gray-100">
-        
         <div className="mt-8 w-full min-h-screen max-w-md">
           <form
             onSubmit={handleSubmit}
-            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+            class="max-w-sm mx-auto bg-gradient-to-r from-blue-700 to-cyan-400 p-4 rounded-md mt-[10%] backdrop-blur-lg bg-opacity-80 relative"
           >
+            <img
+              src={Logo}
+              alt=""
+              className=" blur absolute inset-0 w-full h-full object-cover z-[-1]"
+            />
             <div className="mb-4">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 htmlFor="name"
               >
                 Username
@@ -87,7 +93,7 @@ const Help = () => {
             </div>
             <div className="mb-4">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 htmlFor="email"
               >
                 Email
@@ -103,7 +109,7 @@ const Help = () => {
             </div>
             <div className="mb-6">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 htmlFor="message"
               >
                 Message

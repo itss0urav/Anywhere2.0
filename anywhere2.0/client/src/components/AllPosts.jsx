@@ -159,7 +159,7 @@ const AllPosts = () => {
         {posts.length === 0 ? "No Posts" : "All Posts"}
       </h1>
       <div className="min-w-[40rem] m-4">
-        {posts.map((post, index) => {
+        {posts.slice().reverse().map((post, index) => {
           const totalVotes = post.votes.reduce(
             (total, vote) => total + vote.voteStatus,
             0
