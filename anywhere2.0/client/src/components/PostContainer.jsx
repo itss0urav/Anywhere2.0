@@ -106,7 +106,7 @@ const PostContainer = ({ value, onClick }) => {
             <div className="">
               <img
                 onClick={toggleBlur}
-                className={`w-full h-64 object-contain rounded-t-lg ${
+                className={`w-full h-[20rem] object-contain rounded-t-lg ${
                   blurStatus && value.nsfw ? "blur-lg" : ""
                 }`}
                 src={value.imageUrl}

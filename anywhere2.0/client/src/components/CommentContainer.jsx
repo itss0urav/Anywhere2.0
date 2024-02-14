@@ -198,8 +198,22 @@ export default function CommentContainer() {
         `/posts/${postId}/comments/${commentId}/delete`,
         { data: { postId } }
       );
+      toast.success("Comment deleted!", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
       console.log("Reply response:", response.data);
     } catch (error) {
+      toast.error("Failed to delete Comment", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
       console.error(error);
     }
   };
@@ -212,7 +226,6 @@ export default function CommentContainer() {
 
   return (
     <div className="mt-4 p-4 max-w-xl mx-auto bg-white rounded-xl shadow-md space-y-4 sm:py-4">
-     
       <h2 className="text-3xl font-bold text-center">Comments</h2>
       {mostLikedComment && (
         <div className="bg-green-100 p-4 rounded-md">

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "../config/axios";
 import Navbar from "../components/Navbar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
-import { toast } from "react-hot-toast"; 
+import { toast } from "react-hot-toast";
 import CommentForm from "../components/CommentForm";
 import PostContainer from "../components/PostContainer";
 import useSessionStorage from "../hooks/useSessionStorage";
@@ -17,7 +17,7 @@ const PostView = () => {
   const [post, setPost] = useState(null);
 
   const fetchPost = async () => {
-    console.log("Fetching/Updating")
+    console.log("Fetching/Updating");
     try {
       const response = await axios.get(`/posts/${postId}`);
       setPost(response.data);
@@ -27,7 +27,7 @@ const PostView = () => {
   };
   useEffect(() => {
     fetchPost();
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   const handleDeletePost = (event, postId) => {
@@ -60,13 +60,29 @@ const PostView = () => {
   };
 
   if (!post) {
-    return <div className="text-center text-4xl mt-4">No post selected</div>;
+    return (
+      <div className="">
+        <Navbar />
+        <div className="flex flex-col items-center justify-center text-center mt-4">
+          <div className="text-4xl mb-4">No post selected</div>
+          <p className="text-lg text-gray-700">
+            Your token might have expired, which can cause this issue.
+          </p>
+          <Link
+            to="/login"
+            className="mt-2 text-blue-500 hover:text-blue-700 underline"
+          >
+            Please reauthenticate to regain access.
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="">
       <Navbar />
-     
+
       {user.username === post.author || user.isMod ? (
         <div className="flex justify-end items-center p-4">
           <button
