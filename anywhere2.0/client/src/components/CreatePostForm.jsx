@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import useSessionStorage from "../hooks/useSessionStorage";
 import bgimg from "../assets/Anywhere-Transparent.png";
+
 const CreatePostForm = () => {
   const [user] = useSessionStorage("user");
   useEffect(() => {
     console.log("Changes/Access Noticed in Session Data");
+    getCommunities();
   }, [user]);
   const [postData, setPostData] = useState({
     name: "",
@@ -16,10 +18,19 @@ const CreatePostForm = () => {
     description: "",
     imageUrl: "",
     nsfw: false,
+    community: "",
   });
-
+  const [communities, setCommunities] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const getCommunities = async () => {
+    try {
+      const response = await axios.get("/community/get");
+      setCommunities(response.data);
+    } catch (error) {
+      console.error(`Error fetching communities: ${error}`);
+    }
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPostData({ ...postData, [name]: value });
@@ -66,6 +77,7 @@ const CreatePostForm = () => {
           description: "",
           imageUrl: "",
           nsfw: false,
+          community: "",
         });
 
         setTimeout(() => {
@@ -179,6 +191,27 @@ const CreatePostForm = () => {
               type="text"
               placeholder="Image URL"
             />
+          </div>
+          <div className="mb-5">
+            <label
+              for="Community"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Community
+            </label>
+            <select
+              name="community"
+              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              value={postData.community}
+              onChange={handleChange}
+            >
+              <option value="">Select a community</option>
+              {communities.map((community) => (
+                <option key={community._id} value={community.communityName}>
+                  {community.communityName}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="flex items-start mb-5">
             <div className="flex items-center h-5">

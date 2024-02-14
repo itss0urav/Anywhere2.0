@@ -15,7 +15,7 @@ const CreatePost = () => {
       <img
         src={logo}
         alt=""
-        className=" opacity-50 blur absolute inset-0 w-full h-full object-cover z-[-1]"
+        className=" cursor-pointer opacity-50 blur absolute inset-0 w-full h-full object-cover z-[-1]"
       />
       <div className="flex justify-between flex-col md:flex-row items-center">
         <img
@@ -38,7 +38,7 @@ const CreatePost = () => {
           onClick={() => {
             nav("/CreateCommunity");
           }}
-          className="text-4xl lg:ml-3 text-white"
+          className=" cursor-pointer text-4xl lg:ml-3 text-white"
         />
       </div>
     </div>

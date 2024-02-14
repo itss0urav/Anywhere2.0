@@ -6,6 +6,7 @@ import useSessionStorage from "../hooks/useSessionStorage";
 import { LuArrowBigUp, LuArrowBigDown } from "react-icons/lu";
 
 const PostContainer = ({ value, onClick }) => {
+  console.log("Ultimate", value);
   const [blurStatus, setBlurStatus] = useState(true);
   // eslint-disable-next-line
   const [user, setUser] = useSessionStorage("user");
@@ -77,18 +78,17 @@ const PostContainer = ({ value, onClick }) => {
     (total, vote) => total + vote.voteStatus,
     0
   );
+
   return (
     <div className="flex justify-center">
       <div className="w-3/4 ">
         <div className="m-8 " onClick={onClick}>
           <div className=" rounded-lg shadow-md p-4 bg-white transform transition-transform duration-500 hover:shadow-blue-400 mb-4">
             <div className="">
-            <div className="flex gap-3 text-lg font-semibold">
+              <div className="flex gap-3 text-lg font-semibold">
                 Post By
                 <div
-                  onClick={(event) =>
-                  viewProfileofOthers(event, value.author)
-                  }
+                  onClick={(event) => viewProfileofOthers(event, value.author)}
                   className=" cursor-pointer bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent"
                 >
                   {value.author}

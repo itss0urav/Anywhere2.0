@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 //pages
 import Help from "./pages/Help";
 import Home from "./pages/Home";
@@ -18,6 +18,7 @@ import AdminLogin from "./pages/AdminLogin";
 import ReportPage from "./pages/ReportPage";
 import UserProfile from "./pages/UserProfile";
 import OtherUserProfile from "./pages/OtherUserProfile";
+import PostFromCommunity from "./pages/PostFromCommunity";
 
 //components
 import Mod from "./components/Mod";
@@ -26,6 +27,7 @@ import { AdminWrapper } from "./components/AdminWrapper";
 import CreatePostForm from "./components/CreatePostForm";
 import VerificationForm from "./components/VerificationForm";
 import CreateCommunityForm from "./components/CreateCommunityForm";
+
 function App() {
   console.warn(
     "%cMessage from Anywhere Admin",
@@ -39,7 +41,7 @@ function App() {
 
   return (
     <div className="App">
-       <Toaster />
+      <Toaster />
       <BrowserRouter>
         <Routes>
           {/* pages */}
@@ -57,6 +59,10 @@ function App() {
           <Route
             path="/posts/category/:category"
             element={<PostFromCategory />}
+          />
+          <Route
+            path="/posts/community/:communityName"
+            element={<PostFromCommunity />}
           />
           <Route path="/profile/:username" element={<OtherUserProfile />} />
           <Route path="/ContactUs" element={<ContactUsPage />} />

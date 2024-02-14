@@ -38,6 +38,10 @@ const postSchema = new mongoose.Schema(
       type: [commentSchema],
       default: [],
     },
+    community: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );

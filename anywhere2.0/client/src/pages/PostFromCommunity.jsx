@@ -7,10 +7,10 @@ import SideComponent from "../components/SideComponent";
 // custom hooks
 import useCalculateAge from "../hooks/useCalculateAge";
 import useSessionStorage from "../hooks/useSessionStorage";
-const PostFromCategory = () => {
-  
+
+const PostFromCommunity = () => {
   const [posts, setPosts] = useState([]);
-  const { category } = useParams();
+  const { communityName } = useParams();
   const [user] = useSessionStorage("user");
 
   const navigate = useNavigate();
@@ -19,9 +19,11 @@ const PostFromCategory = () => {
   console.log("Current Age:", userAge);
 
   useEffect(() => {
+    console.log("Fetching posts for community:", communityName);
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`/posts/category/${category}`);
+        const response = await axios.get(`/community/get/${communityName}`);
+        console.log("Response data:", response.data); // Log response data
         setPosts(response.data);
       } catch (error) {
         console.error("Error fetching posts by category:", error);
@@ -29,16 +31,31 @@ const PostFromCategory = () => {
     };
 
     fetchPosts();
-  }, [category]);
+  }, [communityName]);
 
   const handlePostClick = (postId) => {
+    console.log("Post clicked:", postId); // Log the clicked post ID
     navigate(`/posts/${postId}`);
   };
 
+  console.log("Posts state:", posts); // Log the posts state
+  if (posts.length == 0) {
+    return (
+      <div>
+        <Navbar />
+        <div className="text-center text-2xl mt-4">No Posts Found</div>
+      </div>
+    );
+  }
   return (
-    <div className="">
+    <div className=" ">
       <Navbar />
-
+      <div className=" font-roboto flex justify-center gap-3 bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent font-bold text-4xl mt-2">
+        Posts From{" "}
+        <div className="font-roboto  bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent animate-bounce">
+          {communityName}
+        </div>
+      </div>
       <div className="flex flex-col items-center">
         <div className="flex justify-center w-full m-4">
           <div className="w-3/4">
@@ -66,4 +83,4 @@ const PostFromCategory = () => {
   );
 };
 
-export default PostFromCategory;
+export default PostFromCommunity;
