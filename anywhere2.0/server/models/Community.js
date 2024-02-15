@@ -8,9 +8,10 @@ const communitySchema = new mongoose.Schema(
     },
     logoUrl: {
       type: String,
+    },
+    description: {
+      type: String,
       required: true,
-      default:
-        "https://img.freepik.com/premium-photo/violet-pink-blue-cyan-universe-nebula-stars_410516-23647.jpg",
     },
     isNSFW: {
       type: Boolean,
@@ -18,7 +19,7 @@ const communitySchema = new mongoose.Schema(
       default: false,
     },
   },
-  { strict: true, timestamps: true }
+  { timestamps: true }
 );
 
 const Community =

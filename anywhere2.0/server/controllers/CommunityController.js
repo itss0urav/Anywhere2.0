@@ -2,7 +2,7 @@ const Community = require("../models/Community");
 const Post = require("../models/Post");
 const CommunityController = {
   createCommunity: async (req, res) => {
-    const { communityName, logoUrl, isNSFW } = req.body;
+    const { communityName, logoUrl,description, isNSFW } = req.body;
 
     try {
       const existingCommunity = await Community.findOne({ communityName });
@@ -14,6 +14,7 @@ const CommunityController = {
       const community = new Community({
         communityName,
         logoUrl,
+        description,
         isNSFW,
       });
 

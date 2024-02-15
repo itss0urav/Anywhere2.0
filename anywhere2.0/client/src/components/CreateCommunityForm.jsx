@@ -4,16 +4,14 @@ import Navbar from "./Navbar";
 import logo from "../assets/Anywhere-Transparent.png";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
 export default function CreateCommunityForm() {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     communityName: "",
     logoUrl: "",
+    description: "",
     isNSFW: false,
   });
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,7 +19,6 @@ export default function CreateCommunityForm() {
         e.target.type === "checkbox" ? e.target.checked : e.target.value,
     });
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -52,11 +49,9 @@ export default function CreateCommunityForm() {
       );
     }
   };
-
   return (
     <div>
       <Navbar />
-
       <div className="">
         <form
           onSubmit={handleSubmit}
@@ -96,11 +91,29 @@ export default function CreateCommunityForm() {
               type="text"
               id="logoUrl"
               class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-              required
+              
               value={formData.logoUrl}
               onChange={handleChange}
             />
           </div>
+          <div class="mb-5">
+            <label
+              for="description"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Community Description
+            </label>
+            <input
+              type="text"
+              id="description"
+              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              placeholder="Enter community description"
+              required
+              value={formData.description}
+              onChange={handleChange}
+            />
+          </div>
+
           <div class="flex items-start mb-5">
             <div class="flex items-center h-5">
               <input

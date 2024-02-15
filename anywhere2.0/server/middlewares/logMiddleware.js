@@ -24,7 +24,14 @@ const logMiddleware = (req, res, next) => {
     log.responseCode = res.statusCode; // Populate response status code
     const responseBody = JSON.parse(res.locals.body || '{}'); // Parse response body
     log.message = responseBody.message || ''; // Populate response message
-    logs.push(log); // Push the log object into logs array
+
+    // If logs array has reached its maximum size, remove the oldest log
+    if (logs.length >= 30) {
+      logs.shift();
+    }
+
+    // Push the log object into logs array
+    logs.push(log);
   });
 
   next(); // Call next middleware

@@ -2,7 +2,7 @@ import axios from "../config/axios";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import CaroselContainer from "./CaroselContainer";
-
+import { MdTravelExplore } from "react-icons/md";
 const SideComponent = () => {
   const [communities, setCommunities] = useState([]);
 
@@ -48,6 +48,13 @@ const SideComponent = () => {
 
   return (
     <div>
+      <Link
+        to="/Explore"
+        className="flex text-xl gap-2 justify-center bg-gradient-to-r from-blue-600 to-indigo-800 rounded-md text-white py-2"
+      >
+        <MdTravelExplore />
+        Explore
+      </Link>
       <div className="text-center">Popular Categories</div>
       <div className="text-center rounded-md text-white bg-gradient-to-r from-blue-700 to-blue-500 md:min-w-[13rem] ">
         {renderCategories()}

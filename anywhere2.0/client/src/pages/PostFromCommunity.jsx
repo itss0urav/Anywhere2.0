@@ -51,8 +51,8 @@ const PostFromCommunity = () => {
     <div className=" ">
       <Navbar />
       <div className=" font-roboto flex justify-center gap-3 bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent font-bold text-4xl mt-2">
-        Posts From{" "}
-        <div className="font-roboto  bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent animate-bounce">
+        Posts From
+        <div className="font-roboto  bg-gradient-to-r from-sky-500 to-indigo-900 bg-clip-text text-transparent ">
           {communityName}
         </div>
       </div>
