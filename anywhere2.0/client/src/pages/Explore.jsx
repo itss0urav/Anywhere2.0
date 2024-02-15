@@ -40,6 +40,13 @@ export default function Explore() {
                   alt=""
                   className=" blur absolute inset-0 w-full h-full object-cover z-[-1]"
                 />
+                <div className=" inline ">
+                  {data.isNSFW && (
+                    <p className=" absolute inline rounded-sm text-white border border-white text-sm  pr-1 pl-1">
+                      NSFW
+                    </p>
+                  )}
+                </div>
                 <div>
                   <img
                     className="rounded-t-lg"
@@ -47,6 +54,7 @@ export default function Explore() {
                     alt={data.logoUrl}
                   />
                 </div>
+
                 <div className="p-5">
                   <div>
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

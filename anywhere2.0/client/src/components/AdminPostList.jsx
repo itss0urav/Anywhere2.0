@@ -53,6 +53,7 @@ export default function AdminPostList() {
               "Image",
               "Name",
               "Category",
+              "Community",
               "Description",
               "Author",
               "NSFW",
@@ -82,6 +83,7 @@ export default function AdminPostList() {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">{post.name}</td>
               <td className="px-6 py-4 whitespace-nowrap">{post.category}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{post.community}</td>
               <td className="px-6 py-4 text-sm text-gray-500 sm:w-20 md:w-[40rem] break-words">
                 {post.description}
               </td>
