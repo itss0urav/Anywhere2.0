@@ -146,7 +146,7 @@ export default function UserProfile() {
             </div>
             <form onSubmit={handleUpdateProfile} className="space-y-4">
               <div>
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Image URL
                 </label>
                 <input
@@ -156,7 +156,7 @@ export default function UserProfile() {
                   onChange={handleInputChange}
                   className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Username
                 </label>
                 <input
@@ -169,7 +169,7 @@ export default function UserProfile() {
                 />
               </div>
               <div>
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Date of Birth
                 </label>
                 <input
@@ -182,7 +182,7 @@ export default function UserProfile() {
                 />
               </div>
               <div>
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Email
                 </label>
                 <input
@@ -196,7 +196,7 @@ export default function UserProfile() {
               </div>
               <div>
                 <div className="flex items-center justify-between">
-                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Old Password
                   </label>
                   <span className="text-sm font-bold text-red-500">
@@ -214,7 +214,7 @@ export default function UserProfile() {
                 />
               </div>
               <div>
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   New Password
                 </label>
                 <input

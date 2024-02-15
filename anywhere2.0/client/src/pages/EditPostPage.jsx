@@ -82,7 +82,7 @@ export default function EditPostPage() {
           <h2 className="text-2xl text-center font-bold mb-4">Edit Post</h2>
           <form
             onSubmit={handleSubmit}
-            class="max-w-sm mx-auto bg-gradient-to-r from-blue-700 to-cyan-400 p-4 rounded-md  backdrop-blur-lg bg-opacity-80 relative"
+            className="max-w-sm mx-auto bg-gradient-to-r from-blue-700 to-cyan-400 p-4 rounded-md  backdrop-blur-lg bg-opacity-80 relative"
           >
             <img
               src={bgimg}
@@ -90,7 +90,7 @@ export default function EditPostPage() {
               className=" blur absolute inset-0 w-full h-full object-cover z-[-1]"
             />
             <div className="mb-4">
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Name:
               </label>
               <input
@@ -102,7 +102,7 @@ export default function EditPostPage() {
               />
             </div>
             <div className="mb-4">
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Category:
               </label>
               <input
@@ -114,7 +114,7 @@ export default function EditPostPage() {
               />
             </div>
             <div className="mb-4">
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Description:
               </label>
               <textarea
@@ -125,7 +125,7 @@ export default function EditPostPage() {
               />
             </div>
             <div className="mb-4">
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Image URL:
               </label>
               <input
@@ -137,7 +137,7 @@ export default function EditPostPage() {
               />
             </div>
             <div className="mb-4">
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 NSFW:
                 <input
                   type="checkbox"

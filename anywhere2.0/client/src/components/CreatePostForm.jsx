@@ -128,7 +128,7 @@ const CreatePostForm = () => {
           <div className="mb-5">
             <label
               for="Name"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Name
             </label>
@@ -137,7 +137,7 @@ const CreatePostForm = () => {
               name="name"
               value={postData.name}
               onChange={handleChange}
-              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               type="text"
               placeholder="Post Name"
             />
@@ -145,7 +145,7 @@ const CreatePostForm = () => {
           <div className="mb-5">
             <label
               for="Category"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Category
             </label>
@@ -154,7 +154,7 @@ const CreatePostForm = () => {
               name="category"
               value={postData.category}
               onChange={handleChange}
-              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               type="text"
               placeholder="Category"
             />
@@ -162,7 +162,7 @@ const CreatePostForm = () => {
           <div className="mb-5">
             <label
               for="Description"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Description
             </label>
@@ -171,14 +171,14 @@ const CreatePostForm = () => {
               name="description"
               value={postData.description}
               onChange={handleChange}
-              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               placeholder="Description"
             />
           </div>
           <div className="mb-5">
             <label
               for="ImageUrl"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               ImageUrl
             </label>
@@ -187,7 +187,7 @@ const CreatePostForm = () => {
               name="imageUrl"
               value={postData.imageUrl}
               onChange={handleChange}
-              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               type="text"
               placeholder="Image URL"
             />
@@ -195,13 +195,13 @@ const CreatePostForm = () => {
           <div className="mb-5">
             <label
               for="Community"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Community
             </label>
             <select
               name="community"
-              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               value={postData.community}
               onChange={handleChange}
             >
@@ -220,10 +220,10 @@ const CreatePostForm = () => {
                 name="nsfw"
                 checked={postData.nsfw}
                 onChange={handleCheck}
-                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                 type="checkbox"
               />
-              <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                 NSFW
               </label>
             </div>

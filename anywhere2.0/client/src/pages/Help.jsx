@@ -68,7 +68,7 @@ const Help = () => {
         <div className="mt-8 w-full min-h-screen max-w-md">
           <form
             onSubmit={handleSubmit}
-            class="max-w-sm mx-auto bg-gradient-to-r from-blue-700 to-cyan-400 p-4 rounded-md mt-[10%] backdrop-blur-lg bg-opacity-80 relative"
+            className="max-w-sm mx-auto bg-gradient-to-r from-blue-700 to-cyan-400 p-4 rounded-md mt-[10%] backdrop-blur-lg bg-opacity-80 relative"
           >
             <img
               src={Logo}
@@ -77,7 +77,7 @@ const Help = () => {
             />
             <div className="mb-4">
               <label
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 htmlFor="name"
               >
                 Username
@@ -93,7 +93,7 @@ const Help = () => {
             </div>
             <div className="mb-4">
               <label
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 htmlFor="email"
               >
                 Email
@@ -109,7 +109,7 @@ const Help = () => {
             </div>
             <div className="mb-6">
               <label
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 htmlFor="message"
               >
                 Message

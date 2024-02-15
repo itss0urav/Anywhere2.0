@@ -53,7 +53,7 @@ export default function VerificationForm() {
       <Navbar />
       <div className=" ">
         <div className="">
-          <form class="mt-[9%] max-w-sm mx-auto bg-gradient-to-r from-blue-700 to-cyan-400 p-4 rounded-md backdrop-blur-lg bg-opacity-80 relative">
+          <form className="mt-[9%] max-w-sm mx-auto bg-gradient-to-r from-blue-700 to-cyan-400 p-4 rounded-md backdrop-blur-lg bg-opacity-80 relative">
             <img
               src={logo}
               alt=""
@@ -61,14 +61,14 @@ export default function VerificationForm() {
             />
             <div className="mb-4">
               <label
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 htmlFor="voterId"
               >
                 Voter ID Card Number
               </label>
               <input
                 required
-                class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 id="voterId"
                 type="text"
                 placeholder="Voter ID Card Number"
@@ -79,13 +79,13 @@ export default function VerificationForm() {
             </div>
             <div className="mb-4">
               <label
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 htmlFor="formType"
               >
                 Form Type
               </label>
               <select
-                class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 id="formType"
                 value={formData.formType}
                 name="formType"
@@ -99,13 +99,13 @@ export default function VerificationForm() {
               <>
                 <div className="mb-4">
                   <label
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     htmlFor="companyName"
                   >
                     Company Name
                   </label>
                   <input
-                    class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                    className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                     id="companyName"
                     type="text"
                     placeholder="Company Name"
@@ -116,13 +116,13 @@ export default function VerificationForm() {
                 </div>
                 <div className="mb-4">
                   <label
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     htmlFor="companyRegNumber"
                   >
                     Company Registration Number
                   </label>
                   <input
-                    class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                    className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                     id="companyRegNumber"
                     type="text"
                     placeholder="Company Registration Number"
@@ -135,14 +135,14 @@ export default function VerificationForm() {
             )}
             <div className="mb-4">
               <label
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 htmlFor="mobileNumber"
               >
                 Mobile Number
               </label>
               <input
                 required
-                class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 id="mobileNumber"
                 type="text"
                 placeholder="Mobile Number"

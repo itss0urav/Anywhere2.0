@@ -46,7 +46,7 @@ const CommentForm = () => {
     <div className=" max-w-xl mx-auto bg-white rounded-xl shadow-md  ">
       <form
         onSubmit={handleSubmit}
-        class=" mx-auto bg-gradient-to-r from-blue-700 to-cyan-400 p-4 rounded-md  backdrop-blur-lg bg-opacity-80 relative"
+        className=" mx-auto bg-gradient-to-r from-blue-700 to-cyan-400 p-4 rounded-md  backdrop-blur-lg bg-opacity-80 relative"
       >
         <img
           src={bgimg}
@@ -60,7 +60,7 @@ const CommentForm = () => {
           className="border text-center border-gray-300 p-2 rounded w-full"
           placeholder="Add a comment"
         />
-        <button type="submit" class="blue-gradient-btn border border-blue-800 mt-4">
+        <button type="submit" className="blue-gradient-btn border border-blue-800 mt-4">
           Submit
         </button>
       </form>
