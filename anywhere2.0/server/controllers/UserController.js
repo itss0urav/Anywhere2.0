@@ -54,7 +54,8 @@ const UserController = {
       const age = new Date().getFullYear() - new Date(dob).getFullYear();
       if (username.toLowerCase() === "admin") {
         return res.status(400).json({
-          message: "Admin is a reserved username, Try different username",
+          message:
+            "Users are not allowed to use Admin as username, Try different username",
         });
       }
       if (age < 13) {

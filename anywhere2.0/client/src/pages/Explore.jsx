@@ -61,8 +61,8 @@ export default function Explore() {
                       {data.communityName}
                     </h5>
                   </div>
-                  <p className="mb-3 font-normal text-white">
-                    {data.description}
+                  <p className="bg-black bg-opacity-30 p-1 rounded-md mb-3 font-normal text-white">
+                    <span className="opacity-100">{data.description}</span>
                   </p>
                 </div>
               </div>

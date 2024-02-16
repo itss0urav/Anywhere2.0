@@ -61,7 +61,7 @@ const CommunityCarousel = () => {
             alt={community.communityName}
             className="object-cover w-full h-64 md:h-96 "
           />
-          <h2 className="absolute bottom-0 left-0 m-4 text-lg font-bold text-white bg-black  p-2 bg-opacity-30 rounded-md">
+          <h2 className="absolute bottom-0 left-0 m-4 md:text-4xl text-lg  font-bold text-white bg-black  p-2 bg-opacity-30 rounded-md">
             {community.communityName}
           </h2>
         </Link>
