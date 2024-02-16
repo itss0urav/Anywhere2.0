@@ -167,7 +167,8 @@ export default function CommentContainer() {
     try {
       // console.log("Deleting reply...", "PostId:", postId, "CommentId:", commentId, "ReplyId:", replyId);
 
-      const response = await axios.delete(
+      // const response =
+       await axios.delete(
         `/posts/${postId}/comments/${commentId}/replies/${text}`
       );
 
@@ -337,7 +338,7 @@ export default function CommentContainer() {
                 />
                 <button
                   type="submit"
-                  className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
+                  className="blue-gradient-btn mt-2"
                 >
                   Submit
                 </button>

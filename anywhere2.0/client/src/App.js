@@ -20,7 +20,7 @@ import ContactUsPage from "./pages/ContactUsPage";
 import OtherUserProfile from "./pages/OtherUserProfile";
 import PostFromCategory from "./pages/PostFromCategory";
 import PostFromCommunity from "./pages/PostFromCommunity";
-
+import DiscoverZone from "./pages/DiscoverZone";
 //components
 import Mod from "./components/Mod";
 // import Admin from "./components/Admin";
@@ -55,6 +55,7 @@ function App() {
           <Route path="/About" element={<AboutPage />} />
           <Route path="/AdminLogin" element={<AdminLogin />} />
           <Route path="/report/:id" element={<ReportPage />} />
+          <Route path="/DiscoverZone" element={<DiscoverZone />} />
           <Route path="/UserProfile" element={<UserProfile />} />
           <Route path="/posts/:postId" element={<PostView />} />
           <Route path="/posts/edit/:postId" element={<EditPostPage />} />

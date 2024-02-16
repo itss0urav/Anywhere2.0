@@ -47,7 +47,7 @@ export default function Explore() {
                     </p>
                   )}
                 </div>
-                <div>
+                <div className="flex justify-center">
                   <img
                     className="rounded-t-lg"
                     src={data.logoUrl !== "" ? data.logoUrl : space}
