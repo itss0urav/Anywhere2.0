@@ -300,7 +300,7 @@ export default function CommentContainer() {
             {comment.replies.map((reply, index) => (
               <div key={index} className="ml-4 mt-2 bg-gray-100 p-2 rounded">
                 <h4 className="flex gap-2 font-semibold text-gray-700">
-                  Replied By
+                  Replied by
                   <div
                     onClick={(event) => viewProfileofOthers(event, reply.user)}
                     className="cursor-pointer bg-gradient-to-r from-sky-600 to-cyan-900 bg-clip-text text-transparent"

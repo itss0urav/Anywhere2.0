@@ -11,7 +11,11 @@ import { MdDeleteOutline, MdReport } from "react-icons/md";
 // custom hooks
 import useCalculateAge from "../hooks/useCalculateAge";
 import useSessionStorage from "../hooks/useSessionStorage";
+import { PacmanLoader } from "react-spinners";
+
 const SearchPage = () => {
+  const [loading, setLoading] = useState(true);
+
   const [user, setUser] = useSessionStorage("user");
   const [posts, setPosts] = useState([]);
   const [blurStatus, setBlurStatus] = useState({});
@@ -26,6 +30,8 @@ const SearchPage = () => {
     try {
       const response = await axios.post("/posts/search", { postName });
       setPosts(response.data);
+      setLoading(false);
+
       console.log("filtered post", response.data);
       const initialBlurStatus = {};
       response.data.forEach((post, index) => {
@@ -96,6 +102,16 @@ const SearchPage = () => {
     event.stopPropagation();
     setShowOptions(!showOptions);
   };
+
+  if (loading) {
+    // If loading, display the spinner
+    return (
+      <div className="w-2/4 p-4 h-screen flex justify-center items-center">
+        <PacmanLoader color="#005eff" /> {/* Use PacmanLoader component */}
+      </div>
+    );
+  }
+
   return (
     <div>
       <Navbar />
@@ -116,7 +132,6 @@ const SearchPage = () => {
       </div>
       <div className="flex justify-center">
         <div className="w-2/4 p-4 flex flex-col justify-center items-center space-y-4">
-          
           <h1 className="text-3xl font-bold mb-4 text-blue-700">
             {posts.length === 0 ? "No Posts" : "Posts"}
           </h1>

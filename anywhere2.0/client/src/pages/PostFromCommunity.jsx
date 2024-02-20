@@ -7,8 +7,10 @@ import SideComponent from "../components/SideComponent";
 // custom hooks
 import useCalculateAge from "../hooks/useCalculateAge";
 import useSessionStorage from "../hooks/useSessionStorage";
+import { PacmanLoader } from "react-spinners";
 
 const PostFromCommunity = () => {
+  const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const { communityName } = useParams();
   const [user] = useSessionStorage("user");
@@ -25,6 +27,7 @@ const PostFromCommunity = () => {
         const response = await axios.get(`/community/get/${communityName}`);
         console.log("Response data:", response.data); // Log response data
         setPosts(response.data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching posts by category:", error);
       }
@@ -39,11 +42,19 @@ const PostFromCommunity = () => {
   };
 
   console.log("Posts state:", posts); // Log the posts state
-  if (posts.length == 0) {
+  if (posts.length === 0) {
     return (
       <div>
         <Navbar />
         <div className="text-center text-2xl mt-4">No Posts Found</div>
+      </div>
+    );
+  }
+  if (loading) {
+    // If loading, display the spinner
+    return (
+      <div className="w-2/4 p-4 h-screen flex text-center justify-center items-center">
+        <PacmanLoader color="#005eff" /> {/* Use PacmanLoader component */}
       </div>
     );
   }

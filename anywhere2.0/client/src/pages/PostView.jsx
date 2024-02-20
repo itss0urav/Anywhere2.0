@@ -9,12 +9,15 @@ import CommentForm from "../components/CommentForm";
 import PostContainer from "../components/PostContainer";
 import useSessionStorage from "../hooks/useSessionStorage";
 import CommentContainer from "../components/CommentContainer";
+import { PacmanLoader } from "react-spinners"; // Import PacmanLoader from react-spinners
+
 const PostView = () => {
   const nav = useNavigate();
   const [user] = useSessionStorage("user");
 
   const { postId } = useParams();
   const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true); // State to manage loading status
 
   const fetchPost = async () => {
     console.log("Fetching/Updating");
@@ -23,6 +26,8 @@ const PostView = () => {
       setPost(response.data);
     } catch (error) {
       console.error("Error fetching post:", error);
+    } finally {
+      setLoading(false); // Set loading to false after fetching data
     }
   };
   useEffect(() => {
@@ -58,6 +63,15 @@ const PostView = () => {
         });
       });
   };
+
+  if (loading) {
+    // If loading, display the loader
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <PacmanLoader color="#005eff" /> {/* Use PacmanLoader component */}
+      </div>
+    );
+  }
 
   if (!post) {
     return (
