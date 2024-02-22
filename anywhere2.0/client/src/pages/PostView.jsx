@@ -78,15 +78,12 @@ const PostView = () => {
       <div className="">
         <Navbar />
         <div className="flex flex-col items-center justify-center text-center mt-4">
-          <div className="text-4xl mb-4">No post selected</div>
+          <div className="text-4xl my-8 font-bold">Login to view post</div>
           <p className="text-lg text-gray-700">
             Your token might have expired, which can cause this issue.
           </p>
-          <Link
-            to="/login"
-            className="mt-2 text-blue-500 hover:text-blue-700 underline"
-          >
-            Please reauthenticate to regain access.
+          <Link to="/login" className="mt-2 text-blue-500 ">
+            Please reauthenticate to regain access, Click Here.
           </Link>
         </div>
       </div>

@@ -11,6 +11,8 @@ import { MdDeleteOutline, MdReport } from "react-icons/md";
 import { LuArrowBigUp, LuArrowBigDown, LuFileEdit } from "react-icons/lu";
 import { FaUser } from "react-icons/fa";
 import { PacmanLoader } from "react-spinners";
+import { IoShareSocialSharp } from "react-icons/io5";
+
 
 export default function DiscoverZone() {
   const [loading, setLoading] = useState(true);
@@ -35,6 +37,20 @@ export default function DiscoverZone() {
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
+  };
+  const path = "http://localhost:3000/posts/";
+  console.log(path);
+
+  const handleShare = (event, postId) => {
+    event.stopPropagation();
+    navigator.clipboard.writeText(path + postId);
+    toast.success("Post link copied to clipboard", {
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
   };
 
   const shuffleArray = (array) => {
@@ -269,6 +285,16 @@ export default function DiscoverZone() {
                                       >
                                         <MdReport className="inline-block mr-2 text-red-700 text-xl" />
                                         Report
+                                      </button>
+                                      <button
+                                        onClick={(event) => {
+                                          handleShare(event, post._id);
+                                        }}
+                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                        role="menuitem"
+                                      >
+                                        <IoShareSocialSharp className="inline-block mr-2 text-gray-700 text-xl" />
+                                        Share
                                       </button>
                                       {user.username === post.author && (
                                         <button
