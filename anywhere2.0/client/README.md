@@ -58,6 +58,10 @@ Anywhere2.0 : [https://github.com/itss0urav/Anywhere2.0]
 - Total Verified Users
 - Total Verification Requests
 
+### Server Insights
+
+- View logs ( req, res and status codes , message , etc)
+
 ## User Features
 
 ### Account Management
@@ -74,6 +78,7 @@ Anywhere2.0 : [https://github.com/itss0urav/Anywhere2.0]
 - Edit Post
 - Comment on post
 - Reply to comments
+- Share post
 - Delete own post & comments & replies
 - UpVote or Downvote Posts & Comments
 - View the votes on any post and comments
@@ -83,6 +88,8 @@ Anywhere2.0 : [https://github.com/itss0urav/Anywhere2.0]
 
 ### Community Interaction
 
+- Explore different communities
+- Create community
 - View banner content (announcement & ads)
 - Search posts
 - View Other’s profile
@@ -121,7 +128,19 @@ Anywhere 2.0 goes beyond just discussions and community engagement. We celebrate
 - PORT=
 - MONGODB_URI=
 - JWT_SECRET =
-- REACT_APP_API_BASE_URL=
+
+## ProtectedUrls
+
+Place ProtectedUrls.js inside client/src/config
+
+<pre>
+ const ProtectedUrls = {
+  baseUrl: "place your url",
+  bannerPath: "place your url",
+};
+
+export default ProtectedUrls
+</pre>
 
 ## TawkTo
 
@@ -159,3 +178,13 @@ export default TawkTo;
 ## Admin
 
 <img src="/anywhere2.0/client/src/assets/Screenshots/Admin.png">
+
+# About Me (Socials)
+
+- GitHub: [https://github.com/itss0urav/]
+- LinkedIn: [https://www.linkedin.com/in/itssourav/]
+- Medium: [https://itss0urav.medium.com/]
+- Instagramn: [https://www.instagram.com/itssourav.dev/]
+
+- Portfolio (HTML , CSS): [https://itss0urav.netlify.app/]
+- New Portfolio (React , Tailwind CSS): [https://github.com/itss0urav/portfolio-react]

@@ -6,12 +6,12 @@ import useSessionStorage from "../hooks/useSessionStorage";
 import useCalculateAge from "../hooks/useCalculateAge";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 import { SlOptionsVertical } from "react-icons/sl";
+import { IoShareSocialSharp } from "react-icons/io5";
 import { MdDeleteOutline, MdReport } from "react-icons/md";
 import { LuArrowBigUp, LuArrowBigDown, LuFileEdit } from "react-icons/lu";
-import { FaUser } from "react-icons/fa";
 import { PacmanLoader } from "react-spinners";
-import { IoShareSocialSharp } from "react-icons/io5";
 
 
 export default function DiscoverZone() {
