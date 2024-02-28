@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Logo from "../assets/Anywhere-Transparent.png";
 import useSessionStorage from "../hooks/useSessionStorage";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import bgimg from "../assets/space.jpg"
+import bgimg from "../assets/space.jpg";
 // react-icons
 import { FaUser } from "react-icons/fa";
 import { BsMenuButtonWideFill } from "react-icons/bs";
@@ -49,15 +49,19 @@ const Navbar = () => {
             : "bg-gradient-to-r from-slate-800 to-gray-900 p-4 backdrop-blur-lg bg-opacity-40 border border-gray-900 border-opacity-20"
       }`}
     >
-      <img src={bgimg} className =" blur absolute inset-0 w-full h-full object-cover z-[-1] opacity-40" alt="" />
+      <img
+        src={bgimg}
+        className=" blur absolute inset-0 w-full h-full object-cover z-[-1] opacity-40"
+        alt=""
+      />
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <Link
           to="/home"
           className="text-white font-bold text-xl flex items-center mb-4 md:mb-0"
         >
-          <img className="w-24 md:w-12 mr-2" src={Logo} alt="" />
+          <img className="w-24 md:w-12 " src={Logo} alt="" />
         </Link>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center md:space-x-4">
           {menu && (
             <div className="flex flex-col sm:flex-row gap-3">
               <input

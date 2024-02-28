@@ -243,10 +243,10 @@ export default function CommentContainer() {
         </div>
       )}
       {comments.map((comment) => {
-        const totalVotes = comment.votes.reduce(
-          (total, vote) => total + vote.voteStatus,
-          0
-        );
+     
+        const totalVotes = Array.isArray(comment.votes) ?
+            comment.votes.reduce((total, vote) => total + vote.voteStatus, 0) :
+            0;
         return (
           <div
             key={comment._id}

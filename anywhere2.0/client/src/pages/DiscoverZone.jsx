@@ -13,7 +13,6 @@ import { MdDeleteOutline, MdReport } from "react-icons/md";
 import { LuArrowBigUp, LuArrowBigDown, LuFileEdit } from "react-icons/lu";
 import { PacmanLoader } from "react-spinners";
 
-
 export default function DiscoverZone() {
   const [loading, setLoading] = useState(true);
 
@@ -209,10 +208,12 @@ export default function DiscoverZone() {
               .slice()
               .reverse()
               .map((post, index) => {
-                const totalVotes = post.votes.reduce(
-                  (total, vote) => total + vote.voteStatus,
-                  0
-                );
+                const totalVotes = Array.isArray(post.votes)
+                  ? post.votes.reduce(
+                      (total, vote) => total + vote.voteStatus,
+                      0
+                    )
+                  : 0;
 
                 // Check if the user is under 18 and the post is marked as NSFW
                 if (userAge < 18 && post.nsfw) {
