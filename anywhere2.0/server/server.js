@@ -3,7 +3,7 @@ const connectDB = require("./config/db");
 const cors = require("cors");
 require("dotenv").config();
 const { logMiddleware } = require("./middlewares/logMiddleware");
-// const cookieParser = require("cookie-parser");
+
 //routes
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(logMiddleware);
 
-// app.use(cookieParser());
+
 app.use(
   cors({
     origin: "http://localhost:3000",

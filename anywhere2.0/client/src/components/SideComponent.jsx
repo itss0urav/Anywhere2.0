@@ -20,7 +20,7 @@ const SideComponent = () => {
   }, []);
 
   const renderCategories = () => {
-    console.log("renderCategories");
+    // console.log("renderCategories");
     if (categories.length === 0) {
       return <div>Empty Here</div>;
     }

@@ -30,14 +30,18 @@ import VerificationForm from "./components/VerificationForm";
 import CreateCommunityForm from "./components/CreateCommunityForm";
 
 function App() {
+  console.log("%c[itss0urav]", "color: cyan; font-size: 15px;");
   console.warn(
-    "%cMessage from Anywhere Admin",
-    "color: cyan; font-size: 15px;"
-  );
-  console.warn(
-    "%cStop",
+    "%c[Stop]",
     "color: red; font-size: 15px;",
-    'This is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or "hack" someone\'s account, it is a scam and will give them access to your account.'
+    '\nThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or "hack" someone\'s account, it is a scam and will give them access to your account.'
+  );
+
+  console.log(
+    " Hi there 😄 Find me Here \n GitHub: 👉https://github.com/itss0urav",
+    " \n LinkedIn: 👉https://www.linkedin.com/in/itssourav/",
+    " \n Instagram: 👉https://www.instagram.com/itssourav.dev/",
+    " \n Medium: 👉https://itss0urav.medium.com/"
   );
 
   return (

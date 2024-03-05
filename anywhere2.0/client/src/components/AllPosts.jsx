@@ -102,7 +102,7 @@ const AllPosts = () => {
   };
 
   const path = "http://localhost:3000/posts/";
-  console.log(path);
+  // console.log(path);
 
   const handleShare = (event, postId) => {
     event.stopPropagation();
@@ -184,7 +184,7 @@ const AllPosts = () => {
   }
 
   return (
-    <div className="w-2/4 p-4 flex flex-col justify-center items-center space-y-4">
+    <div className=" w-2/4 p-4 flex flex-col justify-center items-center space-y-4">
       <h1 className="text-3xl font-bold mb-4 text-blue-700">
         {posts.length === 0 ? "No Posts" : "All Posts"}
       </h1>
@@ -193,10 +193,9 @@ const AllPosts = () => {
           .slice()
           .reverse()
           .map((post, index) => {
-            const totalVotes = Array.isArray(post.votes) ?
-            post.votes.reduce((total, vote) => total + vote.voteStatus, 0) :
-            0;
-          
+            const totalVotes = Array.isArray(post.votes)
+              ? post.votes.reduce((total, vote) => total + vote.voteStatus, 0)
+              : 0;
 
             // Check if the user is under 18 and the post is marked as NSFW
             if (userAge < 18 && post.nsfw) {

@@ -51,7 +51,13 @@ export default function OtherUserProfile() {
               <div className="grid grid-cols-3 gap-4 py-4">
                 <dt className="text-sm font-medium text-gray-500">Username</dt>
                 <dd className=" flex gap-2 mt-1 text-sm text-gray-900 col-span-2">
-                  {user.username}
+                  {user.username ? (
+                    user.username
+                  ) : (
+                    <div className="md:w-[11rem] w-[7rem] red-gradient-btn">
+                      User Info Missing
+                    </div>
+                  )}
                   {user.isVerified === true ? (
                     <MdVerified className="text-xl" />
                   ) : (
@@ -75,7 +81,13 @@ export default function OtherUserProfile() {
               <div className="grid grid-cols-3 gap-4 py-4">
                 <dt className="text-sm font-medium text-gray-500">Email</dt>
                 <dd className="mt-1 text-sm text-gray-900 col-span-2">
-                  {user.email}
+                  {user.email ? (
+                    user.email
+                  ) : (
+                    <div className="md:w-[11rem] w-[7rem] red-gradient-btn">
+                      User Info Missing
+                    </div>
+                  )}
                 </dd>
               </div>
               <div className="grid grid-cols-3 gap-4 py-4">
