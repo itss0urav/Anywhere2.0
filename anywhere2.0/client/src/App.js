@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
+import TawkTo from "./config/TawkTo";
 import { Toaster } from "react-hot-toast";
 //pages
 import Help from "./pages/Help";
 import Home from "./pages/Home";
+
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Explore from "./pages/Explore";
@@ -21,14 +22,14 @@ import OtherUserProfile from "./pages/OtherUserProfile";
 import PostFromCategory from "./pages/PostFromCategory";
 import PostFromCommunity from "./pages/PostFromCommunity";
 import DiscoverZone from "./pages/DiscoverZone";
+
 //components
 import Mod from "./components/Mod";
-// import Admin from "./components/Admin";
+import { UserWrapper } from "./components/UserWrapper";
 import { AdminWrapper } from "./components/AdminWrapper";
 import CreatePostForm from "./components/CreatePostForm";
 import VerificationForm from "./components/VerificationForm";
 import CreateCommunityForm from "./components/CreateCommunityForm";
-import TawkTo from "./config/TawkTo";
 function App() {
   console.log("%c[itss0urav]", "color: cyan; font-size: 15px;");
   console.warn(
@@ -51,7 +52,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* pages */}
-          <Route path="/Home" element={<Home />} />
+          <Route path="/Home" element={<UserWrapper />} />
           <Route path="/Help" element={<Help />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
