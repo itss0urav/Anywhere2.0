@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "../config/axios";
-import TawkTo from "../config/TawkTo";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import Logo from "../assets/Anywhere-Transparent.png";
-TawkTo();
+
 
 const Help = () => {
   useEffect(() => {

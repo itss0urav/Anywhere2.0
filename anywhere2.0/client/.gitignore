@@ -2,8 +2,8 @@
 
 # dependencies
 /node_modules
-/src/config/tawkto
-/src/config/tawkto.js
+/src/config/TawkTo
+/src/config/TawkTo.js
 /src/config/ProtectedUrls
 /src/config/ProtectedUrls.js
 

@@ -28,7 +28,7 @@ import { AdminWrapper } from "./components/AdminWrapper";
 import CreatePostForm from "./components/CreatePostForm";
 import VerificationForm from "./components/VerificationForm";
 import CreateCommunityForm from "./components/CreateCommunityForm";
-
+import TawkTo from "./config/TawkTo";
 function App() {
   console.log("%c[itss0urav]", "color: cyan; font-size: 15px;");
   console.warn(
@@ -47,6 +47,7 @@ function App() {
   return (
     <div className="App">
       <Toaster />
+      <TawkTo />
       <BrowserRouter>
         <Routes>
           {/* pages */}
