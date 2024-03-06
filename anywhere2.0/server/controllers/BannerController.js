@@ -16,7 +16,17 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+    // Accept images only
+    if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
+      req.fileValidationError = "Only image files are allowed!";
+      return cb(new Error("Only image files are allowed!"), false);
+    }
+    cb(null, true);
+  },
+});
 
 exports.uploadBanner = upload.single("photo");
 
@@ -31,7 +41,7 @@ exports.createBanner = (req, res) => {
 };
 
 exports.getBanners = (req, res) => {
-    Banner.find()
+  Banner.find()
     .then((banners) => res.json(banners))
     .catch((err) => res.status(400).json("Error: " + err));
 };
