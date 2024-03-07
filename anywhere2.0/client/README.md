@@ -133,14 +133,14 @@ Anywhere 2.0 goes beyond just discussions and community engagement. We celebrate
 
 Place ProtectedUrls.js inside client/src/config
 
-<pre>
+```JavaScript
  const ProtectedUrls = {
   baseUrl: "place your url",
   bannerPath: "place your url",
 };
 
 export default ProtectedUrls
-</pre>
+```
 
 ## TawkTo
 
@@ -148,11 +148,11 @@ Place TawkTo.js inside client/src/config
 
 For more info Visit :[https://help.tawk.to/article/react-js]
 
-<pre>
+```JavaScript
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 export default function TawkTo() {
-  return (
-    <div className="">
+return (
+    <div>
       <TawkMessengerReact
         propertyId="place your propertyId"
         widgetId="place your widgetId"
@@ -160,7 +160,8 @@ export default function TawkTo() {
     </div>
   );
 }
-</pre>
+
+```
 
 # Preview
 
