@@ -144,7 +144,7 @@ export default ProtectedUrls
 
 ## TawkTo
 
-Place tawkto.js inside client/src/config
+Place TawkTo.js inside client/src/config
 
 For more info Visit :[https://help.tawk.to/article/react-js]
 
