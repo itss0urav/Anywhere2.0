@@ -32,6 +32,12 @@ function Introduction() {
         >
           Help
         </Link>
+        <Link
+          to="https://donate.stripe.com/test_eVa6pgfkadMf1a03cc"
+          className="text-black font-bold hover:text-gray-600 transition duration-300 py-2 px-3 rounded-md text-lg shadow-white"
+        >
+          Donate
+        </Link>
       </div>
       <div className="z-30 flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8">
         <div className="text-center w-full md:w-1/2 animate-fade-in-left">
@@ -56,9 +62,7 @@ function Introduction() {
         come together and engage in a range of conversations.
       </p>
 
-      <div
-        className="absolute flex bottom-0 right-0 p-1 text-black font-bold text-sm md:text-lg neon-text  opacity-100"
-      >
+      <div className="absolute flex bottom-0 right-0 p-1 text-black font-bold text-sm md:text-lg neon-text  opacity-100">
         Created by @itss0urav <FaGithub className="mx-1" />
       </div>
     </div>
