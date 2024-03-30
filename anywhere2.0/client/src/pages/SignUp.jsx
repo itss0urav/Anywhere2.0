@@ -68,7 +68,6 @@ const SignUp = () => {
 
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
-      
       {/* Left: Image */}
       <div className="w-2/4 h-screen hidden lg:block relative">
         <video
