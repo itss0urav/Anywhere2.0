@@ -28,6 +28,7 @@ import Mod from "./components/Mod";
 import { UserWrapper } from "./components/UserWrapper";
 import { AdminWrapper } from "./components/AdminWrapper";
 import CreatePostForm from "./components/CreatePostForm";
+import MobileCheckAlert from "./components/MobileCheckAlert";
 import VerificationForm from "./components/VerificationForm";
 import CreateCommunityForm from "./components/CreateCommunityForm";
 function App() {
@@ -49,6 +50,7 @@ function App() {
     <div className="App">
       <Toaster />
       <TawkTo />
+      <MobileCheckAlert />
       <BrowserRouter>
         <Routes>
           {/* pages */}
